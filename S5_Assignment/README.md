@@ -21,5 +21,18 @@ python3 main_mnsit.py
 ```
 
 ## Digit Classification on MNIST Data
+### Model ([model.py](https://github.com/prarthanats/ERA/blob/main/S5_Assignment/model.py))
+- This file contains the model implemented using Convolution layers and Fully connected layers.
+- Following model depicts the working of 
+![alt text](https://github.com/prarthanats/ERA/blob/main/S5_Assignment/plots/TorchViz.png?raw=true)
 
+### Utils ([utils.py](https://github.com/prarthanats/ERA/blob/main/S5_Assignment/utils.py))
+- get_trainloader() - to get the training data, transform it and load it iteratively
+- get_testloader() - to get the test data, transform it and load it iteratively
+- GetCorrectPredCount() - Calculates the count of correct predictions given predicted values and corresponding labels.
+- train() - model training, performs a forward pass to get the prediction, calculates loss, backpropogates, updates and tracks accuracy and loss
+- test()- Evaluates model on the test data, calculates the test loss between prediction and actual labels and tracks accuracy and loss
+
+### Main ([main_mnsit.py](https://github.com/prarthanats/ERA/blob/main/S5_Assignment/main_mnsit.py))
+- main function for each epoch runs the train and test data and calculates the accuracy, and provides the model summary
 
