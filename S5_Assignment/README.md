@@ -16,17 +16,17 @@ torchvision=0.15.2
 
 <h2> Digit Classification on MNIST Data </h2>
 
-<h3> model.py </h3>
+<h3> model.py </h3> ([model.py](https://github.com/prarthanats/ERA/blob/main/S5_Assignment/model.py))
 - This file contains the model implemented using Convolution layers and Fully connected layers. 
 - 
-<h3> utils.py </h3>
+<h3> utils.py </h3> ([utils.py](https://github.com/prarthanats/ERA/blob/main/S5_Assignment/utils.py))
 - get_trainloader() - to get the training data, transform it and load it iteratively
 - get_testloader() - to get the test data, transform it and load it iteratively
 - GetCorrectPredCount() - Calculates the count of correct predictions given predicted values and corresponding labels.
 - train() - model training, performs a forward pass to get the prediction, calculates loss, backpropogates, updates and tracks accuracy and loss
 - test()- Evaluates model on the test data, calculates the test loss between prediction and actual labels and tracks accuracy and loss
 
-<h3> main_mnsit.py </h3>
+<h3> main_mnsit.py </h3> ([main_mnist.py](https://github.com/prarthanats/ERA/blob/main/S5_Assignment/main_mnsit.py))
 - main function for each epoch runs the train and test data and calculates the accuracy, and provides the model summary
 
 <h3> Resuts on MNIST dataset </h3>
