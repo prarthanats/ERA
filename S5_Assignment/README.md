@@ -7,7 +7,9 @@ The MNIST database (Modified National Institute of Standards and Technology data
 
 <h2> Requirements </h2>
 Python>=3.5
+<br>
 torch=2.0.1
+</br>
 torchvision=0.15.2
 
 <h2> How to use it? </h2> 
