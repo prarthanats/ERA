@@ -45,6 +45,5 @@ open the MNIST_Handwritten_Digit_Classification_using_Convolution_Neural_Network
 - Checks if CUDA is available and set the device accordingly
 - main function calls the utils and model file, loads the data from train loader and test loader function in utils
 - for each epoch runs the train and test functions and calculates the accuracy and loss, and provides the model summary
-- 
 ## Result on MNIST Data
 ![accuracy_loss](https://github.com/prarthanats/ERA/assets/32382676/c8bb7800-016b-4282-b40a-cd61ba607220)
