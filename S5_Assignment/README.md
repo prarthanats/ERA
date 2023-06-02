@@ -17,9 +17,13 @@ torchvision=0.15.2
 <h2> Digit Classification on MNIST Data </h2>
 
 <h3> model.py </h3> 
--((https://github.com/prarthanats/ERA/blob/main/S5_Assignment/model.py))
-- This file contains the model implemented using Convolution layers and Fully connected layers. 
-- 
+-([model.py](https://github.com/prarthanats/ERA/blob/main/S5_Assignment/model.py))
+- This file contains the model implemented using Convolution layers and Fully connected layers.
+- Following model depicts the working of
+<br>
+![alt text](https://github.com/prarthanats/ERA/blob/main/S5_Assignment/plots/TorchViz.png?raw=true)
+</br>
+
 <h3> utils.py </h3> 
 - ((https://github.com/prarthanats/ERA/blob/main/S5_Assignment/utils.py))
 - get_trainloader() - to get the training data, transform it and load it iteratively
@@ -36,3 +40,4 @@ torchvision=0.15.2
 <br>
 ![Train and Test Accuracy and loss](https://github.com/prarthanats/ERA/blob/main/S5_Assignment/plots/accuracy_loss.png)
 </br>
+
