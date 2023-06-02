@@ -30,4 +30,6 @@ torchvision=0.15.2
 - main function for each epoch runs the train and test data and calculates the accuracy, and provides the model summary
 
 Resuts on MNIST dataset
+<br>
 <img align="center" src="S5_Assignment/plots/accuracy_loss.png" alt="Accuracy and loss">
+</br>
