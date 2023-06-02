@@ -131,6 +131,3 @@ def data_visualization(train_loader):
       plt.xticks([])
       plt.yticks([])
       plt.savefig('books_read.png')
-    
-def model_summary(model):
-    return summary(model, input_size=(1, 28, 28))
