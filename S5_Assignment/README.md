@@ -26,7 +26,13 @@ torchvision=0.15.2
 ### Utils ([utils.py](https://github.com/prarthanats/ERA/blob/main/S5_Assignment/utils.py))
 - For the training, transformations such as scaling, normalizing, cropping, and flipping. This will help the network generalize the model leading to a better performance. The input data is resized to 28x28 pixels. The testing data are used to check the model's performance on data. For this noscaling or rotation transformations are required.
 - get_trainloader() - to get the training data, transform it and load it iteratively
+  - model.train() tells the model that it isin training mode. This helps inform layers if it is training and evaluation stage
+  - PyTorch by default accumulates gradients. if not set as zero_grad() the gradient would be a combination of the old gradient, which is already used to update model parameters and the newly-computed gradient. it would never reach a minimal in this case
+  - Negative log likelihood loss. It is used in classification problems, output produce the output of our network (forward pass) and then compute a negative log-likelihood loss between the output and the target label. It maximizes the probabiliy of choosing correct classification aby reducing the nll
+  - Back propgation, The gradients are stored by the tensors(parameters) once backward() is called on the loss. When initializing optimizer we tell it what parameters of the model it should be updating.After computing the gradients for all tensors in the model, calling optimizer.step() makes the optimizer iterate over all parameters (tensors) it is supposed to update and use their internally stored grad to update their values
 - get_testloader() - to get the test data, transform it and load it iteratively
+  - Summing up batch loss and get the index of the max log-probability
+  - Calculate the loss and accuracy based on the prediction on the test data and the target labels
 - GetCorrectPredCount() - Calculates the count of correct predictions given predicted values and corresponding labels.
 - train() - model training, performs a forward pass to get the prediction, calculates loss, backpropogates, updates and tracks accuracy and loss
 - test()- Evaluates model on the test data, calculates the test loss between prediction and actual labels and tracks accuracy and loss
