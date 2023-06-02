@@ -12,28 +12,19 @@ torch=2.0.1
 </br>
 torchvision=0.15.2
 
-## How to use it?
-```python
-git clone https://github.com/prarthanats/ERA/tree/main/S5_Assignment.git
-sudo pip install requirement.txt
-python3 main_mnsit.py
-```
-The Notebook file is attached in the repository, to use it
-
-```python
-git clone https://github.com/prarthanats/ERA/tree/main/S5_Assignment.git
-sudo pip install requirement.txt
-jupyter notebook
-open the MNIST_Handwritten_Digit_Classification_using_Convolution_Neural_Network__S5.ipynb in the browser
-```
-
 ## Digit Classification on MNIST Data
 ### Model ([model.py](https://github.com/prarthanats/ERA/blob/main/S5_Assignment/model.py))
 - This file contains the model implemented using Convolution layers and Fully connected layers. The model is defined in the `Net` class, which inherits from the `nn.Module` base class
+- We are using 4 convolution layers with 2 max pooling between them, Relu is used as activation function to keep the values positive, except in the last layer
+  - Convolution filters an image for a particular feature
+  - ReLU detects that feature within the filtered image
+  - Maximum pooling condenses the image to enhance the features
+  - Two fully connected Layers are used once the data is flattened
 
 ![TorchView](https://github.com/prarthanats/ERA/assets/32382676/d17be825-583c-433c-a8b9-64e282b4a432)
 
 ### Utils ([utils.py](https://github.com/prarthanats/ERA/blob/main/S5_Assignment/utils.py))
+- transform is called in utils, for the training, transformations such as scaling, normalizing, cropping, and flipping. This will help the network generalize the model leading to a better performance
 - get_trainloader() - to get the training data, transform it and load it iteratively
 - get_testloader() - to get the test data, transform it and load it iteratively
 - GetCorrectPredCount() - Calculates the count of correct predictions given predicted values and corresponding labels.
@@ -41,9 +32,11 @@ open the MNIST_Handwritten_Digit_Classification_using_Convolution_Neural_Network
 - test()- Evaluates model on the test data, calculates the test loss between prediction and actual labels and tracks accuracy and loss
 - model_summary() - Uses the `torchsummary` library to generate a summary of the model. Returns the summary, which includes the input size and the number of parameters in each layer of the model.
 
-### Main ([main_mnsit.py](https://github.com/prarthanats/ERA/blob/main/S5_Assignment/main_mnsit.py))
+### Main ([MNIST_Handwritten_Digit_Classification_using_Convolution_Neural_Network__S5.py](https://github.com/prarthanats/ERA/blob/main/S5_Assignment/MNIST_Handwritten_Digit_Classification_using_Convolution_Neural_Network__S5.ipynb))
 - Checks if CUDA is available and set the device accordingly
-- main function calls the utils and model file, loads the data from train loader and test loader function in utils
+- Load the train and test data from the utils
+- Load the data visulaization, train and test
 - for each epoch runs the train and test functions and calculates the accuracy and loss, and provides the model summary
+
 ## Result on MNIST Data
 ![accuracy_loss](https://github.com/prarthanats/ERA/assets/32382676/c8bb7800-016b-4282-b40a-cd61ba607220)
