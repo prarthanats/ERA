@@ -24,7 +24,7 @@ torchvision=0.15.2
 ![TorchView](https://github.com/prarthanats/ERA/assets/32382676/d17be825-583c-433c-a8b9-64e282b4a432)
 
 ### Utils ([utils.py](https://github.com/prarthanats/ERA/blob/main/S5_Assignment/utils.py))
-- transform is called in utils, for the training, transformations such as scaling, normalizing, cropping, and flipping. This will help the network generalize the model leading to a better performance
+- For the training, transformations such as scaling, normalizing, cropping, and flipping. This will help the network generalize the model leading to a better performance. The input data is resized to 28x28 pixels. The testing data are used to check the model's performance on data. For this noscaling or rotation transformations are required.
 - get_trainloader() - to get the training data, transform it and load it iteratively
 - get_testloader() - to get the test data, transform it and load it iteratively
 - GetCorrectPredCount() - Calculates the count of correct predictions given predicted values and corresponding labels.
