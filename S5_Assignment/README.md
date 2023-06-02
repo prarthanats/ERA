@@ -16,8 +16,6 @@ git clone https://github.com/prarthanats/ERA/edit/main/S5_Assignment.git
 sudo pip install -r requirements.txt
 python3 main_mnsit.py
 ```
-
-
 <h2> Digit Classification on MNIST Data </h2>
 
 <h3> model.py </h3>
