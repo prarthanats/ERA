@@ -14,10 +14,17 @@ torchvision=0.15.2
 
 ## How to use it?
 ```python
-
 git clone https://github.com/prarthanats/ERA/tree/main/S5_Assignment.git
 sudo pip install requirement.txt
 python3 main_mnsit.py
+```
+The Notebook file is attached in the repository, to use it
+
+```python
+git clone https://github.com/prarthanats/ERA/tree/main/S5_Assignment.git
+sudo pip install requirement.txt
+jupyter notebook
+open the MNIST_Handwritten_Digit_Classification_using_Convolution_Neural_Network__S5.ipynb in the browser
 ```
 
 ## Digit Classification on MNIST Data
