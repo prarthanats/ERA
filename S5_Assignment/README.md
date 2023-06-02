@@ -24,9 +24,9 @@ python3 main_mnsit.py
 ### Model ([model.py](https://github.com/prarthanats/ERA/blob/main/S5_Assignment/model.py))
 - This file contains the model implemented using Convolution layers and Fully connected layers.
 - Following model depicts the working of 
-
+<p align="center">
 ![TorchView](https://github.com/prarthanats/ERA/assets/32382676/e0a35392-af3a-424a-92ee-2dbf1d33f6ef)
-
+</p>
 
 ### Utils ([utils.py](https://github.com/prarthanats/ERA/blob/main/S5_Assignment/utils.py))
 - get_trainloader() - to get the training data, transform it and load it iteratively
