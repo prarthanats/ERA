@@ -29,7 +29,7 @@ torchvision=0.15.2
 <h3> main_mnsit.py </h3>
 - main function for each epoch runs the train and test data and calculates the accuracy, and provides the model summary
 
-Resuts on MNIST dataset
+<h3> Resuts on MNIST dataset </h3>
 <br>
-<img align="center" src="S5_Assignment/plots/accuracy_loss.png" alt="Accuracy and loss">
+<img align="center" src="https://github.com/prarthanats/ERA/blob/main/S5_Assignment/plots/accuracy_loss.png" alt="Accuracy and loss">
 </br>
