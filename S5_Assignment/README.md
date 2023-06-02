@@ -11,10 +11,10 @@ torch=2.0.1
 torchvision=0.15.2
 
 <h2> How to use it? </h2> 
-```ruby
-git clone https://github.com/prarthanats/ERA/edit/main/S5_Assignment.git 
-sudo pip install -r requirements.txt
-python3 main_mnsit.py
+```
+function test() {
+  console.log("notice the blank line before this function?");
+}
 ```
 <h2> Digit Classification on MNIST Data </h2>
 
