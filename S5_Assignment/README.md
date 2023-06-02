@@ -11,15 +11,12 @@ torch=2.0.1
 torchvision=0.15.2
 
 <h2> How to use it? </h2> 
-```
-function test() {
-  console.log("notice the blank line before this function?");
-}
-```
+
 <h2> Digit Classification on MNIST Data </h2>
 
 <h3> model.py </h3>
 - This file contains the model implemented using Convolution layers and Fully connected layers. 
+- 
 <h3> utils.py </h3>
 - get_trainloader() - to get the training data, transform it and load it iteratively
 - get_testloader() - to get the test data, transform it and load it iteratively
@@ -31,3 +28,4 @@ function test() {
 - main function for each epoch runs the train and test data and calculates the accuracy, and provides the model summary
 
 Resuts on MNIST dataset
+
