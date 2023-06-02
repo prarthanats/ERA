@@ -31,5 +31,5 @@ torchvision=0.15.2
 
 <h3> Resuts on MNIST dataset </h3>
 <br>
-<img align="center" src="https://github.com/prarthanats/ERA/blob/main/S5_Assignment/plots/accuracy_loss.png" alt="Accuracy and loss">
+![Train and Test Accuracy and loss](https://github.com/prarthanats/ERA/blob/main/S5_Assignment/plots/accuracy_loss.png)
 </br>
