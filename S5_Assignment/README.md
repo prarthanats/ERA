@@ -32,8 +32,10 @@ python3 main_mnsit.py
 - GetCorrectPredCount() - Calculates the count of correct predictions given predicted values and corresponding labels.
 - train() - model training, performs a forward pass to get the prediction, calculates loss, backpropogates, updates and tracks accuracy and loss
 - test()- Evaluates model on the test data, calculates the test loss between prediction and actual labels and tracks accuracy and loss
+- model_summary() - Uses the `torchsummary` library to generate a summary of the model. Returns the summary, which includes the input size and the number of parameters in each layer of the model.
 
 ### Main ([main_mnsit.py](https://github.com/prarthanats/ERA/blob/main/S5_Assignment/main_mnsit.py))
 - main function for each epoch runs the train and test data and calculates the accuracy, and provides the model summary
 
 ## Result on MNIST Data
+![accuracy_loss](https://github.com/prarthanats/ERA/assets/32382676/c8bb7800-016b-4282-b40a-cd61ba607220)
