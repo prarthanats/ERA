@@ -39,9 +39,10 @@ torchvision=0.15.2
 - Plotting the training and test accuracy/loss
 
 ### Main ([MNIST_Handwritten_Digit_Classification_using_Convolution_Neural_Network__S5.py](https://github.com/prarthanats/ERA/blob/main/S5_Assignment/MNIST_Handwritten_Digit_Classification_using_Convolution_Neural_Network__S5.ipynb))
+- Import required function from utils and model file
 - Checks if CUDA is available and set the device accordingly
-- Load the train and test data from the utils
-- Load the data visulaization, train and test
+- Load the transformed train and test data from the utils
+- Load the train and test functions for the model
 - for each epoch runs the train and test functions and calculates the accuracy and loss, and provides the model summary
 
 ## Result on MNIST Data
