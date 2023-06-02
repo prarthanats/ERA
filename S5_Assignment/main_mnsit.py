@@ -9,7 +9,7 @@ import torch.nn.functional as F
 import torch.optim as optim
 from torchsummary import summary
 
-from utils import get_trainloader,get_testloader,train,test,train_test_plot,data_visualization
+from utils import get_trainloader,get_testloader,train,test,train_test_plot,data_visualization,model_summary
 from model import Net
 
 use_cuda = torch.cuda.is_available()
@@ -47,7 +47,7 @@ def mnist_main_run():
       scheduler.step()
       
     train_test_plot()
-    summary(model, input_size=(1, 28, 28))
+    model_summary(model)
 
 if __name__=="__main__":
     mnist_main_run()
