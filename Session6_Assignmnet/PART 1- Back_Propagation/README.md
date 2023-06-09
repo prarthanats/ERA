@@ -22,9 +22,17 @@ The output neuron at each hidden layer is introduced with non-linearity. Activat
 	$a_h2 = σ(h2) = 1/ (1 + exp(-h2))$
 
 We repeat these calculations for each neuron in each layer, starting from the input layer and moving towards the output layer. In the diagram above, the hidden layer is input to the output layer, hidden layer a_h1 and a_h2 are inputs to output layer o1 using weights w5 and w6 and further activation function is added.
+	
 	$o1 = w5*a_h1 + w6*a_h2$
 	$a_o1 = σ(o1) =1/ (1 + exp(-o1))$
 	$o2 = w7*a_h1 + w8*a_h2$
 	$a_o2 = σ(o2) =1/ (1+exp(-o2))$
 	
-	
+## Error Calculation:
+The output of the activation function from the output neuron reflects the predicted output of the inputs.  There’s a difference between the predictions and expected output. The error functions tell how close the predicted values are to the expected output. The optimal value for error is zero, meaning there’s no error at all, and both desired and predicted results are identical.
+
+The difference between the predictions and the expected output and calculate the error. The error is quantified using a loss function, such as mean squared error or cross-entropy loss. We calculate the error, then the forward pass ends, and we should start the backward pass to calculate the derivatives and update the parameters. In the diagram above, the loss is calculated by using the formula,
+	$E_total = E1 + E2, where E1 is calculated for o1 and E2 is calculated for o2$
+	$E1 = ½ * (t1 - a_o1) ²$
+	$E2 = ½ * (t2 - a_o2) ²$
+
