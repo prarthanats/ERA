@@ -7,7 +7,8 @@ Back Propagation algorithm also known as "backward propagation of errors," enabl
 The goal of backpropagation is to minimize the difference between the predicted output of a neural network and the desired output. Starting from the output layer, the error is propagated backward through the network. For each neuron, the algorithm calculates the contribution of that neuron's activations to the overall error. This is done using the chain rule of calculus, which allows us to calculate the derivative of the error with respect to the weights and biases of each neuron.
 
 ## Working of Backpropagation
-                   <img width="419" alt="Archietcture" src="https://github.com/prarthanats/ERA/assets/32382676/91b602be-fdd8-4b9d-b481-a3d2bf30e614">
+
+<img width="419" alt="Archietcture" src="https://github.com/prarthanats/ERA/assets/32382676/91b602be-fdd8-4b9d-b481-a3d2bf30e614">
 
 ### Forward Propagation: 
 The input data is fed through the neural network. Input and output are determined by looking at the problem statement. We don’t know the exact weights initially; we will assign random values to the weights. 
@@ -101,6 +102,18 @@ The forward propagation, backward propagation, and weight updates are repeated f
 4. Weight Updating: The magnitudes of the updated weights can provide insights into the importance of different features or connections in the network. Larger weight values indicate stronger connections and higher importance, while smaller weights suggest weaker connections.
 
 ## Effect of Learning Rate
-Now lets see the effect of learning rate on the weights. We shall consider different learning rates of [0.1, 0.2, 0.5, 0.8, 1.0, 2.0] while keeping all the other parameters such as input, target, initial weights etc. constant.
 
-                              <img width="483" alt="LR_All" src="https://github.com/prarthanats/ERA/assets/32382676/5a4329ad-4984-42f1-bd5a-44d862a5a7d4">
+The learning rate determines the step size at each iteration of the optimization algorithm, while the error rate measures the difference between the predicted output and the actual output.
+1. When the learning rate is high, the algorithm takes large steps, which can lead to overshooting the optimal solution. This can result in a large error rate because the algorithm oscillates around the optimal solution without effectively converging to it.
+2. When the learning rate is low, the algorithm takes smaller steps, which may allow it to converge more precisely toward the optimal solution. However, if the learning rate is too low, the algorithm may get stuck in local minima or take a long time to converge. In these cases, the error rate may remain high because the algorithm fails to find the global optimum.
+Finding an appropriate learning rate is crucial for effective training.
+
+Now lets see the effect of learning rate on the weights. We shall consider different learning rates of [0.1, 0.2, 0.5, 0.8, 1.0, 2.0] while keeping all the other parameters such as input, target, initial weights etc. constant. 
+
+<img width="483" alt="LR_All" src="https://github.com/prarthanats/ERA/assets/32382676/5a4329ad-4984-42f1-bd5a-44d862a5a7d4">
+
+1. For a learning rate of 0.1, the error decreases linearly with the number of iterations. For a learning rate of 0.2, we see that the error rate of decreases is linear and the error rate at end on 100 epoch is much smaller. For a learning rate of 0.5, we see its similar as 0.2 but has an exponential curve rather than a linear one. The algorithm is taking a long time to converge. The learning rate is too low, the algorithm may get stuck in local minima. 
+2. For a learning rate of 0.8, the exponential curve becomes more evident. The error rate is near 0 at 85 to 90 iterations. For a learning rate of 1.0, there seems to be an exponential curve, and the error rate nearing 0 around 60 to 70 iterations. 0.8 to 1 seems to be an optimal solution for this example
+3. For a learning rate of 2.0, the error rate is almost close to 0 after about 30 iterations. From the above example we can see that error rate reaches 0 faster if the learning rate is high and the curve is more exponential. This means that weights can change quickly, and algorithm oscillates around the optimal solution without effectively converging to it. 
+
+
