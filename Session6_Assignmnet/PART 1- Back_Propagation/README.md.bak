@@ -1,0 +1,148 @@
+# Back Propagation 
+
+## Introduction
+
+Back Propagation algorithm also known as "backward propagation of errors," enables the neural networks to adapt and update their weights by propagating the error gradient backward from the output layer to the input layer. Gradients indicate how much each weight contributes to the overall error. Weights are updated backwards to minimize the error.  By doing so, the network can learn from its mistakes and adjust its parameters to improve its performance.
+
+The goal of backpropagation is to minimize the difference between the predicted output of a neural network and the desired output. Starting from the output layer, the error is propagated backward through the network. For each neuron, the algorithm calculates the contribution of that neuron's activations to the overall error. This is done using the chain rule of calculus, which allows us to calculate the derivative of the error with respect to the weights and biases of each neuron.
+
+## Working of Backpropagation
+
+### Forward Propagation: 
+The input data is fed through the neural network. Input and output are determined by looking at the problem statement. We don’t know the exact weights initially; we will assign random values to the weights. 
+
+In the diagram above i1 and i2 are the inputs and are connected to h1 using weights w1 and w2. The weighted sum of the inputs is calculated to produce output of each neuron at the hidden layer.
+
+	$h1 = w1*i1 + w2*i2$
+	$h2 = w3*i1 + w4*i2$
+
+The output neuron at each hidden layer is introduced with non-linearity. Activation functions are used to add non-linearity to the hidden layer, which helps understand the nonlinear relationships and learn complex patterns. In the formula below a sigmoid function is applied.
+
+	$a_h1 = σ(h1) = 1/ (1 + exp(-h1))$
+	$a_h2 = σ(h2) = 1/ (1 + exp(-h2))$
+
+### train()
+- Performs the training loop for the model.
+- Inputs:
+  - `model`: The PyTorch model to be trained.
+  - `device`: The device to be used for training (CPU or GPU).
+  - `train_loader`: The data loader containing the training data.
+  - `optimizer`: The optimizer used for updating the model's parameters.
+- Functionality:
+  - Iterates over the training data and performs the following steps:
+    - Moves the data and labels to the specified device.
+    - Resets the optimizer's gradients.
+    - Performs a forward pass to obtain predictions.
+    - Calculates the loss between the predictions and the ground truth labels.
+    - Performs backpropagation to compute gradients.
+    - Updates the model's parameters using the optimizer.
+    - Keeps track of training loss, accuracy, and displays progress using tqdm.
+
+### test()
+- Evaluates the trained model on the test data.
+- Inputs:
+  - `model`: The trained PyTorch model to be evaluated.
+  - `device`: The device to be used for evaluation (CPU or GPU).
+  - `test_loader`: The data loader containing the test data.
+- Functionality:
+  - Sets the model to evaluation mode (disables gradient computation).
+  - Iterates over the test data and performs the following steps:
+    - Moves the data and labels to the specified device.
+    - Performs a forward pass to obtain predictions.
+    - Calculates the test loss between the predictions and the ground truth labels.
+    - Counts the number of correct predictions.
+  - Prints the average loss and accuracy on the test set.
+
+### model_summary()
+- Generates a summary of the model's architecture and parameter count.
+- Inputs:
+  - `model`: The PyTorch model for which to generate the summary.
+- Outputs:
+  - Summary of the model's architecture and parameter count.
+- Functionality:
+  - Uses the `torchsummary` library to generate a summary of the model.
+  - Returns the summary, which includes the input size and the number of parameters in each layer of the model.
+
+## [Usage](https://github.com/mkthoma/era_v1/blob/main/session5/S5.ipynb)
+1. Import the required libraries and functions.
+``` python
+import torch
+from torchvision import datasets, transforms
+import torch.optim as optim
+from model import Net
+import utils
+from utils import train, test, model_summary
+```
+2. Check if CUDA is available and set the device accordingly
+```python
+cuda =torch.cuda.is_available()
+device = torch.device("cuda" if cuda else "cpu")
+print("CUDA Available?", cuda)
+```
+3. Create data loaders for training and test data.
+```python
+train_transforms = transforms.Compose([
+    transforms.RandomApply([transforms.CenterCrop(22), ], p=0.1),
+    transforms.Resize((28, 28)),
+    transforms.RandomRotation((-15., 15.), fill=0),
+    transforms.ToTensor(),
+    transforms.Normalize((0.1307,), (0.3081,)),
+    ])
+
+test_transforms = transforms.Compose([
+    transforms.ToTensor(),
+    transforms.Normalize((0.1307,), (0.3081,))
+    ])
+```
+4. Download the MNIST dataset and apply the defined transformations:
+``` python
+train_data = datasets.MNIST('../data', train=True, download=True, transform=train_transforms)
+test_data = datasets.MNIST('../data', train=False, download=True, transform=test_transforms)
+```
+5. Set the batch size and create data loaders for training and testing:
+``` python
+batch_size = 512
+
+kwargs = {'batch_size': batch_size, 'shuffle': True, 'num_workers': 2, 'pin_memory': True}
+
+train_loader = torch.utils.data.DataLoader(train_data, kwargs)
+test_loader = torch.utils.data.DataLoader(test_data, kwargs)
+```
+6. Training and Evaluation
+    - Create an instance of the model and define the optimizer.
+        ``` python
+        model = Net().to(device)
+        optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9)
+        ```
+    -  Define a learning rate scheduler.
+        ``` python
+        scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=1, gamma=0.1, verbose=True)
+        num_epochs = 20
+        ```
+    -  Set the number of epochs and start the training loop:
+        ``` python
+        for epoch in range(1, num_epochs+1):
+        print(f'Epoch {epoch}')
+        train(model, device, train_loader, optimizer)
+        test(model, device, test_loader)
+        scheduler.step()
+        ```
+7. Plotting the training and test accuracy/loss:
+``` python
+fig, axs = plt.subplots(2,2,figsize=(15,10))
+axs[0, 0].plot(utils.train_losses)
+axs[0, 0].set_title("Training Loss")
+axs[1, 0].plot(utils.train_acc)
+axs[1, 0].set_title("Training Accuracy")
+axs[0, 1].plot(utils.test_losses)
+axs[0, 1].set_title("Test Loss")
+axs[1, 1].plot(utils.test_acc)
+axs[1, 1].set_title("Test Accuracy")
+```
+8. Generating model summary
+``` python
+model_summary(model)
+```
+
+Feel free to modify the code and adapt it to your specific needs!
+
