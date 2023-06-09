@@ -101,4 +101,6 @@ The forward propagation, backward propagation, and weight updates are repeated f
 4. Weight Updating: The magnitudes of the updated weights can provide insights into the importance of different features or connections in the network. Larger weight values indicate stronger connections and higher importance, while smaller weights suggest weaker connections.
 
 ## Effect of Learning Rate
-	
+Now lets see the effect of learning rate on the weights. We shall consider different learning rates of [0.1, 0.2, 0.5, 0.8, 1.0, 2.0] while keeping all the other parameters such as input, target, initial weights etc. constant.
+
+<img width="483" alt="LR_All" src="https://github.com/prarthanats/ERA/assets/32382676/5a4329ad-4984-42f1-bd5a-44d862a5a7d4">
