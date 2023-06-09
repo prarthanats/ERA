@@ -33,6 +33,8 @@ The MNIST database (Modified National Institute of Standards and Technology data
 
 MNIST features are best extracted at edges,gradients and textures
 
+![Screenshot-from-2021-03-12-15-21-04](https://github.com/prarthanats/ERA/assets/32382676/e12f00f2-801d-47d6-a4f4-c41e07a20d17)
+
 ## Model Architecture
 Tried to implement a  Squeeze-and-Excitation network to identify the numbers in MINIST dataset. This architecute consist of convolution blocks followed by transition blocks. This is a technique designed to enhance the representational power of convolutional neural networks (CNNs) by explicitly modeling interdependencies between channels. The depth of a feature map represents different channels or filters, which capture various patterns and features in the input data. The SE network aims to adaptively recalibrate the feature maps by assigning different importance weights to different channels.
 
