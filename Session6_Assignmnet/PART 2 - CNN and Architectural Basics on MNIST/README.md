@@ -18,7 +18,7 @@ Transition layers (convolution + pooling), is a way of downsampling the represen
 #### Max pooling
 Max pooling is a pooling operation used in convolutional neural networks (CNNs) for feature extraction.It filters out least importenet features and sends out most importent features to consecutive layers for prediction.
 
-#### 1*1 COnvolution
+#### 1*1 Convolution
 1x1 convolution is often used as a transition block in convolutional neural networks (CNNs) to adjust the number of channels (also known as the depth or feature maps) between two consecutive layers. It is commonly used to reduce the number of channels before applying a larger convolution or pooling operation, or to increase the number of channels after a pooling operation and also introduces new parameters and new non-linearity into the network that will help to increase model accuracy.
 
 ### Batch Normalization
@@ -61,11 +61,11 @@ The total parameters of the model is around 15K.
 
 Model consists of convolution and transition blocks batch size of 32, epoch as 20 and optimizer as SGD.
 
-First convolution Block consists of 3 convolution layers of channel size 8, 16 & 32, with batch normalization, zero padding and dropout
-First Transition Block consist of Max Pooling layer of 2x2 followed by 1x1 convolution with input as 32 and output as 8 channels. 
-Second Convolution Block consist of 2 convolution layers of channel size 16 & 32, with batch normalization, zero padding and dropout
-One layer of pooling using AveragePooling.
-Final convolution layer with channel size from 20 to 10 with 3x3 kernel
+1. First convolution Block consists of 3 convolution layers of channel size 8, 16 & 32, with batch normalization, zero padding and dropout
+2. First Transition Block consist of Max Pooling layer of 2x2 followed by 1x1 convolution with input as 32 and output as 8 channels. 
+3. Second Convolution Block consist of 2 convolution layers of channel size 16 & 32, with batch normalization, zero padding and dropout
+4. One layer of pooling using AveragePooling.
+5. Final convolution layer with channel size from 20 to 10 with 3x3 kernel
 
 
 ## Output
