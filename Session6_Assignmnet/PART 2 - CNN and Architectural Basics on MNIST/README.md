@@ -2,7 +2,7 @@
 
 In this assignment, we will be using the MNIST data for classifying handwritten digits using a convolutional layer. 
 
-##Requirements
+## Requirements
 
 1. 99.4% validation accuracy
 2. Less than 20k Parameters
@@ -38,7 +38,7 @@ The MNIST database (Modified National Institute of Standards and Technology data
 
 MNIST features are best extracted at edges,gradients and textures
 
-### Model Architecture
+## Model Architecture
 Tried to implement a  Squeeze-and-Excitation network to identify the numbers in MINIST dataset. This architecute consist of convolution blocks followed by transition blocks. This is a technique designed to enhance the representational power of convolutional neural networks (CNNs) by explicitly modeling interdependencies between channels. The depth of a feature map represents different channels or filters, which capture various patterns and features in the input data. The SE network aims to adaptively recalibrate the feature maps by assigning different importance weights to different channels.
 
 ![download (1)](https://github.com/prarthanats/ERA/assets/32382676/0c48d16e-6de4-42f2-ba3e-c7a6bd9b66c8)
