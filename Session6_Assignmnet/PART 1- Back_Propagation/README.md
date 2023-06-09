@@ -32,7 +32,49 @@ We repeat these calculations for each neuron in each layer, starting from the in
 The output of the activation function from the output neuron reflects the predicted output of the inputs.  There’s a difference between the predictions and expected output. The error functions tell how close the predicted values are to the expected output. The optimal value for error is zero, meaning there’s no error at all, and both desired and predicted results are identical.
 
 The difference between the predictions and the expected output and calculate the error. The error is quantified using a loss function, such as mean squared error or cross-entropy loss. We calculate the error, then the forward pass ends, and we should start the backward pass to calculate the derivatives and update the parameters. In the diagram above, the loss is calculated by using the formula,
+	
 	$E_total = E1 + E2, where E1 is calculated for o1 and E2 is calculated for o2$
 	$E1 = ½ * (t1 - a_o1) ²$
 	$E2 = ½ * (t2 - a_o2) ²$
+
+## Back Propagation:
+For back propagation, we need to understand how the predictions are related to each of the weights so that we calculate the gradients that need to be applied.We calculate the gradients of the error with respect to the weights of each neuron. These gradients indicate how much each weight contributes to the overall error. This tells us the effect of each weight on the prediction error. That is, which parameters do we increase, and which ones do we decrease to get the smallest prediction error. Weights are updated in the opposite direction of the gradients to minimize the error.
+
+In the diagram above, the gradient of total error with respect to weight w5 is calculated using the formula, 
+
+	$∂E_total/∂w5 = ∂ (E1 + E2)/∂w5$
+	
+Here, since ∂5 has no relation to E2, the derivate of it will be 0. The above equations for backpropagation are derived using the chain rule of calculus.  To know how prediction error changes with respect to weight w5 in the parameters we should find the following intermediate derivatives.
+1.Error w.r.t the predicted output (activations of the output layer neurons). This gradient represents how the error changes as we modify the output layer activations (∂E1/∂a_o1)
+2.Predicted Output w.r.t the output neuron (output of hidden layer wrt to the weight) (∂a_o1/∂o1)
+3.Output neuron wrt to the weight w5. In each hidden layer, we calculate the gradient with respect to the activations and use it to compute the gradients with respect to the weights (∂o1/∂w5)
+
+	$∂E_total/∂w5 = ∂E1/∂w5 = ∂E1/∂a_o1*∂a_o1/∂o1*∂o1/∂w5$
+
+In the above diagram,$E1 = ½ * (t1 - a_o1) ²$, and the derivative of Error w.r.t the predicted output $(a_o1) is ∂E1/∂a_o1 = ∂(½ * (t1 - a_o1)²)/∂a_o1 = (a_01 - t1)$
+
+The derivative of Predicted Output(a_o1) w.r.t the output neuron(o1) Is $∂a_o1/∂o1 = ∂(σ(o1))/∂o1 = a_o1 * (1 - a_o1)$, where the derivative of the sigmoid function σ(x) is the sigmoid function σ(x) multiplied by 1−σ(x) *
+
+The derivative of output neuron wrt to the weight w5 is $∂o1/∂w5 = a_h1$, Bringing all the derivates together,
+
+	$∂E_total/∂w5 = (a_01 - t1) * a_o1 * (1 - a_o1) *  a_h1$
+
+Similar Calculation is done for all the hidden layer weights w6,w7 and w8
+	$∂E_total/∂w6 = (a_01 - t1) * a_o1 * (1 - a_o1) *  a_h2$
+	$∂E_total/∂w7 = (a_02 - t2) * a_o2 * (1 - a_o2) *  a_h1$
+	$∂E_total/∂w8 = (a_02 - t2) * a_o2 * (1 - a_o2) *  a_h2$
+
+Similarly, we need to find the gradients for the hidden layer outputs,
+
+	$∂E1/∂a_h1 = (a_01 - t1) * a_o1 * (1 - a_o1) * w5$
+	$∂E2/∂a_h1 = (a_02 - t2) * a_o2 * (1 - a_o2) * w7$
+	$∂E_total/∂a_h1 = (a_01 - t1) * a_o1 * (1 - a_o1) * w5 +  (a_02 - t2) * a_o2 * (1 - a_o2) * w7$
+	$∂E_total/∂a_h2 = (a_01 - t1) * a_o1 * (1 - a_o1) * w6 +  (a_02 - t2) * a_o2 * (1 - a_o2) * w8$
+
+Similarly, calculations are done on weights of the input layers. 
+	
+	$∂E_total/∂w1 = ((a_01 - t1) * a_o1 * (1 - a_o1) * w5 +  (a_02 - t2) * a_o2 * (1 - a_o2) * w7) * a_h1 * (1 - a_h1) * i1$
+	$∂E_total/∂w2 = ((a_01 - t1) * a_o1 * (1 - a_o1) * w5 +  (a_02 - t2) * a_o2 * (1 - a_o2) * w7) * a_h1 * (1 - a_h1) * i2$
+	$∂E_total/∂w3 = ((a_01 - t1) * a_o1 * (1 - a_o1) * w6 +  (a_02 - t2) * a_o2 * (1 - a_o2) * w8) * a_h2 * (1 - a_h2) * i1$
+	$∂E_total/∂w4 = ((a_01 - t1) * a_o1 * (1 - a_o1) * w6 +  (a_02 - t2) * a_o2 * (1 - a_o2) * w8) * a_h2 * (1 - a_h2) * i2$
 
