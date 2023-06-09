@@ -7,7 +7,7 @@ Back Propagation algorithm also known as "backward propagation of errors," enabl
 The goal of backpropagation is to minimize the difference between the predicted output of a neural network and the desired output. Starting from the output layer, the error is propagated backward through the network. For each neuron, the algorithm calculates the contribution of that neuron's activations to the overall error. This is done using the chain rule of calculus, which allows us to calculate the derivative of the error with respect to the weights and biases of each neuron.
 
 ## Working of Backpropagation
-<img width="419" alt="Archietcture" src="https://github.com/prarthanats/ERA/assets/32382676/91b602be-fdd8-4b9d-b481-a3d2bf30e614">
+                   <img width="419" alt="Archietcture" src="https://github.com/prarthanats/ERA/assets/32382676/91b602be-fdd8-4b9d-b481-a3d2bf30e614">
 
 ### Forward Propagation: 
 The input data is fed through the neural network. Input and output are determined by looking at the problem statement. We don’t know the exact weights initially; we will assign random values to the weights. 
@@ -103,4 +103,4 @@ The forward propagation, backward propagation, and weight updates are repeated f
 ## Effect of Learning Rate
 Now lets see the effect of learning rate on the weights. We shall consider different learning rates of [0.1, 0.2, 0.5, 0.8, 1.0, 2.0] while keeping all the other parameters such as input, target, initial weights etc. constant.
 
-<img width="483" alt="LR_All" src="https://github.com/prarthanats/ERA/assets/32382676/5a4329ad-4984-42f1-bd5a-44d862a5a7d4">
+                              <img width="483" alt="LR_All" src="https://github.com/prarthanats/ERA/assets/32382676/5a4329ad-4984-42f1-bd5a-44d862a5a7d4">
