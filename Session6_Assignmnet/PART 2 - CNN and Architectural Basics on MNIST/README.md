@@ -41,6 +41,8 @@ MNIST features are best extracted at edges,gradients and textures
 ### Model Architecture
 Tried to implement a  Squeeze-and-Excitation network to identify the numbers in MINIST dataset. This architecute consist of convolution blocks followed by transition blocks. This is a technique designed to enhance the representational power of convolutional neural networks (CNNs) by explicitly modeling interdependencies between channels. The depth of a feature map represents different channels or filters, which capture various patterns and features in the input data. The SE network aims to adaptively recalibrate the feature maps by assigning different importance weights to different channels.
 
+![download (1)](https://github.com/prarthanats/ERA/assets/32382676/0c48d16e-6de4-42f2-ba3e-c7a6bd9b66c8)
+
 Convolution Block: Convolution layer consists of channels of size 8, 16, 32.The implemented architecture is designed to extract edges and gradients at the Receptive Fields of 3 to 7,with 3 convolution blocks and convolution block 4 for textures. 
 
 Transition Block: To reduce the channel after each block, from 32 to 8. after convolution block, 1x1 convolution is applied , that helped us to reduce num of parameters. This is squeeze operation.
@@ -55,6 +57,7 @@ Dropout: It is applied in the 1st convolution and convolution 4 to reduce the ov
 
 The total parameters of the model is around 15K.
 
+<img width="341" alt="Model_Summary" src="https://github.com/prarthanats/ERA/assets/32382676/38e596f2-c209-4769-8243-bde70f3382be">
 
 Model consists of convolution and transition blocks batch size of 32, epoch as 20 and optimizer as SGD.
 
@@ -66,5 +69,6 @@ Final convolution layer with channel size from 20 to 10 with 3x3 kernel
 
 
 ## Output
-
 Reached highest testing accuracy as 99.4% at 12th epoch.
+
+<img width="644" alt="output" src="https://github.com/prarthanats/ERA/assets/32382676/cd266714-d285-48cc-a964-98122bb201fa">
