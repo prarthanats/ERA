@@ -95,10 +95,10 @@ We have now found the equations using which we can back propagate and adjust the
 The forward propagation, backward propagation, and weight updates are repeated for a certain number of iterations (epochs) until the network converges or reaches a desired level of performance.
 
 ## Interpreting the results of Backpropagation
-1.Gradient Magnitudes: provide insights into how much each weight contributes to the overall error. Larger gradient values indicate that a particular weight or bias has a stronger influence on the error, while smaller gradients suggest a weaker influence.
-2.Weight/Derivative Updates: After calculating the gradients, the weights are updated to minimize the error. Positive weight updates indicate an increase in the weight value, while negative updates indicate a decrease. The magnitude of the weight update depends on the learning rate, which determines the step size taken towards minimizing the error.
-3.Convergence: monitoring the changes in the error over multiple iterations or epochs, you can assess whether the network is converging. If the error decreases consistently, it suggests that the network is learning and adjusting its weights and biases effectively.
-4.Weight Updating: The magnitudes of the updated weights can provide insights into the importance of different features or connections in the network. Larger weight values indicate stronger connections and higher importance, while smaller weights suggest weaker connections.
+1. Gradient Magnitudes: provide insights into how much each weight contributes to the overall error. Larger gradient values indicate that a particular weight or bias has a stronger influence on the error, while smaller gradients suggest a weaker influence.
+2. Weight/Derivative Updates: After calculating the gradients, the weights are updated to minimize the error. Positive weight updates indicate an increase in the weight value, while negative updates indicate a decrease. The magnitude of the weight update depends on the learning rate, which determines the step size taken towards minimizing the error.
+3. Convergence: monitoring the changes in the error over multiple iterations or epochs, you can assess whether the network is converging. If the error decreases consistently, it suggests that the network is learning and adjusting its weights and biases effectively.
+4. Weight Updating: The magnitudes of the updated weights can provide insights into the importance of different features or connections in the network. Larger weight values indicate stronger connections and higher importance, while smaller weights suggest weaker connections.
 
 ## Effect of Learning Rate
 	
