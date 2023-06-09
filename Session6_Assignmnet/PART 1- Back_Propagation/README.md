@@ -51,15 +51,24 @@ Here, since ∂5 has no relation to E2, the derivate of it will be 0. The above 
 
 	$∂E_total/∂w5 = ∂E1/∂w5 = ∂E1/∂a_o1*∂a_o1/∂o1*∂o1/∂w5$
 
-In the above diagram,$E1 = ½ * (t1 - a_o1) ²$, and the derivative of Error w.r.t the predicted output $(a_o1) is ∂E1/∂a_o1 = ∂(½ * (t1 - a_o1)²)/∂a_o1 = (a_01 - t1)$
+In the above diagram,
+	
+	$E1 = ½ * (t1 - a_o1) ²$, 
+	
+and the derivative of Error w.r.t the predicted output 
+	
+	$(a_o1) is ∂E1/∂a_o1 = ∂(½ * (t1 - a_o1)²)/∂a_o1 = (a_01 - t1)$
 
-The derivative of Predicted Output(a_o1) w.r.t the output neuron(o1) Is $∂a_o1/∂o1 = ∂(σ(o1))/∂o1 = a_o1 * (1 - a_o1)$, where the derivative of the sigmoid function σ(x) is the sigmoid function σ(x) multiplied by 1−σ(x) *
+The derivative of Predicted Output(a_o1) w.r.t the output neuron(o1) Is 
 
-The derivative of output neuron wrt to the weight w5 is $∂o1/∂w5 = a_h1$, Bringing all the derivates together,
+	$∂a_o1/∂o1 = ∂(σ(o1))/∂o1 = a_o1 * (1 - a_o1)$, where the derivative of the sigmoid function σ(x) is the sigmoid function σ(x) multiplied by 1−σ(x) *
+
+The derivative of output neuron wrt to the weight w5 is ∂o1/∂w5 = a_h1, Bringing all the derivates together,
 
 	$∂E_total/∂w5 = (a_01 - t1) * a_o1 * (1 - a_o1) *  a_h1$
 
 Similar Calculation is done for all the hidden layer weights w6,w7 and w8
+	
 	$∂E_total/∂w6 = (a_01 - t1) * a_o1 * (1 - a_o1) *  a_h2$
 	$∂E_total/∂w7 = (a_02 - t2) * a_o2 * (1 - a_o2) *  a_h1$
 	$∂E_total/∂w8 = (a_02 - t2) * a_o2 * (1 - a_o2) *  a_h2$
