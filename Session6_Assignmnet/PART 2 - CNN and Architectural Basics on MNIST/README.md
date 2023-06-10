@@ -40,23 +40,23 @@ Pixels on the edge have a significant difference in values. We can compare neigh
 ## Model Architecture
 Tried to implement a  Squeeze-and-Excitation network to identify the numbers in MINIST dataset. This architecute consist of convolution blocks followed by transition blocks. This is a technique designed to enhance the representational power of convolutional neural networks (CNNs) by explicitly modeling interdependencies between channels. The depth of a feature map represents different channels or filters, which capture various patterns and features in the input data. The SE network aims to adaptively recalibrate the feature maps by assigning different importance weights to different channels.
 
-![download (1)](https://github.com/prarthanats/ERA/assets/32382676/0c48d16e-6de4-42f2-ba3e-c7a6bd9b66c8)
+![download (1)](https://github.com/prarthanats/ERA/assets/32382676/e9a09cd6-d502-495f-8db9-2f9e0464f4a0)
 
 1. Convolution Block: Convolution layer consists of channels of size 8, 16, 32.The implemented architecture is designed to extract edges and gradients at the Receptive Fields of 3 to 7,with 3 convolution blocks and convolution block 4 for textures. 
 2. Transition Block: To reduce the channel after each block, from 32 to 8. after convolution block, 1x1 convolution is applied , that helped us to reduce num of parameters. This is squeeze operation.
 3. AvgPooling: It is applied as the 2nd pool before prediction so as to calculates for each pixel is average value rather than the max value for the feature map
 4. BatchNormalization: It is applied after every convolution layer except the last one to standadize the input to a convolution layer for every batch. 
-5. Dropout: It is applied in the 1st convolution and convolution 4 to reduce the overfitting
+5. Dropout: It is applied at the end of 1st convolution and convolution 4 to reduce the overfitting
 
 ## Model Summary
 
 The total parameters of the model is around 15K.
 
-<img width="341" alt="Model_Summary" src="https://github.com/prarthanats/ERA/assets/32382676/38e596f2-c209-4769-8243-bde70f3382be">
+<img width="392" alt="Model_Summary" src="https://github.com/prarthanats/ERA/assets/32382676/9b415280-c2cf-4c20-a5f3-71acb6376d57">
 
 Model consists of convolution and transition blocks batch size of 32, epoch as 20 and optimizer as SGD.
 
-1. First convolution Block consists of 3 convolution layers of channel size 8, 16 & 32, with batch normalization, zero padding and dropout
+1. First convolution Block consists of 3 convolution layers of channel size 8, 16 & 32, with batch normalization, zero padding and dropout at the end 
 2. First Transition Block consist of Max Pooling layer of 2x2 followed by 1x1 convolution with input as 32 and output as 8 channels. 
 3. Second Convolution Block consist of 2 convolution layers of channel size 16 & 32, with batch normalization, zero padding and dropout
 4. One layer of pooling using AveragePooling.
@@ -66,4 +66,5 @@ Model consists of convolution and transition blocks batch size of 32, epoch as 2
 ## Output
 Reached highest testing accuracy as 99.4% at 12th epoch.
 
-<img width="644" alt="output" src="https://github.com/prarthanats/ERA/assets/32382676/cd266714-d285-48cc-a964-98122bb201fa">
+<img width="554" alt="output" src="https://github.com/prarthanats/ERA/assets/32382676/e5e0cb0c-6c8d-4cd8-99ee-7274c02f182f">
+
