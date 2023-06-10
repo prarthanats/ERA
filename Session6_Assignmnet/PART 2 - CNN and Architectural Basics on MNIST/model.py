@@ -37,7 +37,7 @@ class Net(nn.Module):
                 
         self.gp = nn.AvgPool2d(kernel_size=2) # Input: 7  Output:3 RF:18
 
-        self.conv6 = nn.Conv2d(in_channels=32, out_channels=10, kernel_size=3) # Input:9  Output:1 RF:21
+        self.conv6 = nn.Conv2d(in_channels=32, out_channels=10, kernel_size=3) # Input:3  Output:1 RF:21
         
 
     def forward(self, x):
