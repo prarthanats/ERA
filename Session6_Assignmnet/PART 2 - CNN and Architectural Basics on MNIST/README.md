@@ -64,7 +64,7 @@ Model consists of convolution and transition blocks batch size of 32, epoch as 2
 
 
 ## Output
-Reached highest testing accuracy as 99.4% at 12th epoch.
+Reached highest testing accuracy as 99.4% at 15th epoch.
 
 <img width="554" alt="output" src="https://github.com/prarthanats/ERA/assets/32382676/e5e0cb0c-6c8d-4cd8-99ee-7274c02f182f">
 
