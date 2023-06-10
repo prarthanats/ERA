@@ -31,7 +31,7 @@ The model consists of different layers of convolutional layers, max pooling, bat
 ### MNIST Data
 The MNIST database (Modified National Institute of Standards and Technology database) is a large database of handwritten digits that is commonly used for training various image processing systems.The database is also widely used for training and testing in the field of machine learning. It is made up of a number of grayscale pictures that represent the digits 0 through 9. The collection contains square images that are each 28x28 pixels in size, for a total of 784 pixels per image.
 
-MNIST features are best extracted at edges,gradients and textures
+MNIST features are best extracted at edges,gradients 
 
 ![Screenshot-from-2021-03-12-15-21-04](https://github.com/prarthanats/ERA/assets/32382676/e12f00f2-801d-47d6-a4f4-c41e07a20d17)
 
