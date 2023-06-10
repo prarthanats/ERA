@@ -16,11 +16,9 @@ class Net(nn.Module):
         super(Net, self).__init__()
         self.conv1 = nn.Conv2d(in_channels = 1, out_channels=8, kernel_size=3, padding=0) #Input:28  Output:26 RF:3
         self.bn1 = nn.BatchNorm2d(8)
-        self.drop = nn.Dropout(0.05)
        
         self.conv2 = nn.Conv2d(in_channels = 8, out_channels=16, kernel_size=3, padding=0) #Input:26 Output:24 RF:5
         self.bn2 = nn.BatchNorm2d(16)
-        self.drop = nn.Dropout(0.05)
         
         self.conv3 = nn.Conv2d(in_channels = 16, out_channels=32, kernel_size=3, padding=0) # Input:24  Output:22 RF:7
         self.bn3 = nn.BatchNorm2d(32)
@@ -43,7 +41,7 @@ class Net(nn.Module):
         
 
     def forward(self, x):
-        x = F.relu(self.drop(self.bn3(self.conv3(F.relu(self.drop(self.bn2(self.conv2(F.relu(self.drop(self.bn1(self.conv1(x))))))))))))
+        x = F.relu(self.drop(self.conv3(F.relu(self.bn2(self.conv2(F.relu(self.bn1(self.conv1(x)))))))))
         x = self.pool1(x)
         x = F.relu(self.bn6(self.conv5(F.relu(self.drop(self.bn5(self.conv4(F.relu(self.bn4(self.ts1(x))))))))))
         x = self.gp(x)
@@ -78,7 +76,7 @@ def test(model, device, test_loader):
 
     test_loss /= len(test_loader.dataset)
 
-    print('\nTest set: Average loss: {:.4f}, Accuracy: {}/{} ({:.1f}%)\n'.format(
+    print('\nTest set: Average loss: {:.4f}, Accuracy: {}/{} ({:.2f}%)\n'.format(
         test_loss, correct, len(test_loader.dataset),
         100. * correct / len(test_loader.dataset)))
     
