@@ -42,7 +42,7 @@ Tried to implement a  Squeeze-and-Excitation network to identify the numbers in 
 
 ![download (1)](https://github.com/prarthanats/ERA/assets/32382676/e9a09cd6-d502-495f-8db9-2f9e0464f4a0)
 
-1. Convolution Block: Convolution layer consists of channels of size 8, 16, 32.The implemented architecture is designed to extract edges and gradients at the Receptive Fields of 3 to 7,with 3 convolution blocks and convolution block 4 for textures. 
+1. Convolution Block: Convolution layer consists of channels of size 8, 16, 32.The implemented architecture is designed to extract edges and gradients at the Receptive Fields of 7,with 3 convolution blocks and convolution block 4 for textures. 
 2. Transition Block: To reduce the channel after each block, from 32 to 8. after convolution block, 1x1 convolution is applied , that helped us to reduce num of parameters. This is squeeze operation.
 3. AvgPooling: It is applied as the 2nd pool before prediction so as to calculates for each pixel is average value rather than the max value for the feature map
 4. BatchNormalization: It is applied after every convolution layer except the last one to standadize the input to a convolution layer for every batch. 
