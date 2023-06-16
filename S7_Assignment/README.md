@@ -25,7 +25,7 @@ Tried to implement a Squeeze-and-Excitation network to classify the numbers in M
 
 The MNIST Data is best represented at edges. the implemented structure is designed to extract edges at the Receptive Fields of 5. Padding of 1 is added to the first convolution block. Even though it is not very helpfull during the initial models. It is added beacuse we are do image augmentations at the 3rd block and padding can help ensure that the rotated image fits within the desired dimensions.
 
-### Model 1 - Skeleton
+### Model 1 - Skeleton 
 #### Target:
 1. To get the basic skeleton correct
 2. A modular code
@@ -97,11 +97,12 @@ Techniques like dropout,batch normalization are used to reduce the overfitting b
 #### Target:
 1. Make the model lighter 
 2. Add Batch normalization to increase model efficiency and improve accuracy
-
 #### Results:
 Total parameters: 8,714
 Best Training Accuracy - 99.41 at the 15th Epoch
 Best Testing Accuracy - 99.29 at the 14th epoch
+
+![model4](https://github.com/prarthanats/ERA/assets/32382676/099d573a-3309-46f8-b399-b797edd235a3)
 
 #### Analysis:
 1. Train and test discrepancy is less and is around 0.12 and model seems to be good. 
@@ -109,6 +110,7 @@ Best Testing Accuracy - 99.29 at the 14th epoch
 3. Less overfitting and hence can be altered for better accuracy
 4. Parameters are also reduced
 
+![model4](https://github.com/prarthanats/ERA/assets/32382676/2de09512-d50d-40f7-89fb-1f54c5e34b2a)
 
 ### model 5 - DropOut of 0.01 is added to every convolution layer except last one 
 
@@ -121,11 +123,15 @@ Total parameters: 8,694
 Best Training Accuracy - 99.24 at the 15th Epoch
 Best Testing Accuracy - 99.22 at the 15th epoch
 
+![model5](https://github.com/prarthanats/ERA/assets/32382676/1192a3d1-9794-4b7a-a3e3-3a6c60e6a25b)
+
 #### Analysis:
 1. Good model, Train and test discrepancy is less and seems to be close to zero 
 2. The model gap between train and test accuracy has decreased from  0.12 in the previous model to around 0.02
 3. Adding dropout has got the test accuracy close to train accuracy, reducing the over fit. hence the accuracy of test has decreased 99.29 in the previous modek to 99.22
 4. The train accuracy has also decreased from 99.41 to 99.24. Dropout might be causing underfitting, which might be because of the introduction of noise. 
+
+![model5](https://github.com/prarthanats/ERA/assets/32382676/edd7a948-ffff-465a-9472-18e1430028df)
 
 ### model 6 - GAP replaces 6*6 Kernel and add a 1*1 in last layer
 
@@ -138,9 +144,13 @@ Total parameters: 5,194
 Best Training Accuracy - 98.97 at the 15th Epoch
 Best Testing Accuracy - 99.35 at the 12th epoch
 
+![model6](https://github.com/prarthanats/ERA/assets/32382676/c97097d6-c12d-4b51-a63d-6bbc920c3e2f)
+
 #### Analysis:
 1. Total paramters decreased is around 3500 parameters and thats around half the total paramters in the previous model.GAP has reduced the dimensionality of the feature maps resulting in a better representation. 
 2. Introducing GAP has included some discrepancy, the model cannot be compared but does seem to be underfitting. 
+
+![model6](https://github.com/prarthanats/ERA/assets/32382676/047265fb-b4a7-4f5d-88aa-f622ac4a91ed)
 
 
 ### model 7 - Adding Capacity to the Model 
@@ -154,11 +164,17 @@ Total parameters: 7,598
 Best Training Accuracy - 98.92 at the 15th Epoch
 Best Testing Accuracy - 99.20 at the 15th epoch
 
+![model7](https://github.com/prarthanats/ERA/assets/32382676/74b057ec-e7fc-4a46-b865-c2f7b42b580c)
+
+
 #### Analysis:
 1. The total parameters is increased by adding more capacity to the model. 
 2. The model seems to be efficient. 
 3. The model has lesser gap between the train and test accuracy compared to the previous model 
 4. We have met some of our objectives in terms of less than 8k parameters, 15 epochs
+
+![model7](https://github.com/prarthanats/ERA/assets/32382676/190ae012-ddcd-480d-b025-58f39e46f917)
+
 
 At the end of Block two we have a 7k Parameter model, which is good and not overfitting a lot. The next step is to improve accuracy
 
@@ -179,6 +195,9 @@ Best Testing Accuracy - 99.26 at the 15th epoch
 1. Random Rotation between -6.9 and 6.9 degrees. Introducing this variation in the dataset has improved the test accuracy from 99.20 in previous model to 99.26 in this model. 
 2. This model seems to be performing consistent for the test data
 
+![model8](https://github.com/prarthanats/ERA/assets/32382676/1201abca-b4f2-44f3-9dab-1ef28039df81)
+
+
 ### model 9 - Adding Image Augmentation with Learning Rate
 
 #### Target:
@@ -194,6 +213,8 @@ Best Testing Accuracy - 99.42 from the 12th epoch
 2. By adding ReduceLRonPlateau helps the model converge more effieciently to reach a better optima
 3. Adding these 2 have increased the model accuracy and more consistent results
 
+![model9](https://github.com/prarthanats/ERA/assets/32382676/13e7a1c3-6d2d-40a2-89e1-c6a4d6c20c56)
+
 
 ### model 10 - Reduced parameters on Image Augmentation with Learning Rate
 
@@ -205,8 +226,12 @@ Total parameters: 6,022
 Best Training Accuracy - 98.86 at the 15th Epoch
 Best Testing Accuracy - 99.41 from the 14th epoch
 
+![model10](https://github.com/prarthanats/ERA/assets/32382676/187a91ff-885f-4672-b2aa-31d211866060)
+
+
 #### Analysis:
 1. This model has been more of an experiment to see what is the right parameter size with which this model to could give atleast 2 test accuracy more that 99.4.
 2. With around 6k parameters, the model seems to be lineraly increasing the test and train accuracy. 
 
+![model10](https://github.com/prarthanats/ERA/assets/32382676/a1658ff2-19ab-4eb1-9584-7a07bcaed54a)
 
