@@ -25,8 +25,6 @@ Tried to implement a Squeeze-and-Excitation network to classify the numbers in M
 
 The MNIST Data is best represented at edges. the implemented structure is designed to extract edges at the Receptive Fields of 5. Padding of 1 is added to the first convolution block. Even though it is not very helpfull during the initial models. It is added beacuse we are do image augmentations at the 3rd block and padding can help ensure that the rotated image fits within the desired dimensions.
 
-<img width="256" alt="block1" src="https://github.com/prarthanats/ERA/assets/32382676/98732e28-7e97-4805-9515-9e6d6c8e89c3">
-
 ### Model 1 - Skeleton
 #### Target:
 1. To get the basic skeleton correct
@@ -43,6 +41,8 @@ Best Testing Accuracy - 99.01 at the 14th epoch
 1. Extremely Heavy Model for such a problem
 2. Train and test discrepancy is around 0.30 at the last 6 epochs, and it seems to be consistent, model is not generalizing well on the test data
 3. Does indicate overfitting
+
+<img width="580" alt="model1" src="https://github.com/prarthanats/ERA/assets/32382676/25bbb8fa-7df6-4aff-be32-b44be4f72b54">
 
 ### model 2 - Less Parameters
 #### Target:
@@ -61,6 +61,8 @@ Best Testing Accuracy - 98.55 at the 10th epoch
 2. Train and test discrepancy is less, average is around 0.2 but not consistent and is around 0.3 at the last epoch, so its still overfitting but not as model1
 3. The model is capable and can still be pushed to work with lesser parameters
 
+<img width="571" alt="model2" src="https://github.com/prarthanats/ERA/assets/32382676/805cde14-1ead-4496-866d-7fbfd41a8ced">
+
 ### model 3 - Lesser Parameters
 
 #### Target:
@@ -72,13 +74,16 @@ Total parameters: 9,446
 Best Training Accuracy - 98.82 at the 15th Epoch
 Best Testing Accuracy - 98.82 at the 14th epoch
 
+![model3](https://github.com/prarthanats/ERA/assets/32382676/aebc02e8-7cd9-4240-b762-1b733141c0be)
+
 #### Analysis:
 1. Good model
 2. Train and test discrepancy is less but is not consistent and around the last epoch the model looks to be little overfitting
 3. The model is better,and much lighter than the earlier models, very less overfitting. 
 4. we can proceed with this particular skeleton.
 
-![model3](https://github.com/prarthanats/ERA/assets/32382676/aebc02e8-7cd9-4240-b762-1b733141c0be)
+![model3](https://github.com/prarthanats/ERA/assets/32382676/e9480f38-d5ce-4aa7-8bf5-c1ddc8d09fb2)
+
 
 At the end of Block one we have a 9k Parameter model, which is good and not overfitting a lot. The next step is to reduce the overfitting, improve efficency
 
