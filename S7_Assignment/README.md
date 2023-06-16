@@ -5,9 +5,9 @@ In this assignment, we will be using the MNIST data for classifying handwritten 
 ## MNIST Data
 The MNIST database (Modified National Institute of Standards and Technology database) is a large database of handwritten digits that is commonly used for training various image processing systems.The database is also widely used for training and testing in the field of machine learning. It is made up of a number of grayscale pictures that represent the digits 0 through 9. The collection contains square images that are each 28x28 pixels in size, for a total of 784 pixels per image.
 
-Image
+![download](https://github.com/prarthanats/ERA/assets/32382676/6fb2614b-569e-4a7b-aaff-9877fdb530b3)
 
-##Requirements
+## Requirements
 
 1. 99.4%(this must be consistently shown in your last few epochs, and not a one-time achievement)
 2. Less than or equal to 15 epochs
@@ -25,8 +25,9 @@ Tried to implement a Squeeze-and-Excitation network to classify the numbers in M
 
 The MNIST Data is best represented at edges. the implemented structure is designed to extract edges at the Receptive Fields of 5. Padding of 1 is added to the first convolution block. Even though it is not very helpfull during the initial models. It is added beacuse we are do image augmentations at the 3rd block and padding can help ensure that the rotated image fits within the desired dimensions.
 
-### Model 1 - Skeleton
+<img width="256" alt="block1" src="https://github.com/prarthanats/ERA/assets/32382676/98732e28-7e97-4805-9515-9e6d6c8e89c3">
 
+### Model 1 - Skeleton
 #### Target:
 1. To get the basic skeleton correct
 2. A modular code
@@ -36,13 +37,14 @@ Total parameters: 75,408
 Best Training Accuracy - 99.33 at the 15th Epoch
 Best Testing Accuracy - 99.01 at the 14th epoch
 
+![Model1](https://github.com/prarthanats/ERA/assets/32382676/e54bc625-4f07-4fac-bf00-1cb6e9c7c5df)
+
 #### Analysis:
 1. Extremely Heavy Model for such a problem
 2. Train and test discrepancy is around 0.30 at the last 6 epochs, and it seems to be consistent, model is not generalizing well on the test data
 3. Does indicate overfitting
 
 ### model 2 - Less Parameters
-
 #### Target:
 1. Same Skeleton as model 1
 2. Make the model lighter by reducing the number of channels across all layers
@@ -51,6 +53,8 @@ Best Testing Accuracy - 99.01 at the 14th epoch
 Total parameters: 14,760
 Best Training Accuracy - 98.53 at the 15th Epoch
 Best Testing Accuracy - 98.55 at the 10th epoch
+
+![model2](https://github.com/prarthanats/ERA/assets/32382676/b79e0920-f8fc-4cb5-8a60-b8e70d03066a)
 
 #### Analysis:
 1. Good model, the train and test accuracys are overlapping at a few places. 
@@ -74,6 +78,7 @@ Best Testing Accuracy - 98.82 at the 14th epoch
 3. The model is better,and much lighter than the earlier models, very less overfitting. 
 4. we can proceed with this particular skeleton.
 
+![model3](https://github.com/prarthanats/ERA/assets/32382676/aebc02e8-7cd9-4240-b762-1b733141c0be)
 
 At the end of Block one we have a 9k Parameter model, which is good and not overfitting a lot. The next step is to reduce the overfitting, improve efficency
 
@@ -150,6 +155,7 @@ Best Testing Accuracy - 99.20 at the 15th epoch
 3. The model has lesser gap between the train and test accuracy compared to the previous model 
 4. We have met some of our objectives in terms of less than 8k parameters, 15 epochs
 
+At the end of Block two we have a 7k Parameter model, which is good and not overfitting a lot. The next step is to improve accuracy
 
 ## Block 3 - Image Augmentation, Learning Rate
 
