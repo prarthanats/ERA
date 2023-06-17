@@ -31,9 +31,9 @@ The MNIST Data is best represented at edges. the implemented structure is design
 2. A modular code
 
 #### Results:
-Total parameters: 75,408
-Best Training Accuracy - 99.33 at the 15th Epoch
-Best Testing Accuracy - 99.01 at the 14th epoch
+1. Total parameters: 75,408
+2. Best Training Accuracy - 99.33 at the 15th Epoch
+3. Best Testing Accuracy - 99.01 at the 14th epoch
 
 ![Model1](https://github.com/prarthanats/ERA/assets/32382676/e54bc625-4f07-4fac-bf00-1cb6e9c7c5df)
 
@@ -50,9 +50,9 @@ Best Testing Accuracy - 99.01 at the 14th epoch
 2. Make the model lighter by reducing the number of channels across all layers
 
 #### Results:
-Total parameters: 14,760
-Best Training Accuracy - 98.53 at the 15th Epoch
-Best Testing Accuracy - 98.55 at the 10th epoch
+1. Total parameters: 14,760
+2. Best Training Accuracy - 98.53 at the 15th Epoch
+3. Best Testing Accuracy - 98.55 at the 10th epoch
 
 ![model2](https://github.com/prarthanats/ERA/assets/32382676/b79e0920-f8fc-4cb5-8a60-b8e70d03066a)
 
@@ -70,9 +70,9 @@ Best Testing Accuracy - 98.55 at the 10th epoch
 2. Make the model lighter by reducing the number of channels across the model for the assignment requirement
 
 #### Results:
-Total parameters: 9,446
-Best Training Accuracy - 98.82 at the 15th Epoch
-Best Testing Accuracy - 98.82 at the 14th epoch
+1. Total parameters: 9,446
+2. Best Training Accuracy - 98.82 at the 15th Epoch
+3. Best Testing Accuracy - 98.82 at the 14th epoch
 
 ![model3](https://github.com/prarthanats/ERA/assets/32382676/aebc02e8-7cd9-4240-b762-1b733141c0be)
 
@@ -98,9 +98,9 @@ Techniques like dropout,batch normalization are used to reduce the overfitting b
 1. Make the model lighter 
 2. Add Batch normalization to increase model efficiency and improve accuracy
 #### Results:
-Total parameters: 8,714
-Best Training Accuracy - 99.41 at the 15th Epoch
-Best Testing Accuracy - 99.29 at the 14th epoch
+1. Total parameters: 8,714
+2. Best Training Accuracy - 99.41 at the 15th Epoch
+3. Best Testing Accuracy - 99.29 at the 14th epoch
 
 ![model4](https://github.com/prarthanats/ERA/assets/32382676/099d573a-3309-46f8-b399-b797edd235a3)
 
@@ -119,9 +119,9 @@ Best Testing Accuracy - 99.29 at the 14th epoch
 1. Add Regularization, Dropout
 
 #### Results:
-Total parameters: 8,694
-Best Training Accuracy - 99.24 at the 15th Epoch
-Best Testing Accuracy - 99.22 at the 15th epoch
+1. Total parameters: 8,694
+2. Best Training Accuracy - 99.24 at the 15th Epoch
+3. Best Testing Accuracy - 99.22 at the 15th epoch
 
 ![model5](https://github.com/prarthanats/ERA/assets/32382676/1192a3d1-9794-4b7a-a3e3-3a6c60e6a25b)
 
@@ -140,9 +140,9 @@ Best Testing Accuracy - 99.22 at the 15th epoch
 2. Add a 1*1 in the last layer
 
 #### Results:
-Total parameters: 5,194
-Best Training Accuracy - 98.97 at the 15th Epoch
-Best Testing Accuracy - 99.35 at the 12th epoch
+1. Total parameters: 5,194
+2. Best Training Accuracy - 98.97 at the 15th Epoch
+3. Best Testing Accuracy - 99.35 at the 12th epoch
 
 ![model6](https://github.com/prarthanats/ERA/assets/32382676/c97097d6-c12d-4b51-a63d-6bbc920c3e2f)
 
@@ -160,9 +160,9 @@ Best Testing Accuracy - 99.35 at the 12th epoch
 2. Matching the requirements with respect to parameters
 
 #### Results:
-Total parameters: 7,598
-Best Training Accuracy - 98.92 at the 15th Epoch
-Best Testing Accuracy - 99.20 at the 15th epoch
+1. Total parameters: 7,598
+2. Best Training Accuracy - 98.92 at the 15th Epoch
+3. Best Testing Accuracy - 99.20 at the 15th epoch
 
 ![model7](https://github.com/prarthanats/ERA/assets/32382676/74b057ec-e7fc-4a46-b865-c2f7b42b580c)
 
@@ -187,9 +187,9 @@ At the end of Block two we have a 7k Parameter model, which is good and not over
 1. Inorder to increase the accuracy, Image augmentation can be added
 
 #### Results:
-Total parameters: 7,598
-Best Training Accuracy - 98.63 at the 15th Epoch
-Best Testing Accuracy - 99.26 at the 15th epoch
+1. Total parameters: 7,598
+2. Best Training Accuracy - 98.63 at the 15th Epoch
+3. Best Testing Accuracy - 99.26 at the 15th epoch
 
 #### Analysis:
 1. Random Rotation between -6.9 and 6.9 degrees. Introducing this variation in the dataset has improved the test accuracy from 99.20 in previous model to 99.26 in this model. 
@@ -204,9 +204,9 @@ Best Testing Accuracy - 99.26 at the 15th epoch
 1. Inorder to increase the accuracy, Learning rate and Image augmentation can be added
 
 #### Results:
-Total parameters: 7,598
-Best Training Accuracy - 99.08 at the 15th Epoch
-Best Testing Accuracy - 99.42 from the 12th epoch
+1. Total parameters: 7,598
+2. Best Training Accuracy - 99.08 at the 15th Epoch
+3. Best Testing Accuracy - 99.42 from the 12th epoch
 
 #### Analysis:
 1. transforms.RandomAffine(degrees=15) is added as additional augmentation. Introducing this variation in the dataset has improved the test accuracy
@@ -222,9 +222,9 @@ Best Testing Accuracy - 99.42 from the 12th epoch
 1. Reduced parameters to work with lesser parameters
 
 #### Results:
-Total parameters: 6,022
-Best Training Accuracy - 98.86 at the 15th Epoch
-Best Testing Accuracy - 99.41 from the 14th epoch
+1. Total parameters: 6,022
+2. Best Training Accuracy - 98.86 at the 15th Epoch
+3. Best Testing Accuracy - 99.41 from the 14th epoch
 
 ![model10](https://github.com/prarthanats/ERA/assets/32382676/187a91ff-885f-4672-b2aa-31d211866060)
 
