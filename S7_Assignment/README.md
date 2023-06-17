@@ -25,7 +25,7 @@ Tried to implement a Squeeze-and-Excitation network to classify the numbers in M
 
 The MNIST Data is best represented at edges. the implemented structure is designed to extract edges at the Receptive Fields of 5. Padding of 1 is added to the first convolution block. Even though it is not very helpfull during the initial models. It is added beacuse we are do image augmentations at the 3rd block and padding can help ensure that the rotated image fits within the desired dimensions.
 
-### ([model1](https://github.com/prarthanats/ERA/blob/main/S7_Assignment/Session_7_Block_1_Model_1_Skeleton.ipynb))  - Skeleton
+### Skeleton - ([model1](https://github.com/prarthanats/ERA/blob/main/S7_Assignment/Session_7_Block_1_Model_1_Skeleton.ipynb)) 
 #### Target:
 1. To get the basic skeleton correct
 2. A modular code
@@ -44,7 +44,7 @@ The MNIST Data is best represented at edges. the implemented structure is design
 
 <img width="580" alt="model1" src="https://github.com/prarthanats/ERA/assets/32382676/25bbb8fa-7df6-4aff-be32-b44be4f72b54">
 
-### model 2 - Less Parameters
+### Less Parameters - ([model2](https://github.com/prarthanats/ERA/blob/main/S7_Assignment/Session_7_Block_1_Model_2_Less_Param.ipynb))
 #### Target:
 1. Same Skeleton as model 1
 2. Make the model lighter by reducing the number of channels across all layers
@@ -63,7 +63,7 @@ The MNIST Data is best represented at edges. the implemented structure is design
 
 <img width="571" alt="model2" src="https://github.com/prarthanats/ERA/assets/32382676/805cde14-1ead-4496-866d-7fbfd41a8ced">
 
-### model 3 - Lesser Parameters
+### Lesser Parameters - ([model3](https://github.com/prarthanats/ERA/blob/main/S7_Assignment/Session_7_Block_1_Model_3_Lesser_Param.ipynb))
 
 #### Target:
 1. Same Skeleton as model 1
@@ -92,7 +92,7 @@ At the end of Block one we have a 9k Parameter model, which is good and not over
 
 Techniques like dropout,batch normalization are used to reduce the overfitting by adding constraints or introducing randomness during training also adjusting the model architecture to prevent it from overfitting.
 
-### model 4 - Batch Normalization added to every convolution layer except last one 
+### Batch Normalization added to every convolution layer except last one - ([model4](https://github.com/prarthanats/ERA/blob/main/S7_Assignment/Session_7_Block_2_Model_4_Batch_Norm.ipynb))
 
 #### Target:
 1. Make the model lighter 
@@ -112,7 +112,7 @@ Techniques like dropout,batch normalization are used to reduce the overfitting b
 
 ![model4](https://github.com/prarthanats/ERA/assets/32382676/2de09512-d50d-40f7-89fb-1f54c5e34b2a)
 
-### model 5 - DropOut of 0.01 is added to every convolution layer except last one 
+### DropOut of 0.01 is added to every convolution layer except last one - ([model5](https://github.com/prarthanats/ERA/blob/main/S7_Assignment/Session_7_Block_2_Model_5_DropOut.ipynb))
 
 #### Target:
 
@@ -134,7 +134,7 @@ Techniques like dropout,batch normalization are used to reduce the overfitting b
 ![image](https://github.com/prarthanats/ERA/assets/32382676/4bdfd45a-a15c-4279-89a6-c8da65863832)
 
 
-### model 6 - GAP replaces 6X6 kernel and add a 1*1 in last layer
+### GAP replaces 6X6 kernel and add a 1*1 in last layer - ([model6](https://github.com/prarthanats/ERA/blob/main/S7_Assignment/Session_7_Block_2_Model_6_GAP.ipynb))
 
 #### Target:
 1. Add GAP and remove the last BIG kernel (6*6 Kernel) 
@@ -153,7 +153,7 @@ Techniques like dropout,batch normalization are used to reduce the overfitting b
 
 ![image](https://github.com/prarthanats/ERA/assets/32382676/5fa78f3a-caa5-4968-8bc4-c8d7686bff55)
 
-### model 7 - Adding Capacity to the Model 
+### Adding Capacity to the Model - ([model7](https://github.com/prarthanats/ERA/blob/main/S7_Assignment/Session_7_Block_2_Model_7_param.ipynb))
 
 #### Target:
 1. Increasing the number of parameters to the GAP Model
@@ -181,7 +181,7 @@ At the end of Block two we have a 7k Parameter model, which is good and not over
 ## Block 3 - Image Augmentation, Learning Rate
 
 
-### model 8 - Adding Image Augmentation to improve accuracy
+### Adding Image Augmentation to improve accuracy - ([model8](https://github.com/prarthanats/ERA/blob/main/S7_Assignment/Session_7_Block_3_Model_8_AUG.ipynb))
 
 #### Target:
 1. Inorder to increase the accuracy, Image augmentation can be added
@@ -198,7 +198,7 @@ At the end of Block two we have a 7k Parameter model, which is good and not over
 ![image](https://github.com/prarthanats/ERA/assets/32382676/6bdb8199-35dd-44cf-a962-9887785cc86f)
 
 
-### model 9 - Adding Image Augmentation with Learning Rate
+### Adding Image Augmentation with Learning Rate - ([model9](https://github.com/prarthanats/ERA/blob/main/S7_Assignment/Session_7_Block_3_Model_9_LR_decrease.ipynb))
 
 #### Target:
 1. Inorder to increase the accuracy, Learning rate and Image augmentation can be added
@@ -210,13 +210,13 @@ At the end of Block two we have a 7k Parameter model, which is good and not over
 
 #### Analysis:
 1. transforms.RandomAffine(degrees=15) is added as additional augmentation. Introducing this variation in the dataset has improved the test accuracy
-2. By adding ReduceLRonPlateau helps the model converge more effieciently to reach a better optima
+2. By adding ReduceLRonPlateau with a lr of 0.075 helps the model converge more effieciently to reach a better optima
 3. Adding these 2 have increased the model accuracy and more consistent results
 
 ![image](https://github.com/prarthanats/ERA/assets/32382676/d7225732-7a39-41e9-a919-dfa3a7db8f79)
 
 
-### model 10 - Reduced parameters on Image Augmentation with Learning Rate
+### Reduced parameters on Image Augmentation with Learning Rate - ([model10](https://github.com/prarthanats/ERA/blob/main/S7_Assignment/Session_7_Block_3_Model_10_param_reduce.ipynb))
 
 #### Target:
 1. Reduced parameters to work with lesser parameters
