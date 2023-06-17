@@ -25,7 +25,7 @@ Tried to implement a Squeeze-and-Excitation network to classify the numbers in M
 
 The MNIST Data is best represented at edges. the implemented structure is designed to extract edges at the Receptive Fields of 5. Padding of 1 is added to the first convolution block. Even though it is not very helpfull during the initial models. It is added beacuse we are do image augmentations at the 3rd block and padding can help ensure that the rotated image fits within the desired dimensions.
 
-### Model 1 - Skeleton 
+### ([model1](https://github.com/prarthanats/ERA/blob/main/S7_Assignment/Session_7_Block_1_Model_1_Skeleton.ipynb))  - Skeleton
 #### Target:
 1. To get the basic skeleton correct
 2. A modular code
