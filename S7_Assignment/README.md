@@ -74,7 +74,7 @@ The MNIST Data is best represented at edges. the implemented structure is design
 2. Best Training Accuracy - 98.82 at the 15th Epoch
 3. Best Testing Accuracy - 98.82 at the 14th epoch
 
-![model3](https://github.com/prarthanats/ERA/assets/32382676/aebc02e8-7cd9-4240-b762-1b733141c0be)
+![image](https://github.com/prarthanats/ERA/assets/32382676/a2ad7555-022c-4010-a8ad-2dd986e77b38)
 
 #### Analysis:
 1. Good model
@@ -131,7 +131,8 @@ Techniques like dropout,batch normalization are used to reduce the overfitting b
 3. Adding dropout has got the test accuracy close to train accuracy, reducing the over fit. hence the accuracy of test has decreased 99.29 in the previous modek to 99.22
 4. The train accuracy has also decreased from 99.41 to 99.24. Dropout might be causing underfitting, which might be because of the introduction of noise. 
 
-![model5](https://github.com/prarthanats/ERA/assets/32382676/edd7a948-ffff-465a-9472-18e1430028df)
+![image](https://github.com/prarthanats/ERA/assets/32382676/4bdfd45a-a15c-4279-89a6-c8da65863832)
+
 
 ### model 6 - GAP replaces 6*6 Kernel and add a 1*1 in last layer
 
