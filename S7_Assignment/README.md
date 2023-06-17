@@ -74,7 +74,8 @@ The MNIST Data is best represented at edges. the implemented structure is design
 2. Best Training Accuracy - 98.82 at the 15th Epoch
 3. Best Testing Accuracy - 98.82 at the 14th epoch
 
-![image](https://github.com/prarthanats/ERA/assets/32382676/a2ad7555-022c-4010-a8ad-2dd986e77b38)
+![model2](https://github.com/prarthanats/ERA/assets/32382676/e8ad01e2-a7ae-4c71-85bc-504107aba8e9)
+
 
 #### Analysis:
 1. Good model
