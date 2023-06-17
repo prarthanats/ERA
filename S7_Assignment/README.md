@@ -134,7 +134,7 @@ Techniques like dropout,batch normalization are used to reduce the overfitting b
 ![image](https://github.com/prarthanats/ERA/assets/32382676/4bdfd45a-a15c-4279-89a6-c8da65863832)
 
 
-### model 6 - GAP replaces 6*6 Kernel and add a 1*1 in last layer
+### model 6 - GAP replaces 6X6 kernel and add a 1*1 in last layer
 
 #### Target:
 1. Add GAP and remove the last BIG kernel (6*6 Kernel) 
@@ -235,3 +235,6 @@ At the end of Block two we have a 7k Parameter model, which is good and not over
 
 ![model10](https://github.com/prarthanats/ERA/assets/32382676/a1658ff2-19ab-4eb1-9584-7a07bcaed54a)
 
+The final output 
+
+![image](https://github.com/prarthanats/ERA/assets/32382676/bbace4da-573e-46ed-9851-e79113f1c9f3)
