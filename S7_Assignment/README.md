@@ -82,8 +82,7 @@ The MNIST Data is best represented at edges. the implemented structure is design
 3. The model is better,and much lighter than the earlier models, very less overfitting. 
 4. we can proceed with this particular skeleton.
 
-![model3](https://github.com/prarthanats/ERA/assets/32382676/e9480f38-d5ce-4aa7-8bf5-c1ddc8d09fb2)
-
+![image](https://github.com/prarthanats/ERA/assets/32382676/53bc1d5f-16e4-4eef-b34a-62fe9ddbdb64)
 
 At the end of Block one we have a 9k Parameter model, which is good and not overfitting a lot. The next step is to reduce the overfitting, improve efficency
 
@@ -151,8 +150,7 @@ Techniques like dropout,batch normalization are used to reduce the overfitting b
 1. Total paramters decreased is around 3500 parameters and thats around half the total paramters in the previous model.GAP has reduced the dimensionality of the feature maps resulting in a better representation. 
 2. Introducing GAP has included some discrepancy, the model cannot be compared but does seem to be underfitting. 
 
-![model6](https://github.com/prarthanats/ERA/assets/32382676/047265fb-b4a7-4f5d-88aa-f622ac4a91ed)
-
+![image](https://github.com/prarthanats/ERA/assets/32382676/5fa78f3a-caa5-4968-8bc4-c8d7686bff55)
 
 ### model 7 - Adding Capacity to the Model 
 
@@ -174,7 +172,7 @@ Techniques like dropout,batch normalization are used to reduce the overfitting b
 3. The model has lesser gap between the train and test accuracy compared to the previous model 
 4. We have met some of our objectives in terms of less than 8k parameters, 15 epochs
 
-![model7](https://github.com/prarthanats/ERA/assets/32382676/190ae012-ddcd-480d-b025-58f39e46f917)
+![image](https://github.com/prarthanats/ERA/assets/32382676/7bf9f9c9-8d06-4207-979d-d101a18e9c95)
 
 
 At the end of Block two we have a 7k Parameter model, which is good and not overfitting a lot. The next step is to improve accuracy
