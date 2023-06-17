@@ -237,4 +237,5 @@ At the end of Block two we have a 7k Parameter model, which is good and not over
 
 The final output 
 
-![image](https://github.com/prarthanats/ERA/assets/32382676/bbace4da-573e-46ed-9851-e79113f1c9f3)
+<img width="544" alt="output" src="https://github.com/prarthanats/ERA/assets/32382676/fe58ecf7-f08f-4edc-b47c-81c892cfe69d">
+
