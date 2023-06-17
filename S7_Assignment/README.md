@@ -195,7 +195,7 @@ At the end of Block two we have a 7k Parameter model, which is good and not over
 1. Random Rotation between -6.9 and 6.9 degrees. Introducing this variation in the dataset has improved the test accuracy from 99.20 in previous model to 99.26 in this model. 
 2. This model seems to be performing consistent for the test data
 
-![model8](https://github.com/prarthanats/ERA/assets/32382676/1201abca-b4f2-44f3-9dab-1ef28039df81)
+![image](https://github.com/prarthanats/ERA/assets/32382676/6bdb8199-35dd-44cf-a962-9887785cc86f)
 
 
 ### model 9 - Adding Image Augmentation with Learning Rate
@@ -213,7 +213,7 @@ At the end of Block two we have a 7k Parameter model, which is good and not over
 2. By adding ReduceLRonPlateau helps the model converge more effieciently to reach a better optima
 3. Adding these 2 have increased the model accuracy and more consistent results
 
-![model9](https://github.com/prarthanats/ERA/assets/32382676/13e7a1c3-6d2d-40a2-89e1-c6a4d6c20c56)
+![image](https://github.com/prarthanats/ERA/assets/32382676/d7225732-7a39-41e9-a919-dfa3a7db8f79)
 
 
 ### model 10 - Reduced parameters on Image Augmentation with Learning Rate
