@@ -35,17 +35,6 @@ The CIFAR-10 dataset consists of 60000 32x32 RGB colour images  each of size 32x
 ## Normalization
 Normalization are techniques used in deep learning to normalize the activations of neurons in a neural network. They help address the issue of internal covariate shift, which refers to the change in the distribution of input values to a layer during training.Batch Normalization, Layer Normalization, and Group Normalization are the techniques used to address the internal covariate shift but they differ in how they normalize the activations and the level at which normalization is applied.
 
-
-
-The statistics (mean and variance) are computed across the batch and the spatial dimensions
-
-
-I
-It reduces the dependence of gradients on the scale of the parameters or of their initial values. This allows us to use much higher learning rates
-
-
-
-
 |Normalization |Computation | Rescaling | Description | Works Best|Representation |
 |-----------------|-----------------|-----------------|-----------------|-----------------|-----------------|
 |Batch Normalization (BN) |It computes the mean and variance across the mini-batch for each channel and normalizes the activations based on these statistics|Rescaling the data points w.r.t each channel|It introduces learnable scale and shift parameters to allow the network to adapt the normalized activations|It is effective for training deep networks, especially in tasks such as image classification|![batch-norm](https://github.com/prarthanats/ERA/assets/32382676/15a7ea5e-085f-46f5-ae45-8a6c8c311320)|
