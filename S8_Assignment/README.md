@@ -13,7 +13,7 @@ In this assignment we will be implementing the different normalization technique
 2. Less than 50000 parameters
 3. Find 10 misclassified images for each of the 3 models, and show them as a 5x2 image matrix in 3 separately annotated images
 4. More than 70% accuracy
-5. 20 epochs
+5. Less than 20 epochs
 
 ## General Requirements
 
