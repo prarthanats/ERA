@@ -59,12 +59,11 @@ The choice of normalization method depends on the specific task, network archite
 
 |Normalization |Batch size |Dropout |Parameters |Best Train Accuracy |Best Test Accuracy | Link |
 |-----------------|-----------------|-----------------|-----------------|-----------------|-----------------|-----------------|
-| Batch Normalization | 128 | 0.01 | 41,992 | 82.31 | 76.47 | |
-| Layer Normalization | 128 | 0.01 | 41,992 | 75.08 | 71.67 | |
-| Group Normalization | 128 | 0.01 | 41,992 | 76.00 | 72.14 | |
-| Batch Normalization with skip connection | 128 | 0.01 | 32,584 | 80.13 | 74.97 | |
-| Group Normalization with lesser batch | 64 | 0.01 | 41,992 | 75.87 | 72.25 | |
-
+| Batch Normalization | 128 | 0.01 | 41,992 | 82.31 | 76.47 |[BN](https://github.com/prarthanats/ERA/blob/main/S8_Assignment/Normalization_Experiment/Batch_Normalization.ipynb |
+| Layer Normalization | 128 | 0.01 | 41,992 | 75.08 | 71.67 |[LN](https://github.com/prarthanats/ERA/blob/main/S8_Assignment/Normalization_Experiment/Layer_Normalization.ipynb)|
+| Group Normalization | 128 | 0.01 | 41,992 | 76.00 | 72.14 |[GN](https://github.com/prarthanats/ERA/blob/main/S8_Assignment/Normalization_Experiment/Group_Normalization.ipynb) |
+| Batch Normalization with skip connection | 128 | 0.01 | 32,584 | 80.13 | 74.97 |[BN_skip](https://github.com/prarthanats/ERA/blob/main/S8_Assignment/Normalization_Experiment/Batch_Normalization_xplustry%20(1).ipynb) |
+| Group Normalization with lesser batch | 64 | 0.01 | 41,992 | 75.87 | 72.25 |[GN_64](https://github.com/prarthanats/ERA/blob/main/S8_Assignment/Normalization_Experiment/Group_Normalization_less_batch.ipynb) |
 
 Observations
 
