@@ -2,7 +2,7 @@
 
 In this assignment we will be implementing the different normalization techniques such as Batch, Layer and Group on the CIFAR 10 dataset using PyTorch.
 
-##Requirements
+## Requirements
 
 1. Make a model using CIFAR dataset
 
