@@ -35,38 +35,23 @@ The CIFAR-10 dataset consists of 60000 32x32 RGB colour images  each of size 32x
 ## Normalization
 Normalization are techniques used in deep learning to normalize the activations of neurons in a neural network. They help address the issue of internal covariate shift, which refers to the change in the distribution of input values to a layer during training.Batch Normalization, Layer Normalization, and Group Normalization are the techniques used to address the internal covariate shift but they differ in how they normalize the activations and the level at which normalization is applied.
 
-1. Batch Normalization (BN)
+
 
 The statistics (mean and variance) are computed across the batch and the spatial dimensions
-Rescaling the data points w.r.t each channel
-It computes the mean and variance across the mini-batch for each channel and normalizes the activations based on these statistics
-It introduces learnable scale and shift parameters to allow the network to adapt the normalized activations
+
+
+I
 It reduces the dependence of gradients on the scale of the parameters or of their initial values. This allows us to use much higher learning rates
-It is effective for training deep networks, especially in tasks such as image classification
 
-![batch-norm](https://github.com/prarthanats/ERA/assets/32382676/15a7ea5e-085f-46f5-ae45-8a6c8c311320)
 
-2. Layer Normalization (LN)
 
-The statistics (mean and variance) are computed across all channels and spatial dims
-Rescaling the data points w.r.t each image across all channels
-It computes the mean and variance across the spatial dimensions for each channel and normalizes the activations based on these statistics
-It operates on the spatial dimensions (e.g., height and width) of the activations within a layer
-It is commonly used in recurrent neural networks (RNNs) and natural language processing tasks
 
-![layer-norm](https://github.com/prarthanats/ERA/assets/32382676/100869f5-a0de-4b9d-b6fe-adc73de47f24)
+|Normalization |Computation | Rescaling | Description | Works Best|Representation |
+|-----------------|-----------------|-----------------|-----------------|-----------------|-----------------|
+|Batch Normalization (BN) |It computes the mean and variance across the mini-batch for each channel and normalizes the activations based on these statistics|Rescaling the data points w.r.t each channel|It introduces learnable scale and shift parameters to allow the network to adapt the normalized activations|It is effective for training deep networks, especially in tasks such as image classification|![batch-norm](https://github.com/prarthanats/ERA/assets/32382676/15a7ea5e-085f-46f5-ae45-8a6c8c311320)|
+|Layer Normalization (LN) |It computes the mean and variance across the spatial dimensions for each channel and normalizes the activations based on these statistics| Rescaling the data points w.r.t each image across all channels|It operates on the spatial dimensions (e.g., height and width) of the activations within a layer|It is commonly used in recurrent neural networks (RNNs) and natural language processing tasks|![layer-norm](https://github.com/prarthanats/ERA/assets/32382676/100869f5-a0de-4b9d-b6fe-adc73de47f24)|
+|Group Normalization (GN)|It divides the channels into groups and computes the first-order statistics within each group|Rescaling the data points w.r.t specific group of layer in an image|It normalizes the activations within each group based on their group-specific statistics.It operates on both the channel and spatial dimensions of the activations|It can be effective when batch size is small such as when processing multiple images or samples with different characteristics. |![group-normalization](https://github.com/prarthanats/ERA/assets/32382676/24dd445f-c2d3-4a0d-a9d0-53c9cae1b687)|
 
-3. Group Normalization (GN)
-
-It divides the channels into groups and computes the first-order statistics within each group
-Rescaling the data points w.r.t specific group of layer in an image
-It operates on both the channel and spatial dimensions of the activations. 
-It divides the channels into groups and computes the mean and variance separately for each group.
-It normalizes the activations within each group based on their group-specific statistics.
-It can be effective when batch size is small such as when processing multiple images or samples with different characteristics. 
-GN introduces additional parameters for scale and shift, similar to BN.
-
-![group-normalization](https://github.com/prarthanats/ERA/assets/32382676/24dd445f-c2d3-4a0d-a9d0-53c9cae1b687)
 
 The choice of normalization method depends on the specific task, network architecture, and the available data.
 
