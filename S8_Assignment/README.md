@@ -26,7 +26,7 @@ The CIFAR-10 dataset consists of 60000 32x32 RGB colour images  each of size 32x
 1. Images are equally distributed across classes, no class imbalance
 2. The 10 classes in CIFAR-10 are:
 
-It can be seen that some of the classes in automobile have gray scale. Also the last image of aeroplane and bird look similar 	
+    It can be seen that some of the classes in automobile have gray scale. Also the last image of aeroplane and bird look similar 	
    
 ![Data_Analysis](https://github.com/prarthanats/ERA/assets/32382676/f24c0379-4f06-4a31-8a91-184499e677f4)
 
@@ -44,6 +44,7 @@ It introduces learnable scale and shift parameters to allow the network to adapt
 It reduces the dependence of gradients on the scale of the parameters or of their initial values. This allows us to use much higher learning rates
 It is effective for training deep networks, especially in tasks such as image classification
 
+![batch-norm](https://github.com/prarthanats/ERA/assets/32382676/15a7ea5e-085f-46f5-ae45-8a6c8c311320)
 
 2. Layer Normalization (LN)
 
@@ -52,6 +53,8 @@ Rescaling the data points w.r.t each image across all channels
 It computes the mean and variance across the spatial dimensions for each channel and normalizes the activations based on these statistics
 It operates on the spatial dimensions (e.g., height and width) of the activations within a layer
 It is commonly used in recurrent neural networks (RNNs) and natural language processing tasks
+
+![layer-norm](https://github.com/prarthanats/ERA/assets/32382676/100869f5-a0de-4b9d-b6fe-adc73de47f24)
 
 3. Group Normalization (GN)
 
@@ -62,6 +65,8 @@ It divides the channels into groups and computes the mean and variance separatel
 It normalizes the activations within each group based on their group-specific statistics.
 It can be effective when batch size is small such as when processing multiple images or samples with different characteristics. 
 GN introduces additional parameters for scale and shift, similar to BN.
+
+![group-normalization](https://github.com/prarthanats/ERA/assets/32382676/24dd445f-c2d3-4a0d-a9d0-53c9cae1b687)
 
 The choice of normalization method depends on the specific task, network architecture, and the available data.
 
