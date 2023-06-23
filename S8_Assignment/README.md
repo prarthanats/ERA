@@ -25,16 +25,12 @@ The CIFAR-10 dataset consists of 60000 32x32 RGB colour images  each of size 32x
 
 1. Images are equally distributed across classes, no class imbalance
 2. The 10 classes in CIFAR-10 are:
+
+It can be seen that some of the classes in automobile have gray scale. Also the last image of aeroplane and bird look similar 	
    
 ![Data_Analysis](https://github.com/prarthanats/ERA/assets/32382676/f24c0379-4f06-4a31-8a91-184499e677f4)
 
-we can see that some of the classes in automobile have gray scale
-Also the last image of aeroplane and bird look similar 	
-
-3. Mean and Standard Deviation for the CIFAR Data is
-   
-$mean 0.49139968 0.48215841 0.44653091$
-$standard deviation 0.24703223 0.24348513 0.26158784$
+3. Mean and Standard Deviation for the CIFAR Data is $0.49139968 0.48215841 0.44653091$ and $0.24703223 0.24348513 0.26158784$
 
 ## Normalization
 Normalization are techniques used in deep learning to normalize the activations of neurons in a neural network. They help address the issue of internal covariate shift, which refers to the change in the distribution of input values to a layer during training.Batch Normalization, Layer Normalization, and Group Normalization are the techniques used to address the internal covariate shift but they differ in how they normalize the activations and the level at which normalization is applied.
