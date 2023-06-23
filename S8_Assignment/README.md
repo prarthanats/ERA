@@ -25,22 +25,13 @@ The CIFAR-10 dataset consists of 60000 32x32 RGB colour images  each of size 32x
 
 1. Images are equally distributed across classes, no class imbalance
 2. The 10 classes in CIFAR-10 are:
+   
+![Data_Analysis](https://github.com/prarthanats/ERA/assets/32382676/f24c0379-4f06-4a31-8a91-184499e677f4)
 
-	Airplane
-	Automobile
-	Bird
-	Cat
-	Deer
-	Dog
-	Frog
-	Horse
-	Ship
-	Truck	
+4. Mean and Standard Deviation for the CIFAR Data is 
 
-3. Mean and Standard Deviation for the CIFAR Data is 
-
-'mean [0.49139968 0.48215841 0.44653091]'
-'standard deviation [0.24703223 0.24348513 0.26158784]'
+$ mean [0.49139968 0.48215841 0.44653091]$
+$standard deviation [0.24703223 0.24348513 0.26158784]$
 
 4. The dataset contains 10 classes, below are 10 sample images from each class, 
 
