@@ -46,21 +46,13 @@ The choice of normalization method depends on the specific task, network archite
 
 ## Experiments and Model performance wrt Normalization
 
-|Normalization |Batch size |Dropout |Parameters |Best Train Accuracy |Best Test Accuracy | Link |
-|-----------------|-----------------|-----------------|-----------------|-----------------|-----------------|-----------------|
-| Batch Normalization | 128 | 0.01 | 41,992 | 82.31 | 76.47 |[BN](https://github.com/prarthanats/ERA/blob/main/S8_Assignment/Normalization_Experiment/Batch_Normalization.ipynb) |
-| Layer Normalization | 128 | 0.01 | 41,992 | 75.08 | 71.67 |[LN](https://github.com/prarthanats/ERA/blob/main/S8_Assignment/Normalization_Experiment/Layer_Normalization.ipynb)|
-| Group Normalization | 128 | 0.01 | 41,992 | 76.00 | 72.14 |[GN](https://github.com/prarthanats/ERA/blob/main/S8_Assignment/Normalization_Experiment/Group_Normalization.ipynb) |
-| Batch Normalization with skip connection | 128 | 0.01 | 32,584 | 80.13 | 74.97 |[BN_skip](https://github.com/prarthanats/ERA/blob/main/S8_Assignment/Normalization_Experiment/Batch_Normalization_xplustry%20(1).ipynb) |
-| Group Normalization with lesser batch | 64 | 0.01 | 41,992 | 75.87 | 72.25 |[GN_64](https://github.com/prarthanats/ERA/blob/main/S8_Assignment/Normalization_Experiment/Group_Normalization_less_batch.ipynb) |
-
-## Observations
-
-1. Batch normalization performs better than other two techniques with a highest accuracy of 76.47
-2. Batch normalization performs better with higher batch sizes as the statistics are computed over a larger number of samples
-3. Layer normalization performance was lower compared to other two techniques. Can handle samples independently, making it more suitable for tasks involving sequential data
-4. Group Normalization performs better with lower batchsize, with a batch size of 128, earier epoch performed better but with a batch size of 64 it performs better at higher epochs
-5. Batch normalization with skip added at convolution layer 6, gave a similar accuracy with 9k less parameters
+|Normalization |Batch size |Dropout |Parameters |Best Train Accuracy |Best Test Accuracy | Observation  |Link |
+|-----------------|-----------------|-----------------|-----------------|-----------------|-----------------|-----------------|-----------------|
+| Batch Normalization | 128 | 0.01 | 41,992 | 82.31 | 76.47 | Batch normalization performs better than other two techniques with a highest accuracy of 76.47. Batch normalization performs better with higher batch sizes as the statistics are computed over a larger number of samples |[BN](https://github.com/prarthanats/ERA/blob/main/S8_Assignment/Normalization_Experiment/Batch_Normalization.ipynb) |
+| Layer Normalization | 128 | 0.01 | 41,992 | 75.08 | 71.67 | Layer normalization accuracy was lower compared to other two techniques |[LN](https://github.com/prarthanats/ERA/blob/main/S8_Assignment/Normalization_Experiment/Layer_Normalization.ipynb)|
+| Group Normalization | 128 | 0.01 | 41,992 | 76.00 | 72.14 | Group Normalization performs better than LN|[GN](https://github.com/prarthanats/ERA/blob/main/S8_Assignment/Normalization_Experiment/Group_Normalization.ipynb) |
+| Batch Normalization with skip connection | 128 | 0.01 | 32,584 | 80.13 | 74.97 | Batch normalization with skip added at convolution layer 6, gave a similar accuracy with 9k less parameters  |[BN_skip](https://github.com/prarthanats/ERA/blob/main/S8_Assignment/Normalization_Experiment/Batch_Normalization_xplustry%20(1).ipynb) |
+| Group Normalization with lesser batch | 64 | 0.01 | 41,992 | 75.87 | 72.25 |Group Normalization performs better with lower batchsize |[GN_64](https://github.com/prarthanats/ERA/blob/main/S8_Assignment/Normalization_Experiment/Group_Normalization_less_batch.ipynb) |
 
 ## Receptive Field Calculation
 
