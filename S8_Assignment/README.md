@@ -21,7 +21,7 @@ In this assignment we will be implementing the different normalization technique
 
 ## Introduction to CIFAR Data
 
-The CIFAR-10 dataset consists of 60000 32x32 RGB colour images  each of size 32x32 pixels, in 10 classes. There are 50000 training images and 10000 test images. Analysis on the dataset can be found here. 
+The CIFAR-10 dataset consists of 60000 32x32 RGB colour images  each of size 32x32 pixels, in 10 classes. There are 50000 training images and 10000 test images. Analysis on the dataset can be found here. [Data Analysis](https://github.com/prarthanats/ERA/blob/main/S8_Assignment/data_analysis/data_analysis.ipynb)
 
 1. Images are equally distributed across classes, no class imbalance
 2. The 10 classes in CIFAR-10 are:
