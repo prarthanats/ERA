@@ -20,17 +20,11 @@ In this assignment we will be implementing the different Convolutions such as Di
 The CIFAR-10 dataset consists of 60000 32x32 RGB colour images  each of size 32x32 pixels, in 10 classes. There are 50000 training images and 10000 test images. Analysis on the dataset can be found here. 
 
 1. Images are equally distributed across classes, no class imbalance
-2. The 10 classes in CIFAR-10 are:
+2. There are  10 classes in CIFAR-10, we can see that some of the classes in automobile have gray scale and also the last image of aeroplane and bird look similar
 
-   	we can see that some of the classes in automobile have gray scale
-	Also the last image of aeroplane and bird look similar
+![Data_Analysis](https://github.com/prarthanats/ERA/assets/32382676/6c7557d3-379c-470b-808a-e87b0156c93b)
 
-   ![Data_Analysis](https://github.com/prarthanats/ERA/assets/32382676/6c7557d3-379c-470b-808a-e87b0156c93b)
-
-3. Mean and Standard Deviation for the CIFAR Data is 
-
-'mean [0.49139968 0.48215841 0.44653091]'
-'standard deviation [0.24703223 0.24348513 0.26158784]'
+3. Mean is $ [0.49139968 0.48215841 0.44653091] $ and Standard Deviation is $ [0.24703223 0.24348513 0.26158784] $
 
 ## Dilated convolution
 
