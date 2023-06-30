@@ -2,7 +2,7 @@
 
 In this assignment we will be implementing the different Convolutions such as Dilated and Depth-wise Seperable Convolutions, Data Augmentation and Visualization on the CIFAR 10 dataset using PyTorch.
 
-##Requirements
+## Requirements
 
 1. Write a new network that has the architecture to C1C2C3C40 
 3. Total RF must be more than 44
@@ -43,7 +43,7 @@ The CIFAR-10 dataset consists of 60000 32x32 RGB colour images  each of size 32x
 we can see that some of the classes in automobile have gray scale
 Also the last image of aeroplane and bird look similar
 
-##Dilated convolution
+## Dilated convolution
 
 Dilated convolution is just a convolution applied to input with defined gaps. With this definition, for given input is an 2D image, dilation rate k=1 is normal convolution and k=2 means skipping one pixel per input and k=4 means skipping 3 pixels
 
@@ -59,7 +59,7 @@ $sli+1=sli+(kernelsize−1)∗dilationfactor$
 
 The receptive field of each neuron in the network increases with each layer, based on the kernel size and dilation rate
 
-##Depthwise Seperable Convolution
+## Depthwise Seperable Convolution
 
 Depthwise separable convolution is a type of convolutional operation commonly used to reduce the computational complexity of traditional convolutions while maintaining or even improving the network's performance. It breaks down the convolution into two separate stages: a depthwise convolution and a pointwise convolution
 
