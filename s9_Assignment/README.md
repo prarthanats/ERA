@@ -24,7 +24,7 @@ The CIFAR-10 dataset consists of 60000 32x32 RGB colour images  each of size 32x
 
 ![Data_Analysis](https://github.com/prarthanats/ERA/assets/32382676/6c7557d3-379c-470b-808a-e87b0156c93b)
 
-3. Mean is $ [0.49139968 0.48215841 0.44653091] $ and Standard Deviation is $ [0.24703223 0.24348513 0.26158784] $
+3.Mean and Standard Deviation for the CIFAR Data is $0.49139968, 0.48215841, 0.44653091$ and $0.24703223, 0.24348513, 0.26158784$
 
 ## Dilated convolution
 
