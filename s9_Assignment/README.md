@@ -69,7 +69,7 @@ The details for this can be found here
 1. The code is modularized and has seperate functions
 2. Data Augmentation is performed using  Albumentations library. Three techniques are applied in the training data loader: horizontal flipping, shiftScaleRotate, and coarseDropout.[Augmentation](https://github.com/prarthanats/ERA/blob/main/s9_Assignment/data_augmentation.py)
 3. Data Loader function downloads, transform the data [Data Loader](https://github.com/prarthanats/ERA/blob/main/s9_Assignment/data_loader.py)
-4. model.py file includes Netfunction that is the model structure. It includes a training function and testing function [Model] (https://github.com/prarthanats/ERA/blob/main/s9_Assignment/model.py)
+4. model.py file includes Netfunction that is the model structure. It includes a training function and testing function [Model](https://github.com/prarthanats/ERA/blob/main/s9_Assignment/model.py)
 4. Visualize.py have a function to plot the metrics, print missclassified images visulaize [Visualize](https://github.com/prarthanats/ERA/blob/main/s9_Assignment/visualize.py)
 5. Helper function is used for model summary [Helper](https://github.com/prarthanats/ERA/blob/main/s9_Assignment/helper.py)
 
@@ -82,7 +82,7 @@ The details for this can be found here
 5. Convolution Block 4 is a convolution block with 2 convolution for reduction. Here a skip connection is added to improve the accuracy
 6. Output Block - gap is applied with a kernel size of 5 and a linear transformation (fully connected layer) to the output of the average pooling layer to get the target classes
 
-(```)
+```
         #Input Block, input = 32, Output = 16, RF = 3
         
         self.conv1 = nn.Sequential(
@@ -158,7 +158,7 @@ The details for this can be found here
         )
 
         self.linear = nn.Linear(32, 10)	
-(```)
+```
 ### Model Summary
 
 <img width="438" alt="summary" src="https://github.com/prarthanats/ERA/assets/32382676/e2b69dd7-1284-4728-a773-6edb8676f900">
@@ -183,7 +183,7 @@ The details for this can be found here
 	Maximum Testing Accuracy : 86.30 (85.07 at 79 epoch)
 
 ### Training Log
-(```)
+```
 EPOCH: 1
 Loss=1.4609601497650146 Batch_id=390 Accuracy=39.57: 100%|██████████| 391/391 [00:18<00:00, 21.63it/s]
 
@@ -684,12 +684,26 @@ Loss=0.27930739521980286 Batch_id=390 Accuracy=84.73: 100%|███████
 
 Test set: Average loss: 0.0033, Accuracy: 8630/10000 (86.30%)
 
-(```)
+```
 
 ### Accuracy and Loss Plots
 
+![image](https://github.com/prarthanats/ERA/assets/32382676/b6b4b309-25ca-425c-a19d-f7b7b4a42814)
 
 ### Misclassified Images
 
+![image](https://github.com/prarthanats/ERA/assets/32382676/64b4cdcd-b70c-4de0-9a46-c126ec225515)
 
 ### Class Level Accuracy
+'''
+Accuracy of airplane : 80 %
+Accuracy of automobile : 94 %
+Accuracy of  bird : 89 %
+Accuracy of   cat : 54 %
+Accuracy of  deer : 93 %
+Accuracy of   dog : 60 %
+Accuracy of  frog : 91 %
+Accuracy of horse : 92 %
+Accuracy of  ship : 96 %
+Accuracy of truck : 94 %
+'''
