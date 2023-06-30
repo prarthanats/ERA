@@ -87,7 +87,6 @@ The details for this can be found here
             nn.BatchNorm2d(16),
             nn.Dropout(dropout_value)
         )
-        
         #Covolution Block1 , input = 16, Output = 12, RF = 15, Output Channels = 64
         self.conv2 = nn.Sequential(
             nn.Conv2d(in_channels = 16, out_channels = 32, kernel_size = (3, 3), stride = 1, padding = 1, dilation = 2, bias = False),
@@ -103,7 +102,6 @@ The details for this can be found here
             nn.BatchNorm2d(64),
             nn.Dropout(dropout_value)
         ) 
-        
         #Covolution Block2 , input = 16, Output = 12, RF = 15, Output Channels = 64
         self.conv3 = nn.Sequential(
             nn.Conv2d(in_channels = 16, out_channels = 32, kernel_size = (3, 3), stride = 1, padding = 1, dilation = 2, bias = False),
@@ -119,7 +117,6 @@ The details for this can be found here
             nn.BatchNorm2d(64),
             nn.Dropout(dropout_value)
         )
-        
         #Covolution Block3 , input = 12, Output = 10, RF = 19, Input Channels = 128, with 64 from CB1 and 64 from CB2 concatenated
         self.dsb = nn.Sequential(
             nn.Conv2d(in_channels = 128, out_channels = 128, kernel_size = (3, 3), padding = 0, groups = 128, bias = False),
@@ -128,7 +125,6 @@ The details for this can be found here
             nn.BatchNorm2d(32),
             nn.Dropout(dropout_value)
         )
-        
         #Covolution Block4 , input = 10, Output = 5, RF = 31
         self.conv4 = nn.Sequential(
             nn.Conv2d(in_channels = 32, out_channels = 32, kernel_size=(3, 3), stride = 2, padding = 1, dilation = 1, bias = False),
@@ -141,18 +137,16 @@ The details for this can be found here
             nn.ReLU(),
             nn.BatchNorm2d(32),
             nn.Dropout(dropout_value)
-        )
-        
+        ) 
         #Output Block , input = 5 , Output = 1, RF = 47
         self.gap = nn.Sequential(
             nn.AvgPool2d(kernel_size = 5) ## Global Average Pooling
         )
-
         self.linear = nn.Linear(32, 10)	
 ```
 ### Model Summary
 
-'''		
+~~~		
 		----------------------------------------------------------------
 		Layer (type)               Output Shape         Param #
 		================================================================
@@ -206,11 +200,11 @@ The details for this can be found here
 		----------------------------------------------------------------
 		Input size (MB): 0.01
 		Forward/backward pass size (MB): 1.88
-	Params size (MB): 0.55
-	Estimated Total Size (MB): 2.44
-	----------------------------------------------------------------
+		Params size (MB): 0.55
+		Estimated Total Size (MB): 2.44
+		----------------------------------------------------------------
 	 
-'''
+~~~
 
 ### Receptive Field Calculation
 
