@@ -1,6 +1,6 @@
 #  Advanced Convolutions, Data Augmentation and Visualization on CIFAR 10 Dataset 
 
-In this assignment we will be implementing the different Convolutions such as Dilated and Depth-wise Seperable Convolutions, Data Augmentation and Visualization on the CIFAR 10 dataset using PyTorch.
+In this assignment we will be implementing the different Convolutions such as Dilated Convolution, Depth-wise Seperable Convolutions and Skip Connection, Data Augmentation and Visualization on the CIFAR 10 dataset using PyTorch.
 
 ## Requirements
 
@@ -22,26 +22,15 @@ The CIFAR-10 dataset consists of 60000 32x32 RGB colour images  each of size 32x
 1. Images are equally distributed across classes, no class imbalance
 2. The 10 classes in CIFAR-10 are:
 
-	Airplane
-	Automobile
-	Bird
-	Cat
-	Deer
-	Dog
-	Frog
-	Horse
-	Ship
-	Truck	
+   	we can see that some of the classes in automobile have gray scale
+	Also the last image of aeroplane and bird look similar
+
+   ![Data_Analysis](https://github.com/prarthanats/ERA/assets/32382676/6c7557d3-379c-470b-808a-e87b0156c93b)
 
 3. Mean and Standard Deviation for the CIFAR Data is 
 
 'mean [0.49139968 0.48215841 0.44653091]'
 'standard deviation [0.24703223 0.24348513 0.26158784]'
-
-4. The dataset contains 10 classes, below are 10 sample images from each class, 
-
-we can see that some of the classes in automobile have gray scale
-Also the last image of aeroplane and bird look similar
 
 ## Dilated convolution
 
@@ -49,19 +38,23 @@ Dilated convolution is just a convolution applied to input with defined gaps. Wi
 
 Dilation convolution is commonly used within the convolutional blocks to capture multi-scale information and increase the receptive field of the network. In this case, dilation convolution is applied alongside traditional convolutions within the convolution block to extract features at different scales. By adjusting the dilation rate, the receptive field of each convolutional layer can be expanded without increasing the number of parameters or reducing spatial resolution.
 
+![dilated convolution](https://github.com/prarthanats/ERA/assets/32382676/0678183b-9e87-4218-89e9-e0b8d39bb760)
+
 ### Receptive Field wrt to Dilated Convolution
 
 The receptive field of a neuron refers to the spatial extent of the input that influences the neuron's output. In traditional convolutions, each neuron's receptive field is determined by the size of the kernel and the stride of the convolutional layers. However, in dilated convolutions, an additional parameter called dilation rate is introduced, which controls the spacing between the values in the kernel.
 
 The receptive field of a neuron can be calculated using the following formula:
 
-$sli+1=sli+(kernelsize−1)∗dilationfactor$
+ $sli+1=sli+(kernelsize−1)∗dilationfactor$
 
 The receptive field of each neuron in the network increases with each layer, based on the kernel size and dilation rate
 
 ## Depthwise Seperable Convolution
 
 Depthwise separable convolution is a type of convolutional operation commonly used to reduce the computational complexity of traditional convolutions while maintaining or even improving the network's performance. It breaks down the convolution into two separate stages: a depthwise convolution and a pointwise convolution
+
+![depthwise](https://github.com/prarthanats/ERA/assets/32382676/d3b3beed-0bf1-46e6-ae6f-9be42ef0839c)
 
 ### Depthwise Convolution:
 
@@ -72,7 +65,6 @@ As a result, the output of the depthwise convolution has the same number of chan
 
 After the depthwise convolution, the output is passed through a pointwise convolution. Pointwise convolution is a 1x1 convolution, which means it uses 1x1 kernels.
 In the pointwise convolution stage, the purpose is to combine the spatial information from the depthwise convolution output and create new features by applying a set of 1x1 kernels. The number of output channels in the pointwise convolution can be adjusted according to the desired complexity of the network or the number of filters needed.
-
 
 ## Code Structure
 
@@ -87,7 +79,6 @@ The details for this can be found here
 4. Visualize.py have a function to plot the metrics, print missclassified images visulaize
 5. Helper function is used for model summary
 
-
 ## Model Architecture
 
 1. Input Block - convblock1: Applies a 3x3 convolution with a stride of 2
@@ -97,8 +88,83 @@ The details for this can be found here
 5. Convolution Block 4 is a convolution block with 2 convolution for reduction. Here a skip connection is added to improve the accuracy
 6. Output Block - gap is applied with a kernel size of 5 and a linear transformation (fully connected layer) to the output of the average pooling layer to get the target classes
 
+(```)
+self.conv1 = nn.Sequential(
+            nn.Conv2d(in_channels = 3, out_channels = 16, kernel_size = (3, 3), stride = 2, padding = 1, dilation = 1, bias = False),    nn.ReLU(),
+            nn.BatchNorm2d(16),
+            nn.Dropout(dropout_value)
+        )
+        
+        #Covolution Block1 , input = 16, Output = 12, RF = 15, Output Channels = 64
+        
+        self.conv2 = nn.Sequential(
+            nn.Conv2d(in_channels = 16, out_channels = 32, kernel_size = (3, 3), stride = 1, padding = 1, dilation = 2, bias = False),
+            nn.ReLU(),
+            nn.BatchNorm2d(32),
+            nn.Dropout(dropout_value),
+            nn.Conv2d(in_channels = 32, out_channels = 64, kernel_size = (3, 3), stride = 1, padding = 1, dilation = 2, bias = False),
+            nn.ReLU(),
+            nn.BatchNorm2d(64),
+            nn.Dropout(dropout_value),
+            nn.Conv2d(in_channels = 64, out_channels = 64, kernel_size=(3, 3), stride = 1, padding = 1, dilation = 1, bias = False),
+            nn.ReLU(),
+            nn.BatchNorm2d(64),
+            nn.Dropout(dropout_value)
+        ) 
+        
+        #Covolution Block2 , input = 16, Output = 12, RF = 15, Output Channels = 64
+        
+        self.conv3 = nn.Sequential(
+            nn.Conv2d(in_channels = 16, out_channels = 32, kernel_size = (3, 3), stride = 1, padding = 1, dilation = 2, bias = False),
+            nn.ReLU(),
+            nn.BatchNorm2d(32),
+            nn.Dropout(dropout_value),
+            nn.Conv2d(in_channels = 32, out_channels = 64, kernel_size = (3, 3), stride = 1, padding = 1, dilation = 2, bias = False),
+            nn.ReLU(),
+            nn.BatchNorm2d(64),
+            nn.Dropout(dropout_value),
+            nn.Conv2d(in_channels = 64, out_channels = 64, kernel_size=(3, 3), stride = 1, padding = 1, dilation = 1, bias = False),
+            nn.ReLU(),
+            nn.BatchNorm2d(64),
+            nn.Dropout(dropout_value)
+        )
+        
+        
+        #Covolution Block3 , input = 12, Output = 10, RF = 19, Input Channels = 128, with 64 from CB1 and 64 from CB2 concatenated
+        
+        self.dsb = nn.Sequential(
+            nn.Conv2d(in_channels = 128, out_channels = 128, kernel_size = (3, 3), padding = 0, groups = 128, bias = False),
+            nn.Conv2d(in_channels = 128, out_channels = 32, kernel_size = (1, 1), padding = 0, bias = False),
+            nn.ReLU(),
+            nn.BatchNorm2d(32),
+            nn.Dropout(dropout_value)
+        )
+        
+        #Covolution Block4 , input = 10, Output = 5, RF = 31
+        
+        self.conv4 = nn.Sequential(
+            nn.Conv2d(in_channels = 32, out_channels = 32, kernel_size=(3, 3), stride = 2, padding = 1, dilation = 1, bias = False),
+            nn.ReLU(),
+            nn.BatchNorm2d(32),
+            nn.Dropout(dropout_value)
+        )
+        self.conv5 = nn.Sequential(
+            nn.Conv2d(in_channels = 32, out_channels = 32, kernel_size=(3, 3), stride = 1, padding = 1, dilation = 1, bias = False),
+            nn.ReLU(),
+            nn.BatchNorm2d(32),
+            nn.Dropout(dropout_value)
+        )
+        
+        #Output Block , input = 5 , Output = 1, RF = 47
+        
+        self.gap = nn.Sequential(
+            nn.AvgPool2d(kernel_size = 5) ## Global Average Pooling
+        )
 
+        self.linear = nn.Linear(32, 10)
+(```)
 ### Model Summary
+(```)
 
 
 ### Receptive Field Calculation
