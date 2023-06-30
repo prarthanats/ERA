@@ -63,9 +63,7 @@ In the pointwise convolution stage, the purpose is to combine the spatial inform
 ## Code Structure
 
 The final code can be found here [final code](https://github.com/prarthanats/ERA/blob/main/s9_Assignment/Assignment_9_DPS_DC_Final.ipynb)
-
 The details for this can be found here
-
 1. The code is modularized and has seperate functions
 2. Data Augmentation is performed using  Albumentations library. Three techniques are applied in the training data loader: horizontal flipping, shiftScaleRotate, and coarseDropout.[Augmentation](https://github.com/prarthanats/ERA/blob/main/s9_Assignment/data_augmentation.py)
 3. Data Loader function downloads, transform the data [Data Loader](https://github.com/prarthanats/ERA/blob/main/s9_Assignment/data_loader.py)
@@ -78,21 +76,19 @@ The details for this can be found here
 1. Input Block - convblock1: Applies a 3x3 convolution with a stride of 2
 2. Convolution Block 1 and Convolution Block 2 consists of - 2 convolution layers with dilation of 2 with padding and 1 convolution layer with stride of 1. Both the blocks have an input channel of 16 and ends with an output channel of 64. 
 3. Both the convolution blocks are concatinated using $y = torch.cat((x1, x2), 1)$, the dimension specified is 1, which means the tensors will be concatenated along their columns.
-4. Convolution Block 3 is a Depthwise Seperable Convolution Block takes an input and output channel of 128 with a 3*3 kernel. It is followed by a pointwise convolution with a kernel of 1*1 
+4. Convolution Block 3 is a Depthwise Seperable Convolution Block takes an input and output channel of 128 with a 3x3 kernel. It is followed by a pointwise convolution with a kernel of 1*1 
 5. Convolution Block 4 is a convolution block with 2 convolution for reduction. Here a skip connection is added to improve the accuracy
 6. Output Block - gap is applied with a kernel size of 5 and a linear transformation (fully connected layer) to the output of the average pooling layer to get the target classes
 
 ```
-        
-        
+        #Input Block, input = 32, Output = 16, RF = 3
         self.conv1 = nn.Sequential(
             nn.Conv2d(in_channels = 3, out_channels = 16, kernel_size = (3, 3), stride = 2, padding = 1, dilation = 1, bias = False),    nn.ReLU(),
             nn.BatchNorm2d(16),
             nn.Dropout(dropout_value)
-        )#Input Block, input = 32, Output = 16, RF = 3
+        )
         
         #Covolution Block1 , input = 16, Output = 12, RF = 15, Output Channels = 64
-        
         self.conv2 = nn.Sequential(
             nn.Conv2d(in_channels = 16, out_channels = 32, kernel_size = (3, 3), stride = 1, padding = 1, dilation = 2, bias = False),
             nn.ReLU(),
@@ -109,7 +105,6 @@ The details for this can be found here
         ) 
         
         #Covolution Block2 , input = 16, Output = 12, RF = 15, Output Channels = 64
-        
         self.conv3 = nn.Sequential(
             nn.Conv2d(in_channels = 16, out_channels = 32, kernel_size = (3, 3), stride = 1, padding = 1, dilation = 2, bias = False),
             nn.ReLU(),
@@ -125,9 +120,7 @@ The details for this can be found here
             nn.Dropout(dropout_value)
         )
         
-        
         #Covolution Block3 , input = 12, Output = 10, RF = 19, Input Channels = 128, with 64 from CB1 and 64 from CB2 concatenated
-        
         self.dsb = nn.Sequential(
             nn.Conv2d(in_channels = 128, out_channels = 128, kernel_size = (3, 3), padding = 0, groups = 128, bias = False),
             nn.Conv2d(in_channels = 128, out_channels = 32, kernel_size = (1, 1), padding = 0, bias = False),
@@ -137,7 +130,6 @@ The details for this can be found here
         )
         
         #Covolution Block4 , input = 10, Output = 5, RF = 31
-        
         self.conv4 = nn.Sequential(
             nn.Conv2d(in_channels = 32, out_channels = 32, kernel_size=(3, 3), stride = 2, padding = 1, dilation = 1, bias = False),
             nn.ReLU(),
@@ -152,7 +144,6 @@ The details for this can be found here
         )
         
         #Output Block , input = 5 , Output = 1, RF = 47
-        
         self.gap = nn.Sequential(
             nn.AvgPool2d(kernel_size = 5) ## Global Average Pooling
         )
@@ -161,6 +152,63 @@ The details for this can be found here
 ```
 ### Model Summary
 
+'''
+		---------------------------------------------------------------
+	        Layer (type)               Output Shape         Param #
+		================================================================
+	            Conv2d-1           [-1, 16, 16, 16]             432
+	              ReLU-2           [-1, 16, 16, 16]               0
+	       BatchNorm2d-3           [-1, 16, 16, 16]              32
+	           Dropout-4           [-1, 16, 16, 16]               0
+	            Conv2d-5           [-1, 32, 14, 14]           4,608
+	              ReLU-6           [-1, 32, 14, 14]               0
+	       BatchNorm2d-7           [-1, 32, 14, 14]              64
+	           Dropout-8           [-1, 32, 14, 14]               0
+	            Conv2d-9           [-1, 64, 12, 12]          18,432
+	             ReLU-10           [-1, 64, 12, 12]               0
+	      BatchNorm2d-11           [-1, 64, 12, 12]             128
+	          Dropout-12           [-1, 64, 12, 12]               0
+	           Conv2d-13           [-1, 64, 12, 12]          36,864
+	             ReLU-14           [-1, 64, 12, 12]               0
+	      BatchNorm2d-15           [-1, 64, 12, 12]             128
+	          Dropout-16           [-1, 64, 12, 12]               0
+	           Conv2d-17           [-1, 32, 14, 14]           4,608
+	             ReLU-18           [-1, 32, 14, 14]               0
+	      BatchNorm2d-19           [-1, 32, 14, 14]              64
+	          Dropout-20           [-1, 32, 14, 14]               0
+	           Conv2d-21           [-1, 64, 12, 12]          18,432
+	             ReLU-22           [-1, 64, 12, 12]               0
+	      BatchNorm2d-23           [-1, 64, 12, 12]             128
+	          Dropout-24           [-1, 64, 12, 12]               0
+	           Conv2d-25           [-1, 64, 12, 12]          36,864
+	             ReLU-26           [-1, 64, 12, 12]               0
+	      BatchNorm2d-27           [-1, 64, 12, 12]             128
+	          Dropout-28           [-1, 64, 12, 12]               0
+	           Conv2d-29          [-1, 128, 10, 10]           1,152
+	           Conv2d-30           [-1, 32, 10, 10]           4,096
+	             ReLU-31           [-1, 32, 10, 10]               0
+	      BatchNorm2d-32           [-1, 32, 10, 10]              64
+	          Dropout-33           [-1, 32, 10, 10]               0
+	           Conv2d-34             [-1, 32, 5, 5]           9,216
+	             ReLU-35             [-1, 32, 5, 5]               0
+	      BatchNorm2d-36             [-1, 32, 5, 5]              64
+	          Dropout-37             [-1, 32, 5, 5]               0
+	           Conv2d-38             [-1, 32, 5, 5]           9,216
+	             ReLU-39             [-1, 32, 5, 5]               0
+	      BatchNorm2d-40             [-1, 32, 5, 5]              64
+	          Dropout-41             [-1, 32, 5, 5]               0
+	        AvgPool2d-42             [-1, 32, 1, 1]               0
+	           Linear-43                   [-1, 10]             330
+	================================================================
+		Total params: 145,114
+		Trainable params: 145,114
+		Non-trainable params: 0
+		----------------------------------------------------------------
+		Input size (MB): 0.01
+		Forward/backward pass size (MB): 1.88
+		Params size (MB): 0.55
+	
+'''
 
 ### Receptive Field Calculation
 
@@ -693,14 +741,14 @@ The details for this can be found here
 
 ### Class Level Accuracy
 '''
-Accuracy of airplane : 80 %
-Accuracy of automobile : 94 %
-Accuracy of  bird : 89 %
-Accuracy of   cat : 54 %
-Accuracy of  deer : 93 %
-Accuracy of   dog : 60 %
-Accuracy of  frog : 91 %
-Accuracy of horse : 92 %
-Accuracy of  ship : 96 %
-Accuracy of truck : 94 %
+	Accuracy of airplane : 80 %
+	Accuracy of automobile : 94 %
+	Accuracy of  bird : 89 %
+	Accuracy of   cat : 54 %
+	Accuracy of  deer : 93 %
+	Accuracy of   dog : 60 %
+	Accuracy of  frog : 91 %
+	Accuracy of horse : 92 %
+	Accuracy of  ship : 96 %
+	Accuracy of truck : 94 %
 '''
