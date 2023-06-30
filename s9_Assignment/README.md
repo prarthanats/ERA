@@ -1,4 +1,4 @@
-<img width="604" alt="rf2" src="https://github.com/prarthanats/ERA/assets/32382676/1e6095da-39ea-454d-a723-149805f57725">#  Advanced Convolutions, Data Augmentation and Visualization on CIFAR 10 Dataset 
+#  Advanced Convolutions, Data Augmentation and Visualization on CIFAR 10 Dataset 
 
 In this assignment we will be implementing the different Convolutions such as Dilated Convolution, Depth-wise Seperable Convolutions and Skip Connection, Data Augmentation and Visualization on the CIFAR 10 dataset using PyTorch.
 
