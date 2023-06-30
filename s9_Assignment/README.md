@@ -74,11 +74,11 @@ The details for this can be found here
 ## Model Architecture
 
 1. Input Block - convblock1: Applies a 3x3 convolution with a stride of 2
-2. Convolution Block 1 and Convolution Block 2 consists of - 2 convolution layers with dilation of 2 with padding and 1 convolution layer with stride of 1. Both the blocks have an input channel of 16 and ends with an output channel of 64. 
+2. Convolution Block 1 and Convolution Block 2 consists of - 2 convolution layers with **dilation of 2** with padding and 1 convolution layer with stride of 1. Both the blocks have an input channel of 16 and ends with an output channel of 64. 
 3. Both the convolution blocks are concatinated using $y = torch.cat((x1, x2), 1)$, the dimension specified is 1, which means the tensors will be concatenated along their columns.
-4. Convolution Block 3 is a Depthwise Seperable Convolution Block takes an input and output channel of 128 with a 3x3 kernel. It is followed by a pointwise convolution with a kernel of 1*1 
-5. Convolution Block 4 is a convolution block with 2 convolution for reduction. Here a skip connection is added to improve the accuracy
-6. Output Block - gap is applied with a kernel size of 5 and a linear transformation (fully connected layer) to the output of the average pooling layer to get the target classes
+4. Convolution Block 3 is a **Depthwise Seperable Convolution** Block takes an input and output channel of 128 with a 3x3 kernel. It is followed by a **pointwise** convolution with a kernel of 1*1 
+5. Convolution Block 4 is a convolution block with 2 convolution for reduction. Here a **skip connection** is added to improve the accuracy
+6. Output Block - **gap** is applied with a kernel size of 5 and a **linear transformation (fully connected layer)** to the output of the average pooling layer to get the target classes
 
 ```
         #Input Block, input = 32, Output = 16, RF = 3
