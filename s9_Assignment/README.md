@@ -1,4 +1,4 @@
-#  Advanced Convolutions, Data Augmentation and Visualization on CIFAR 10 Dataset 
+<img width="604" alt="rf2" src="https://github.com/prarthanats/ERA/assets/32382676/1e6095da-39ea-454d-a723-149805f57725">#  Advanced Convolutions, Data Augmentation and Visualization on CIFAR 10 Dataset 
 
 In this assignment we will be implementing the different Convolutions such as Dilated Convolution, Depth-wise Seperable Convolutions and Skip Connection, Data Augmentation and Visualization on the CIFAR 10 dataset using PyTorch.
 
@@ -214,7 +214,7 @@ Receptive Field for Block 1
 
 Receptive Field for Block 2
 
-<img width="612" alt="rf2" src="https://github.com/prarthanats/ERA/assets/32382676/61c8a048-a59d-4eaa-bfb5-d55e4936d1d7">
+<img width="604" alt="rf2" src="https://github.com/prarthanats/ERA/assets/32382676/c417512c-38dc-4f1b-834c-4335dfa89d54">
 
 ### Model Graph
 
@@ -744,7 +744,7 @@ Receptive Field for Block 2
 ![image](https://github.com/prarthanats/ERA/assets/32382676/64b4cdcd-b70c-4de0-9a46-c126ec225515)
 
 ### Class Level Accuracy
-'''
+~~~
 	Accuracy of airplane : 80 %
 	Accuracy of automobile : 94 %
 	Accuracy of  bird : 89 %
@@ -755,4 +755,4 @@ Receptive Field for Block 2
 	Accuracy of horse : 92 %
 	Accuracy of  ship : 96 %
 	Accuracy of truck : 94 %
-'''
+~~~
