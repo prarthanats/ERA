@@ -210,7 +210,7 @@ The details for this can be found here
 
 Receptive Field for Block 1
 
-<img width="612" alt="rf2" src="https://github.com/prarthanats/ERA/assets/32382676/b300152d-fe97-4821-965a-6e417663af69">
+<img width="611" alt="rf1" src="https://github.com/prarthanats/ERA/assets/32382676/9c66bd84-36d1-416c-8cba-4caebc2f3781">
 
 Receptive Field for Block 2
 
