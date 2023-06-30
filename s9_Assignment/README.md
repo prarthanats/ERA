@@ -208,9 +208,11 @@ The details for this can be found here
 
 ### Receptive Field Calculation
 
-Receptive Field for Block 1 are same,
+Receptive Field for Block 1
 
-<img width="611" alt="rf1" src="https://github.com/prarthanats/ERA/assets/32382676/2484ea0a-1cce-4dbd-ad13-a108d96394e5">
+<img width="612" alt="rf2" src="https://github.com/prarthanats/ERA/assets/32382676/b300152d-fe97-4821-965a-6e417663af69">
+
+Receptive Field for Block 2
 
 <img width="612" alt="rf2" src="https://github.com/prarthanats/ERA/assets/32382676/61c8a048-a59d-4eaa-bfb5-d55e4936d1d7">
 
