@@ -1,6 +1,6 @@
-# Application of Normalization on CIFAR 10 Dataset 
+#  Advanced Convolutions, Data Augmentation and Visualization on CIFAR 10 Dataset 
 
-In this assignment we will be implementing the different normalization techniques such as Batch, Layer and Group on the CIFAR 10 dataset using PyTorch.
+In this assignment we will be implementing the different Convolutions such as Dilated and Depth-wise Seperable Convolutions, Data Augmentation and Visualization on the CIFAR 10 dataset using PyTorch.
 
 ##Requirements
 
