@@ -84,11 +84,11 @@ The details for this can be found here
 
 (```)
 	#Input Block, input = 32, Output = 16, RF = 3
- 	self.conv1 = nn.Sequential(
+        self.conv1 = nn.Sequential(
             nn.Conv2d(in_channels = 3, out_channels = 16, kernel_size = (3, 3), stride = 2, padding = 1, dilation = 1, bias = False),    nn.ReLU(),
             nn.BatchNorm2d(16),
-            nn.Dropout(dropout_value))
-        
+            nn.Dropout(dropout_value)
+        )
         #Covolution Block1 , input = 16, Output = 12, RF = 15, Output Channels = 64
         self.conv2 = nn.Sequential(
             nn.Conv2d(in_channels = 16, out_channels = 32, kernel_size = (3, 3), stride = 1, padding = 1, dilation = 2, bias = False),
@@ -120,8 +120,6 @@ The details for this can be found here
             nn.BatchNorm2d(64),
             nn.Dropout(dropout_value)
         )
-        
-        
         #Covolution Block3 , input = 12, Output = 10, RF = 19, Input Channels = 128, with 64 from CB1 and 64 from CB2 concatenated
         self.dsb = nn.Sequential(
             nn.Conv2d(in_channels = 128, out_channels = 128, kernel_size = (3, 3), padding = 0, groups = 128, bias = False),
@@ -130,7 +128,6 @@ The details for this can be found here
             nn.BatchNorm2d(32),
             nn.Dropout(dropout_value)
         )
-        
         #Covolution Block4 , input = 10, Output = 5, RF = 31
         self.conv4 = nn.Sequential(
             nn.Conv2d(in_channels = 32, out_channels = 32, kernel_size=(3, 3), stride = 2, padding = 1, dilation = 1, bias = False),
@@ -144,73 +141,14 @@ The details for this can be found here
             nn.BatchNorm2d(32),
             nn.Dropout(dropout_value)
         )
-        
         #Output Block , input = 5 , Output = 1, RF = 47
         self.gap = nn.Sequential(
             nn.AvgPool2d(kernel_size = 5) ## Global Average Pooling
         )
-
         self.linear = nn.Linear(32, 10)
 (```)
 ### Model Summary
-(```)
--------------------------------------------------------------
-        Layer (type)               Output Shape         Param #
-================================================================
-            Conv2d-1           [-1, 16, 16, 16]             432
-              ReLU-2           [-1, 16, 16, 16]               0
-       BatchNorm2d-3           [-1, 16, 16, 16]              32
-           Dropout-4           [-1, 16, 16, 16]               0
-            Conv2d-5           [-1, 32, 14, 14]           4,608
-              ReLU-6           [-1, 32, 14, 14]               0
-       BatchNorm2d-7           [-1, 32, 14, 14]              64
-           Dropout-8           [-1, 32, 14, 14]               0
-            Conv2d-9           [-1, 64, 12, 12]          18,432
-             ReLU-10           [-1, 64, 12, 12]               0
-      BatchNorm2d-11           [-1, 64, 12, 12]             128
-          Dropout-12           [-1, 64, 12, 12]               0
-           Conv2d-13           [-1, 64, 12, 12]          36,864
-             ReLU-14           [-1, 64, 12, 12]               0
-      BatchNorm2d-15           [-1, 64, 12, 12]             128
-          Dropout-16           [-1, 64, 12, 12]               0
-           Conv2d-17           [-1, 32, 14, 14]           4,608
-             ReLU-18           [-1, 32, 14, 14]               0
-      BatchNorm2d-19           [-1, 32, 14, 14]              64
-          Dropout-20           [-1, 32, 14, 14]               0
-           Conv2d-21           [-1, 64, 12, 12]          18,432
-             ReLU-22           [-1, 64, 12, 12]               0
-      BatchNorm2d-23           [-1, 64, 12, 12]             128
-          Dropout-24           [-1, 64, 12, 12]               0
-           Conv2d-25           [-1, 64, 12, 12]          36,864
-             ReLU-26           [-1, 64, 12, 12]               0
-      BatchNorm2d-27           [-1, 64, 12, 12]             128
-          Dropout-28           [-1, 64, 12, 12]               0
-           Conv2d-29          [-1, 128, 10, 10]           1,152
-           Conv2d-30           [-1, 32, 10, 10]           4,096
-             ReLU-31           [-1, 32, 10, 10]               0
-      BatchNorm2d-32           [-1, 32, 10, 10]              64
-          Dropout-33           [-1, 32, 10, 10]               0
-           Conv2d-34             [-1, 32, 5, 5]           9,216
-             ReLU-35             [-1, 32, 5, 5]               0
-      BatchNorm2d-36             [-1, 32, 5, 5]              64
-          Dropout-37             [-1, 32, 5, 5]               0
-           Conv2d-38             [-1, 32, 5, 5]           9,216
-             ReLU-39             [-1, 32, 5, 5]               0
-      BatchNorm2d-40             [-1, 32, 5, 5]              64
-          Dropout-41             [-1, 32, 5, 5]               0
-        AvgPool2d-42             [-1, 32, 1, 1]               0
-           Linear-43                   [-1, 10]             330
-================================================================
-Total params: 145,114
-Trainable params: 145,114
-Non-trainable params: 0
-----------------------------------------------------------------
-Input size (MB): 0.01
-Forward/backward pass size (MB): 1.88
-Params size (MB): 0.55
-Estimated Total Size (MB): 2.44
----------------------------------------------------------------
-(```)
+
 ### Receptive Field Calculation
 
 
