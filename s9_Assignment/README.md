@@ -74,61 +74,71 @@ The details for this can be found here
 ## Model Architecture
 
 1. Tried to implement an archiecture similar to GoogLeNet Inception model, with Dilation and Depthwise and added a skip connection to it
-2. Input Block - convblock1: Applies a 3x3 convolution with a stride of 2
-3. Convolution Block 1 and Convolution Block 2 consists of - 2 convolution layers with **dilation of 2** with padding and 1 convolution layer with stride of 1. Both the blocks have an input channel of 16 and ends with an output channel of 64. 
+2. Input Block - convblock1: Applies a 3x3 convolution with a stride of 1
+3. Convolution Block 1 and Convolution Block 2 consists of - 2 convolution layers with **dilation of 2** with padding and 1 convolution layer with stride of 2. Both the blocks have an input channel of 16 and ends with an output channel of 64. 
 4. Both the convolution blocks are concatinated using $y = torch.cat((x1, x2), 1)$, the dimension specified is 1, which means the tensors will be concatenated along their columns.
 5. Convolution Block 3 is a **Depthwise Seperable Convolution** Block takes an input and output channel of 128 with a 3x3 kernel. It is followed by a **pointwise** convolution with a kernel of 1*1 
-6. Convolution Block 4 is a convolution block with 2 convolution for reduction. Here a **skip connection** is added to improve the accuracy
+6. Convolution Block 4 is a convolution block with 3 convolution for reduction. Here a **skip connection** is added to improve the accuracy, 1 stridded convolution
 7. Output Block - **gap** is applied with a kernel size of 5 and a **linear transformation (fully connected layer)** to the output of the average pooling layer to get the target classes
 
 ```
-        #Input Block, input = 32, Output = 16, RF = 3
+       #Input Block, input = 32, Output = 32, RF = 3
+        
         self.conv1 = nn.Sequential(
-            nn.Conv2d(in_channels = 3, out_channels = 16, kernel_size = (3, 3), stride = 2, padding = 1, dilation = 1, bias = False),    nn.ReLU(),
+            nn.Conv2d(in_channels = 3, out_channels = 16, kernel_size = (3, 3), stride = 1, padding = 1, dilation = 1, bias = False),    nn.ReLU(),
             nn.BatchNorm2d(16),
             nn.Dropout(dropout_value)
         )
-        #Covolution Block1 , input = 16, Output = 12, RF = 15, Output Channels = 64
+        
+        #Covolution Block1 , input = 30, Output = 13, RF = 11, Output Channels = 64
+        
         self.conv2 = nn.Sequential(
-            nn.Conv2d(in_channels = 16, out_channels = 32, kernel_size = (3, 3), stride = 1, padding = 1, dilation = 2, bias = False),
+            nn.Conv2d(in_channels = 16, out_channels = 32, kernel_size = (3, 3), stride = 1, padding = 0, dilation = 1, bias = False),
             nn.ReLU(),
             nn.BatchNorm2d(32),
             nn.Dropout(dropout_value),
-            nn.Conv2d(in_channels = 32, out_channels = 64, kernel_size = (3, 3), stride = 1, padding = 1, dilation = 2, bias = False),
+            nn.Conv2d(in_channels = 32, out_channels = 64, kernel_size = (3, 3), stride = 1, padding = 0, dilation = 1, bias = False),
             nn.ReLU(),
             nn.BatchNorm2d(64),
             nn.Dropout(dropout_value),
-            nn.Conv2d(in_channels = 64, out_channels = 64, kernel_size=(3, 3), stride = 1, padding = 1, dilation = 1, bias = False),
+            nn.Conv2d(in_channels = 64, out_channels = 64, kernel_size=(3, 3), stride = 2, padding = 1, dilation = 2, bias = False),
             nn.ReLU(),
             nn.BatchNorm2d(64),
             nn.Dropout(dropout_value)
         ) 
-        #Covolution Block2 , input = 16, Output = 12, RF = 15, Output Channels = 64
+        
+        #Covolution Block2 , input = 30, Output = 13, RF = 11, Output Channels = 64
+        
         self.conv3 = nn.Sequential(
-            nn.Conv2d(in_channels = 16, out_channels = 32, kernel_size = (3, 3), stride = 1, padding = 1, dilation = 2, bias = False),
+            nn.Conv2d(in_channels = 16, out_channels = 32, kernel_size = (3, 3), stride = 1, padding = 0, dilation = 1, bias = False),
             nn.ReLU(),
             nn.BatchNorm2d(32),
             nn.Dropout(dropout_value),
-            nn.Conv2d(in_channels = 32, out_channels = 64, kernel_size = (3, 3), stride = 1, padding = 1, dilation = 2, bias = False),
+            nn.Conv2d(in_channels = 32, out_channels = 64, kernel_size = (3, 3), stride = 1, padding = 0, dilation = 1, bias = False),
             nn.ReLU(),
             nn.BatchNorm2d(64),
             nn.Dropout(dropout_value),
-            nn.Conv2d(in_channels = 64, out_channels = 64, kernel_size=(3, 3), stride = 1, padding = 1, dilation = 1, bias = False),
+            nn.Conv2d(in_channels = 64, out_channels = 64, kernel_size=(3, 3), stride = 2, padding = 1, dilation = 2, bias = False),
             nn.ReLU(),
             nn.BatchNorm2d(64),
             nn.Dropout(dropout_value)
         )
-        #Covolution Block3 , input = 12, Output = 10, RF = 19, Input Channels = 128, with 64 from CB1 and 64 from CB2 concatenated
+        
+        
+        #Covolution Block3 , input = 13, Output = 13, RF = 15, Input Channels = 128, with 64 from CB1 and 64 from CB2 concatenated
+        
         self.dsb = nn.Sequential(
-            nn.Conv2d(in_channels = 128, out_channels = 128, kernel_size = (3, 3), padding = 0, groups = 128, bias = False),
+            nn.Conv2d(in_channels = 128, out_channels = 128, kernel_size = (3, 3), padding = 1, groups = 128, bias = False),
             nn.Conv2d(in_channels = 128, out_channels = 32, kernel_size = (1, 1), padding = 0, bias = False),
             nn.ReLU(),
             nn.BatchNorm2d(32),
             nn.Dropout(dropout_value)
         )
-        #Covolution Block4 , input = 10, Output = 5, RF = 31
+        
+        #Covolution Block4 , input = 13, Output = 6, RF = 31
+        
         self.conv4 = nn.Sequential(
-            nn.Conv2d(in_channels = 32, out_channels = 32, kernel_size=(3, 3), stride = 2, padding = 1, dilation = 1, bias = False),
+            nn.Conv2d(in_channels = 32, out_channels = 32, kernel_size=(3, 3), stride = 1, padding = 1, dilation = 1, bias = False),
             nn.ReLU(),
             nn.BatchNorm2d(32),
             nn.Dropout(dropout_value)
@@ -138,176 +148,29 @@ The details for this can be found here
             nn.ReLU(),
             nn.BatchNorm2d(32),
             nn.Dropout(dropout_value)
-        ) 
-        #Output Block , input = 5 , Output = 1, RF = 47
-        self.gap = nn.Sequential(
-            nn.AvgPool2d(kernel_size = 5) ## Global Average Pooling
         )
-        self.linear = nn.Linear(32, 10)	
+
+        self.conv6 = nn.Sequential(
+            nn.Conv2d(in_channels = 32, out_channels = 32, kernel_size=(3, 3), stride = 2, padding = 0, dilation = 1, bias = False),
+            nn.ReLU(),
+            nn.BatchNorm2d(32),
+            nn.Dropout(dropout_value)
+        )
+        
+        #Output Block , input = 6 , Output = 1, RF = 
+        
+        self.gap = nn.Sequential(
+            nn.AvgPool2d(kernel_size = 6) ## Global Average Pooling
+        )
+
+        self.linear = nn.Linear(32, 10)
+
 ```
 ### Model Summary
 
 ~~~		
-		----------------------------------------------------------------
-		Layer (type)               Output Shape         Param #
-		================================================================
-		    Conv2d-1           [-1, 16, 16, 16]             432
-	              ReLU-2           [-1, 16, 16, 16]               0
-	       BatchNorm2d-3           [-1, 16, 16, 16]              32
-	           Dropout-4           [-1, 16, 16, 16]               0
-	            Conv2d-5           [-1, 32, 14, 14]           4,608
-	              ReLU-6           [-1, 32, 14, 14]               0
-	       BatchNorm2d-7           [-1, 32, 14, 14]              64
-	           Dropout-8           [-1, 32, 14, 14]               0
-	            Conv2d-9           [-1, 64, 12, 12]          18,432
-	             ReLU-10           [-1, 64, 12, 12]               0
-	      BatchNorm2d-11           [-1, 64, 12, 12]             128
-	          Dropout-12           [-1, 64, 12, 12]               0
-	           Conv2d-13           [-1, 64, 12, 12]          36,864
-	             ReLU-14           [-1, 64, 12, 12]               0
-	      BatchNorm2d-15           [-1, 64, 12, 12]             128
-	          Dropout-16           [-1, 64, 12, 12]               0
-	           Conv2d-17           [-1, 32, 14, 14]           4,608
-	             ReLU-18           [-1, 32, 14, 14]               0
-	      BatchNorm2d-19           [-1, 32, 14, 14]              64
-	          Dropout-20           [-1, 32, 14, 14]               0
-	           Conv2d-21           [-1, 64, 12, 12]          18,432
-	             ReLU-22           [-1, 64, 12, 12]               0
-	      BatchNorm2d-23           [-1, 64, 12, 12]             128
-	          Dropout-24           [-1, 64, 12, 12]               0
-	           Conv2d-25           [-1, 64, 12, 12]          36,864
-	             ReLU-26           [-1, 64, 12, 12]               0
-	      BatchNorm2d-27           [-1, 64, 12, 12]             128
-	          Dropout-28           [-1, 64, 12, 12]               0
-	           Conv2d-29          [-1, 128, 10, 10]           1,152
-	           Conv2d-30           [-1, 32, 10, 10]           4,096
-	             ReLU-31           [-1, 32, 10, 10]               0
-	      BatchNorm2d-32           [-1, 32, 10, 10]              64
-	          Dropout-33           [-1, 32, 10, 10]               0
-	           Conv2d-34             [-1, 32, 5, 5]           9,216
-	             ReLU-35             [-1, 32, 5, 5]               0
-	      BatchNorm2d-36             [-1, 32, 5, 5]              64
-	          Dropout-37             [-1, 32, 5, 5]               0
-	           Conv2d-38             [-1, 32, 5, 5]           9,216
-	             ReLU-39             [-1, 32, 5, 5]               0
-	      BatchNorm2d-40             [-1, 32, 5, 5]              64
-	          Dropout-41             [-1, 32, 5, 5]               0
-	        AvgPool2d-42             [-1, 32, 1, 1]               0
-	           Linear-43                   [-1, 10]             330
-		================================================================
-		Total params: 145,114
-		Trainable params: 145,114
-		Non-trainable params: 0
-		----------------------------------------------------------------
-		Input size (MB): 0.01
-		Forward/backward pass size (MB): 1.88
-		Params size (MB): 0.55
-		Estimated Total Size (MB): 2.44
-		----------------------------------------------------------------
-	 
-~~~
-
-### Receptive Field Calculation
-
-Receptive Field for Block 1 and Block 2
-
-![image](https://github.com/prarthanats/ERA/assets/32382676/c3350658-b8c0-4f9a-8a18-07f714f5e2c7)
-
-
-### Model Graph
-
-![download](https://github.com/prarthanats/ERA/assets/32382676/d00f4a1c-dae5-46ed-8411-3347db6cadf5)
-
-## Implementation and Inference Details
-
-### Model Metrics
-
-	Epochs : 100
-	Number of parameters: 145,114 parameters
-	LR Scheduler: OneCycleLR
-	Final Receptive Field: 47
-	Maximum Training Accuracy : 84.73
-	Maximum Testing Accuracy : 86.30 (85.07 at 79 epoch)
-
-### Training Log
-```
-	EPOCH: 1
-	Loss=1.4609601497650146 Batch_id=390 Accuracy=39.57: 100%|██████████| 391/391 [00:18<00:00, 21.63it/s]
-	
-	Test set: Average loss: 0.0104, Accuracy: 5274/10000 (52.74%)
-	
-	EPOCH: 2
-	Loss=1.3040621280670166 Batch_id=390 Accuracy=51.67: 100%|██████████| 391/391 [00:19<00:00, 19.74it/s]
-	
-	Test set: Average loss: 0.0089, Accuracy: 5957/10000 (59.57%)
-	
-	EPOCH: 3
-	Loss=1.387711763381958 Batch_id=390 Accuracy=55.58: 100%|██████████| 391/391 [00:18<00:00, 21.19it/s]
-	
-	Test set: Average loss: 0.0081, Accuracy: 6402/10000 (64.02%)
-	
-	EPOCH: 4
-	Loss=0.9404183626174927 Batch_id=390 Accuracy=58.01: 100%|██████████| 391/391 [00:19<00:00, 19.89it/s]
-	
-	Test set: Average loss: 0.0078, Accuracy: 6557/10000 (65.57%)
-	
-	EPOCH: 5
-	Loss=1.3025163412094116 Batch_id=390 Accuracy=59.79: 100%|██████████| 391/391 [00:17<00:00, 22.15it/s]
-	
-	Test set: Average loss: 0.0073, Accuracy: 6724/10000 (67.24%)
-	
-	EPOCH: 6
-	Loss=1.2056061029434204 Batch_id=390 Accuracy=61.46: 100%|██████████| 391/391 [00:18<00:00, 20.73it/s]
-	
-	Test set: Average loss: 0.0070, Accuracy: 6863/10000 (68.63%)
-	
-	EPOCH: 7
-	Loss=1.1469991207122803 Batch_id=390 Accuracy=62.92: 100%|██████████| 391/391 [00:17<00:00, 22.32it/s]
-	
-	Test set: Average loss: 0.0069, Accuracy: 6924/10000 (69.24%)
-	
-	EPOCH: 8
-	Loss=1.053687572479248 Batch_id=390 Accuracy=63.59: 100%|██████████| 391/391 [00:18<00:00, 21.62it/s]
-	
-	Test set: Average loss: 0.0070, Accuracy: 6896/10000 (68.96%)
-	
-	EPOCH: 9
-	Loss=1.1110724210739136 Batch_id=390 Accuracy=64.46: 100%|██████████| 391/391 [00:17<00:00, 22.56it/s]
-	
-	Test set: Average loss: 0.0065, Accuracy: 7150/10000 (71.50%)
-	
-	EPOCH: 10
-	Loss=0.9890600442886353 Batch_id=390 Accuracy=65.37: 100%|██████████| 391/391 [00:18<00:00, 21.26it/s]
-	
-	Test set: Average loss: 0.0064, Accuracy: 7222/10000 (72.22%)
-	
-	EPOCH: 11
-	Loss=0.9511944055557251 Batch_id=390 Accuracy=66.14: 100%|██████████| 391/391 [00:17<00:00, 22.52it/s]
-	
-	Test set: Average loss: 0.0063, Accuracy: 7197/10000 (71.97%)
-	
-	EPOCH: 12
-	Loss=0.788652241230011 Batch_id=390 Accuracy=66.47: 100%|██████████| 391/391 [00:18<00:00, 20.82it/s]
-	
-	Test set: Average loss: 0.0061, Accuracy: 7298/10000 (72.98%)
-	
-	EPOCH: 13
-	Loss=1.044738531112671 Batch_id=390 Accuracy=66.91: 100%|██████████| 391/391 [00:17<00:00, 22.04it/s]
-	
-	Test set: Average loss: 0.0058, Accuracy: 7473/10000 (74.73%)
-	
-	EPOCH: 14
-	Loss=0.9132393002510071 Batch_id=390 Accuracy=67.14: 100%|██████████| 391/391 [00:18<00:00, 21.29it/s]
-	
-	Test set: Average loss: 0.0062, Accuracy: 7344/10000 (73.44%)
-	
-	EPOCH: 15
-	Loss=0.9120794534683228 Batch_id=390 Accuracy=67.76: 100%|██████████| 391/391 [00:17<00:00, 22.24it/s]
-	
-	Test set: Average loss: 0.0056, Accuracy: 7523/10000 (75.23%)
-	
-	EPOCH: 16
-	Loss=1.058044195175171 Batch_id=390 Accuracy=68.34: 100%|██████████| 391/391 [00:18<00:00, 20.67it/s]
+		
+	 1/391 [00:18<00:00, 20.67it/s]
 	
 	Test set: Average loss: 0.0056, Accuracy: 7578/10000 (75.78%)
 	
