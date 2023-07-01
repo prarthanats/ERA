@@ -230,6 +230,20 @@ The details for this can be found here
 	----------------------------------------------------------------
 ~~~
 
+### Model Graph
+
+![download](https://github.com/prarthanats/ERA/assets/32382676/0f5107c6-d3b9-4b71-a621-6b606a69aafe)
+
+##  Inference
+
+### Implementation
+~~~
+	Total parameters: 154,394
+	Total epochs: 100
+	Max Training Accuracy: 88.63, 85% at 66 epoch
+	Max Testing Accuracy: 84.20, 85% at 66 epoch
+~~~
+
 ### Training Logs
 ~~~		
 		
@@ -759,7 +773,7 @@ The details for this can be found here
 	Accuracy of truck : 96 %
 ~~~
 
-### Reference
+## Reference
 ~~~
 	https://medium.com/@RaghavPrabhu/cnn-architectures-lenet-alexnet-vgg-googlenet-and-resnet-7c81c017b848
 	http://slazebni.cs.illinois.edu/spring17/lec01_cnn_architectures.pdf
