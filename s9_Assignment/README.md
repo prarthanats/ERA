@@ -231,19 +231,23 @@ The details for this can be found here
 	Estimated Total Size (MB): 7.28
 	----------------------------------------------------------------
 ~~~
+### Receptive Field
+
+![image](https://github.com/prarthanats/ERA/assets/32382676/01d6c8fe-7334-45c3-96ea-f5f62b07f13d)
 
 ### Model Graph
 
 ![download](https://github.com/prarthanats/ERA/assets/32382676/0f5107c6-d3b9-4b71-a621-6b606a69aafe)
 
-##  Inference
+##  Implementation and Inference
 
-### Implementation
+### Implementation Details
 ~~~
 	Total parameters: 154,394
 	Total epochs: 100
 	Max Training Accuracy: 88.63, 85% at 66 epoch
 	Max Testing Accuracy: 84.20, 85% at 66 epoch
+	Max Receptive Field: 51
 ~~~
 
 ### Training Logs
