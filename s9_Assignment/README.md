@@ -209,13 +209,10 @@ The details for this can be found here
 
 ### Receptive Field Calculation
 
-Receptive Field for Block 1
+Receptive Field for Block 1 and Block 2
 
-<img width="611" alt="rf1" src="https://github.com/prarthanats/ERA/assets/32382676/9c66bd84-36d1-416c-8cba-4caebc2f3781">
+![image](https://github.com/prarthanats/ERA/assets/32382676/c3350658-b8c0-4f9a-8a18-07f714f5e2c7)
 
-Receptive Field for Block 2
-
-<img width="604" alt="rf2" src="https://github.com/prarthanats/ERA/assets/32382676/c417512c-38dc-4f1b-834c-4335dfa89d54">
 
 ### Model Graph
 
