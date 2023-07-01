@@ -42,6 +42,8 @@ The receptive field of a neuron can be calculated using the following formula:
 
  $sli+1=sli+(kernelsize−1)∗dilationfactor$
 
+ Effective Output channels will be calculated where for a dilation of 2, Kernel will be of 5
+
 The receptive field of each neuron in the network increases with each layer, based on the kernel size and dilation rate
 
 ## Depthwise Seperable Convolution
