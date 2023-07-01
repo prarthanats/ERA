@@ -761,4 +761,5 @@ Receptive Field for Block 2
 ### Reference
 ~~~
 	https://medium.com/@RaghavPrabhu/cnn-architectures-lenet-alexnet-vgg-googlenet-and-resnet-7c81c017b848
+	http://slazebni.cs.illinois.edu/spring17/lec01_cnn_architectures.pdf
 ~~~
