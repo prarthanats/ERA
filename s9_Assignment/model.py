@@ -3,6 +3,7 @@
 Created on Fri Jun 30 10:52:41 2023
 @author: prarthana.ts
 """
+
 from __future__ import print_function
 import torch
 import torch.nn as nn
@@ -14,63 +15,63 @@ class Net(nn.Module):
     def __init__(self):
         super(Net, self).__init__()
         
-        #Input Block, input = 32, Output = 16, RF = 3
+        #Input Block, input = 32, Output = 32, RF = 3
         
         self.conv1 = nn.Sequential(
-            nn.Conv2d(in_channels = 3, out_channels = 16, kernel_size = (3, 3), stride = 2, padding = 1, dilation = 1, bias = False),    nn.ReLU(),
+            nn.Conv2d(in_channels = 3, out_channels = 16, kernel_size = (3, 3), stride = 1, padding = 1, dilation = 1, bias = False),    nn.ReLU(),
             nn.BatchNorm2d(16),
             nn.Dropout(dropout_value)
         )
         
-        #Covolution Block1 , input = 16, Output = 12, RF = 15, Output Channels = 64
+        #Covolution Block1 , input = 30, Output = 13, RF = 11, Output Channels = 64
         
         self.conv2 = nn.Sequential(
-            nn.Conv2d(in_channels = 16, out_channels = 32, kernel_size = (3, 3), stride = 1, padding = 1, dilation = 2, bias = False),
+            nn.Conv2d(in_channels = 16, out_channels = 32, kernel_size = (3, 3), stride = 1, padding = 0, dilation = 1, bias = False),
             nn.ReLU(),
             nn.BatchNorm2d(32),
             nn.Dropout(dropout_value),
-            nn.Conv2d(in_channels = 32, out_channels = 64, kernel_size = (3, 3), stride = 1, padding = 1, dilation = 2, bias = False),
+            nn.Conv2d(in_channels = 32, out_channels = 64, kernel_size = (3, 3), stride = 1, padding = 0, dilation = 1, bias = False),
             nn.ReLU(),
             nn.BatchNorm2d(64),
             nn.Dropout(dropout_value),
-            nn.Conv2d(in_channels = 64, out_channels = 64, kernel_size=(3, 3), stride = 1, padding = 1, dilation = 1, bias = False),
+            nn.Conv2d(in_channels = 64, out_channels = 64, kernel_size=(3, 3), stride = 2, padding = 1, dilation = 2, bias = False),
             nn.ReLU(),
             nn.BatchNorm2d(64),
             nn.Dropout(dropout_value)
         ) 
         
-        #Covolution Block2 , input = 16, Output = 12, RF = 15, Output Channels = 64
+        #Covolution Block2 , input = 30, Output = 13, RF = 11, Output Channels = 64
         
         self.conv3 = nn.Sequential(
-            nn.Conv2d(in_channels = 16, out_channels = 32, kernel_size = (3, 3), stride = 1, padding = 1, dilation = 2, bias = False),
+            nn.Conv2d(in_channels = 16, out_channels = 32, kernel_size = (3, 3), stride = 1, padding = 0, dilation = 1, bias = False),
             nn.ReLU(),
             nn.BatchNorm2d(32),
             nn.Dropout(dropout_value),
-            nn.Conv2d(in_channels = 32, out_channels = 64, kernel_size = (3, 3), stride = 1, padding = 1, dilation = 2, bias = False),
+            nn.Conv2d(in_channels = 32, out_channels = 64, kernel_size = (3, 3), stride = 1, padding = 0, dilation = 1, bias = False),
             nn.ReLU(),
             nn.BatchNorm2d(64),
             nn.Dropout(dropout_value),
-            nn.Conv2d(in_channels = 64, out_channels = 64, kernel_size=(3, 3), stride = 1, padding = 1, dilation = 1, bias = False),
+            nn.Conv2d(in_channels = 64, out_channels = 64, kernel_size=(3, 3), stride = 2, padding = 1, dilation = 2, bias = False),
             nn.ReLU(),
             nn.BatchNorm2d(64),
             nn.Dropout(dropout_value)
         )
         
         
-        #Covolution Block3 , input = 12, Output = 10, RF = 19, Input Channels = 128, with 64 from CB1 and 64 from CB2 concatenated
+        #Covolution Block3 , input = 13, Output = 13, RF = 15, Input Channels = 128, with 64 from CB1 and 64 from CB2 concatenated
         
         self.dsb = nn.Sequential(
-            nn.Conv2d(in_channels = 128, out_channels = 128, kernel_size = (3, 3), padding = 0, groups = 128, bias = False),
+            nn.Conv2d(in_channels = 128, out_channels = 128, kernel_size = (3, 3), padding = 1, groups = 128, bias = False),
             nn.Conv2d(in_channels = 128, out_channels = 32, kernel_size = (1, 1), padding = 0, bias = False),
             nn.ReLU(),
             nn.BatchNorm2d(32),
             nn.Dropout(dropout_value)
         )
         
-        #Covolution Block4 , input = 10, Output = 5, RF = 31
+        #Covolution Block4 , input = 13, Output = 6, RF = 31
         
         self.conv4 = nn.Sequential(
-            nn.Conv2d(in_channels = 32, out_channels = 32, kernel_size=(3, 3), stride = 2, padding = 1, dilation = 1, bias = False),
+            nn.Conv2d(in_channels = 32, out_channels = 32, kernel_size=(3, 3), stride = 1, padding = 1, dilation = 1, bias = False),
             nn.ReLU(),
             nn.BatchNorm2d(32),
             nn.Dropout(dropout_value)
@@ -81,11 +82,18 @@ class Net(nn.Module):
             nn.BatchNorm2d(32),
             nn.Dropout(dropout_value)
         )
+
+        self.conv6 = nn.Sequential(
+            nn.Conv2d(in_channels = 32, out_channels = 32, kernel_size=(3, 3), stride = 2, padding = 0, dilation = 1, bias = False),
+            nn.ReLU(),
+            nn.BatchNorm2d(32),
+            nn.Dropout(dropout_value)
+        )
         
-        #Output Block , input = 5 , Output = 1, RF = 47
+        #Output Block , input = 6 , Output = 1, RF = 51
         
         self.gap = nn.Sequential(
-            nn.AvgPool2d(kernel_size = 5) ## Global Average Pooling
+            nn.AvgPool2d(kernel_size = 6) ## Global Average Pooling
         )
 
         self.linear = nn.Linear(32, 10)
@@ -100,6 +108,7 @@ class Net(nn.Module):
         y = self.dsb(y)
         y = self.conv4(y)
         y = y + self.conv5(y)
+        y = self.conv6(y)
         y = self.gap(y)
         y = y.view(y.size(0), -1)
         y = self.linear(y)
