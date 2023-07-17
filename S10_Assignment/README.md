@@ -1,7 +1,5 @@
 # Application of Normalization on CIFAR 10 Dataset 
 
-In this assignment we will be implementing the different normalization techniques such as Batch, Layer and Group on the CIFAR 10 dataset using PyTorch.
-
 ## Requirements
 
 1. Write a customLinks to an external site. ResNet architecture for CIFAR10 that has the following architecture:
