@@ -64,10 +64,6 @@ The CIFAR-10 dataset consists of 60000 32x32 RGB colour images  each of size 32x
 'mean [0.49139968 0.48215841 0.44653091]'
 'standard deviation [0.24703223 0.24348513 0.26158784]'
 
-4. The dataset contains 10 classes, below are 10 sample images from each class, 
-
-we can see that some of the classes in automobile have gray scale
-Also the last image of aeroplane and bird look similar
 
 ## [Resnet Utils]('https://github.com/prarthanats/Assignment_10_Resnet_Utils')
 
