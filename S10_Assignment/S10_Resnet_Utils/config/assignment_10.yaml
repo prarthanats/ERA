@@ -1,0 +1,12 @@
+minHeight : 36
+minWidth : 36
+height : 32
+width : 32
+horizontalFlipProb : 0.2
+num_holes : 1
+max_h_size : 8
+max_w_size : 8
+grayscaleProb : 0.15
+dropout : 0.01
+max_lr_epoch : 5
+epochs : 24
