@@ -1,8 +1,8 @@
-# Application of Normalization on CIFAR 10 Dataset 
+# Application of CAMs, LRs and Optimizers on CIFAR 10 Dataset 
 
 In this assignment we will be implementing a ResNet18 architecture on the CIFAR 10 dataset using PyTorch. 
 
-##Requirements
+## Requirements
 
 1. Write a customLinks to an external site. ResNet18 architecture for CIFAR10 that has the following architecture from [Resnet18](https://github.com/kuangliu/pytorch-cifar)
 2. Transforms while training: RandomCrop(32, padding=4),CutOut(16x16)
