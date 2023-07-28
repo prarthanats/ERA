@@ -81,12 +81,9 @@ It consists of several layers of BasicBlocks, and each BasicBlock contains two 3
 		The expansion attribute is set to 1, indicating that the number of output channels is the same as the number of input channels.
 	
 		The __init__ method initializes the block and defines its layers:
-			self.conv1: The first 3x3 convolutional layer with in_planes input channels and planes output channels.
-			self.bn1: Batch normalization after the first convolutional layer.
-			self.conv2: The second 3x3 convolutional layer with planes input channels and planes output channels.
-			self.bn2: Batch normalization after the second convolutional layer.
-			self.shortcut: The shortcut connection for the residual block.
-		If the stride is not 1 or the number of input channels (in_planes) is not equal to self.expansion*planes, a 1x1 convolution is used to match the dimensions, followed by batch normalization.
+			self.conv1,self.conv2 : The 3x3 convolutional layer with in_planes input channels and planes output channels.
+			self.bn1, self.bn2: Batch normalization after the convolutional layer.
+			self.shortcut: The shortcut connection for the residual block. If the stride is not 1 or the number of input channels (in_planes) is not equal to self.expansion*planes, a 1x1 convolution is used to match the dimensions, followed by batch normalization.
 		The forward method defines the forward pass of the BasicBlock:
 			The input x is passed through the first convolutional layer, batch normalization, and ReLU activation.
 			The result is then passed through the second convolutional layer and batch normalization.
@@ -107,7 +104,8 @@ It consists of several layers of BasicBlocks, and each BasicBlock contains two 3
 			It is then passed through each stage (self.layer1, self.layer2, etc.) one by one.
 			After the last stage (self.layer4), the output is passed through an average pooling layer to reduce the spatial dimensions to 1x1.
 			The output is then flattened and passed through the fully connected layer to get the final classification logits.
-	ResNet18 Function:
+
+	3. ResNet18 Function:
 	
 	The ResNet18 function creates an instance of the ResNet class with BasicBlocks and the specific number of blocks in each stage [2, 2, 2, 2].
 	It returns the ResNet-18 model, which is ready for training and evaluation.
@@ -194,6 +192,27 @@ The final model can be visualized as:
 	Best Training Accuracy - 96.17% (20th Epoch)
 	Best Testing Accuracy - 91.51% (20th Epoch)	
 ~~~
+
+
+### Learning Rate Range Test Curve
+
+![LR](https://github.com/prarthanats/ERA/assets/32382676/878497b5-1042-4aca-80ad-c7c6d892fbaf)
+
+### Accuracy and Loss Plots
+
+![Loss and Accuracy](https://github.com/prarthanats/ERA/assets/32382676/ce3705ef-991b-41cf-b514-1e1c3b67950f)
+
+### Misclassified Images
+
+![Misclassify](https://github.com/prarthanats/ERA/assets/32382676/a223abee-b913-4272-b989-6087e96e4ca2)
+
+### GradCam Misclassified Images
+
+![GradCam](https://github.com/prarthanats/ERA/assets/32382676/d3c84aed-312c-4c8b-9d20-58a79d9690e2)
+
+### TensorBoard Outputs
+
+<img width="626" alt="tensor Output" src="https://github.com/prarthanats/ERA/assets/32382676/7ebdf3c1-5a7b-4417-bece-681ca114fdc5">
 
 ### Training Logs
 ~~~
@@ -297,24 +316,4 @@ The final model can be visualized as:
 	
 	Test set: Average loss: 0.0006, Accuracy: 9151/10000 (91.51%)
 ~~~
-
-### Learning Rate Range Test Curve
-
-![LR](https://github.com/prarthanats/ERA/assets/32382676/878497b5-1042-4aca-80ad-c7c6d892fbaf)
-
-### Accuracy and Loss Plots
-
-![Loss and Accuracy](https://github.com/prarthanats/ERA/assets/32382676/ce3705ef-991b-41cf-b514-1e1c3b67950f)
-
-### Misclassified Images
-
-![Misclassify](https://github.com/prarthanats/ERA/assets/32382676/a223abee-b913-4272-b989-6087e96e4ca2)
-
-### GradCam Misclassified Images
-
-![GradCam](https://github.com/prarthanats/ERA/assets/32382676/d3c84aed-312c-4c8b-9d20-58a79d9690e2)
-
-### TensorBoard Outputs
-
-<img width="626" alt="tensor Output" src="https://github.com/prarthanats/ERA/assets/32382676/7ebdf3c1-5a7b-4417-bece-681ca114fdc5">
 
