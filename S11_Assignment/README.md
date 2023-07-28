@@ -32,15 +32,7 @@ The CIFAR-10 dataset consists of 60000 32x32 RGB colour images  each of size 32x
 	Ship
 	Truck	
 
-3. Mean and Standard Deviation for the CIFAR Data is 
-
-'mean [0.49139968 0.48215841 0.44653091]'
-'standard deviation [0.24703223 0.24348513 0.26158784]'
-
-4. The dataset contains 10 classes, below are 10 sample images from each class, 
-
-we can see that some of the classes in automobile have gray scale
-Also the last image of aeroplane and bird look similar
+3. Mean and Standard Deviation for the CIFAR Data . Mean is '0.49139968, 0.48215841, 0.44653091' and standard deviation is '0.24703223, 0.24348513, 0.26158784'
 
 ## [Torch Wrapper]('https://github.com/prarthanats/torch_wrapper.git')
 
@@ -65,7 +57,6 @@ Support wrapper repo that includes augmentations, data loader, Custom_Resnet Mod
     |── README.md
 
 ~~~
-
 
 ## Notebook
 The notebook for this assignment can be accessed here: [Assignment_11_CIFAR_10](https://github.com/prarthanats/ERA/blob/main/S11_Assignment/CIFAR_10_Assignment_11.ipynb)
