@@ -1,4 +1,4 @@
-# Application of CAMs, LRs and Optimizers on CIFAR 10 Dataset 
+![Loss and Accuracy](https://github.com/prarthanats/ERA/assets/32382676/52275c67-6f5d-4561-9632-3ab93d5d0f4a)# Application of CAMs, LRs and Optimizers on CIFAR 10 Dataset 
 
 In this assignment we will be implementing a ResNet18 architecture on the CIFAR 10 dataset using PyTorch. 
 
@@ -196,124 +196,125 @@ The final model can be visualized as:
 
 ### Learning Rate Range Test Curve
 
-![LR](https://github.com/prarthanats/ERA/assets/32382676/878497b5-1042-4aca-80ad-c7c6d892fbaf)
+![LR](https://github.com/prarthanats/ERA/assets/32382676/26e49457-94e0-4e77-b540-db8feedcc7e2)
 
 ### Accuracy and Loss Plots
 
-![Loss and Accuracy](https://github.com/prarthanats/ERA/assets/32382676/ce3705ef-991b-41cf-b514-1e1c3b67950f)
+![Loss and Accuracy](https://github.com/prarthanats/ERA/assets/32382676/41761179-2f61-4bf9-85b0-b43d97b7af84)
 
 ### Misclassified Images
 
-![Misclassify](https://github.com/prarthanats/ERA/assets/32382676/a223abee-b913-4272-b989-6087e96e4ca2)
+![Misclassify](https://github.com/prarthanats/ERA/assets/32382676/c3b1d27c-255e-4a4e-89f7-f2c196cfae7d)
 
 ### GradCam Misclassified Images
 
-![GradCam](https://github.com/prarthanats/ERA/assets/32382676/d3c84aed-312c-4c8b-9d20-58a79d9690e2)
+![GradCam](https://github.com/prarthanats/ERA/assets/32382676/5a049982-410b-4167-9219-2ecf203b981a)
 
 ### TensorBoard Outputs
 
-<img width="626" alt="tensor Output" src="https://github.com/prarthanats/ERA/assets/32382676/7ebdf3c1-5a7b-4417-bece-681ca114fdc5">
+<img width="537" alt="tensor Output" src="https://github.com/prarthanats/ERA/assets/32382676/df466f7d-3116-4ce5-b667-2d121693dc75">
+
 
 ### Training Logs
 ~~~
 	Epoch 1:
-	Loss=1.5638378858566284 Batch_id=97 LR=0.00464 Accuracy=35.93: 100%|██████████| 98/98 [00:41<00:00,  2.37it/s]
+	Loss=1.4932713508605957 Batch_id=97 LR=0.00351 Accuracy=37.80: 100%|██████████| 98/98 [00:39<00:00,  2.49it/s]
 	
-	Test set: Average loss: 0.0036, Accuracy: 3916/10000 (39.16%)
+	Test set: Average loss: 0.0041, Accuracy: 3605/10000 (36.05%)
 	
 	Epoch 2:
-	Loss=1.4184805154800415 Batch_id=97 LR=0.01309 Accuracy=49.66: 100%|██████████| 98/98 [00:42<00:00,  2.33it/s]
+	Loss=1.1906986236572266 Batch_id=97 LR=0.00990 Accuracy=53.12: 100%|██████████| 98/98 [00:40<00:00,  2.45it/s]
 	
-	Test set: Average loss: 0.0045, Accuracy: 4029/10000 (40.29%)
+	Test set: Average loss: 0.0037, Accuracy: 4405/10000 (44.05%)
 	
 	Epoch 3:
-	Loss=1.1353524923324585 Batch_id=97 LR=0.02353 Accuracy=58.18: 100%|██████████| 98/98 [00:41<00:00,  2.34it/s]
+	Loss=0.9887471199035645 Batch_id=97 LR=0.01780 Accuracy=61.33: 100%|██████████| 98/98 [00:40<00:00,  2.41it/s]
 	
-	Test set: Average loss: 0.0036, Accuracy: 5029/10000 (50.29%)
+	Test set: Average loss: 0.0031, Accuracy: 5421/10000 (54.21%)
 	
 	Epoch 4:
-	Loss=0.9001946449279785 Batch_id=97 LR=0.03194 Accuracy=65.84: 100%|██████████| 98/98 [00:41<00:00,  2.34it/s]
+	Loss=0.8137422204017639 Batch_id=97 LR=0.02416 Accuracy=68.62: 100%|██████████| 98/98 [00:41<00:00,  2.39it/s]
 	
-	Test set: Average loss: 0.0016, Accuracy: 7170/10000 (71.70%)
+	Test set: Average loss: 0.0015, Accuracy: 7332/10000 (73.32%)
 	
 	Epoch 5:
-	Loss=0.8339181542396545 Batch_id=97 LR=0.03511 Accuracy=71.57: 100%|██████████| 98/98 [00:41<00:00,  2.34it/s]
+	Loss=0.7336296439170837 Batch_id=97 LR=0.02656 Accuracy=73.65: 100%|██████████| 98/98 [00:41<00:00,  2.37it/s]
 	
-	Test set: Average loss: 0.0016, Accuracy: 7339/10000 (73.39%)
+	Test set: Average loss: 0.0016, Accuracy: 7394/10000 (73.94%)
 	
 	Epoch 6:
-	Loss=0.7122399806976318 Batch_id=97 LR=0.03472 Accuracy=75.86: 100%|██████████| 98/98 [00:42<00:00,  2.33it/s]
+	Loss=0.6894105076789856 Batch_id=97 LR=0.02626 Accuracy=77.93: 100%|██████████| 98/98 [00:41<00:00,  2.38it/s]
 	
-	Test set: Average loss: 0.0013, Accuracy: 7720/10000 (77.20%)
+	Test set: Average loss: 0.0016, Accuracy: 7388/10000 (73.88%)
 	
 	Epoch 7:
-	Loss=0.6160628199577332 Batch_id=97 LR=0.03358 Accuracy=78.90: 100%|██████████| 98/98 [00:41<00:00,  2.34it/s]
+	Loss=0.6051175594329834 Batch_id=97 LR=0.02540 Accuracy=80.25: 100%|██████████| 98/98 [00:41<00:00,  2.34it/s]
 	
-	Test set: Average loss: 0.0018, Accuracy: 7401/10000 (74.01%)
+	Test set: Average loss: 0.0014, Accuracy: 7713/10000 (77.13%)
 	
 	Epoch 8:
-	Loss=0.4498029351234436 Batch_id=97 LR=0.03174 Accuracy=81.35: 100%|██████████| 98/98 [00:41<00:00,  2.34it/s]
+	Loss=0.4582046866416931 Batch_id=97 LR=0.02401 Accuracy=82.53: 100%|██████████| 98/98 [00:41<00:00,  2.34it/s]
 	
-	Test set: Average loss: 0.0010, Accuracy: 8250/10000 (82.50%)
+	Test set: Average loss: 0.0010, Accuracy: 8267/10000 (82.67%)
 	
 	Epoch 9:
-	Loss=0.5891032218933105 Batch_id=97 LR=0.02928 Accuracy=83.49: 100%|██████████| 98/98 [00:41<00:00,  2.34it/s]
+	Loss=0.5204144716262817 Batch_id=97 LR=0.02215 Accuracy=84.24: 100%|██████████| 98/98 [00:41<00:00,  2.34it/s]
 	
-	Test set: Average loss: 0.0011, Accuracy: 8218/10000 (82.18%)
+	Test set: Average loss: 0.0009, Accuracy: 8542/10000 (85.42%)
 	
 	Epoch 10:
-	Loss=0.3976404070854187 Batch_id=97 LR=0.02630 Accuracy=85.02: 100%|██████████| 98/98 [00:41<00:00,  2.34it/s]
+	Loss=0.4067685604095459 Batch_id=97 LR=0.01990 Accuracy=86.08: 100%|██████████| 98/98 [00:41<00:00,  2.34it/s]
 	
-	Test set: Average loss: 0.0009, Accuracy: 8540/10000 (85.40%)
+	Test set: Average loss: 0.0009, Accuracy: 8467/10000 (84.67%)
 	
 	Epoch 11:
-	Loss=0.36522236466407776 Batch_id=97 LR=0.02295 Accuracy=87.00: 100%|██████████| 98/98 [00:41<00:00,  2.34it/s]
+	Loss=0.3895864486694336 Batch_id=97 LR=0.01736 Accuracy=87.25: 100%|██████████| 98/98 [00:41<00:00,  2.34it/s]
 	
-	Test set: Average loss: 0.0008, Accuracy: 8606/10000 (86.06%)
+	Test set: Average loss: 0.0009, Accuracy: 8631/10000 (86.31%)
 	
 	Epoch 12:
-	Loss=0.3309040069580078 Batch_id=97 LR=0.01935 Accuracy=88.17: 100%|██████████| 98/98 [00:41<00:00,  2.34it/s]
+	Loss=0.30533018708229065 Batch_id=97 LR=0.01464 Accuracy=88.89: 100%|██████████| 98/98 [00:41<00:00,  2.34it/s]
 	
-	Test set: Average loss: 0.0009, Accuracy: 8609/10000 (86.09%)
+	Test set: Average loss: 0.0009, Accuracy: 8595/10000 (85.95%)
 	
 	Epoch 13:
-	Loss=0.3672555387020111 Batch_id=97 LR=0.01568 Accuracy=89.78: 100%|██████████| 98/98 [00:41<00:00,  2.34it/s]
+	Loss=0.3287360370159149 Batch_id=97 LR=0.01186 Accuracy=90.41: 100%|██████████| 98/98 [00:41<00:00,  2.35it/s]
 	
-	Test set: Average loss: 0.0008, Accuracy: 8799/10000 (87.99%)
+	Test set: Average loss: 0.0007, Accuracy: 8873/10000 (88.73%)
 	
 	Epoch 14:
-	Loss=0.24744948744773865 Batch_id=97 LR=0.01210 Accuracy=90.92: 100%|██████████| 98/98 [00:42<00:00,  2.33it/s]
+	Loss=0.27418187260627747 Batch_id=97 LR=0.00915 Accuracy=91.55: 100%|██████████| 98/98 [00:41<00:00,  2.34it/s]
 	
-	Test set: Average loss: 0.0007, Accuracy: 8924/10000 (89.24%)
+	Test set: Average loss: 0.0007, Accuracy: 8880/10000 (88.80%)
 	
 	Epoch 15:
-	Loss=0.21767078340053558 Batch_id=97 LR=0.00875 Accuracy=92.20: 100%|██████████| 98/98 [00:41<00:00,  2.34it/s]
+	Loss=0.24516217410564423 Batch_id=97 LR=0.00662 Accuracy=92.69: 100%|██████████| 98/98 [00:41<00:00,  2.35it/s]
 	
-	Test set: Average loss: 0.0007, Accuracy: 8970/10000 (89.70%)
+	Test set: Average loss: 0.0006, Accuracy: 8991/10000 (89.91%)
 	
 	Epoch 16:
-	Loss=0.20082253217697144 Batch_id=97 LR=0.00578 Accuracy=93.40: 100%|██████████| 98/98 [00:41<00:00,  2.34it/s]
+	Loss=0.2548474073410034 Batch_id=97 LR=0.00437 Accuracy=93.93: 100%|██████████| 98/98 [00:41<00:00,  2.34it/s]
 	
-	Test set: Average loss: 0.0006, Accuracy: 9076/10000 (90.76%)
+	Test set: Average loss: 0.0006, Accuracy: 9122/10000 (91.22%)
 	
 	Epoch 17:
-	Loss=0.12145695090293884 Batch_id=97 LR=0.00333 Accuracy=94.75: 100%|██████████| 98/98 [00:41<00:00,  2.34it/s]
+	Loss=0.13494442403316498 Batch_id=97 LR=0.00252 Accuracy=94.97: 100%|██████████| 98/98 [00:41<00:00,  2.35it/s]
 	
-	Test set: Average loss: 0.0006, Accuracy: 9117/10000 (91.17%)
+	Test set: Average loss: 0.0006, Accuracy: 9149/10000 (91.49%)
 	
 	Epoch 18:
-	Loss=0.13016997277736664 Batch_id=97 LR=0.00150 Accuracy=95.48: 100%|██████████| 98/98 [00:42<00:00,  2.33it/s]
-	
-	Test set: Average loss: 0.0006, Accuracy: 9123/10000 (91.23%)
-	
-	Epoch 19:
-	Loss=0.0886826142668724 Batch_id=97 LR=0.00038 Accuracy=95.89: 100%|██████████| 98/98 [00:41<00:00,  2.34it/s]
-	
-	Test set: Average loss: 0.0006, Accuracy: 9150/10000 (91.50%)
-	
-	Epoch 20:
-	Loss=0.12358154356479645 Batch_id=97 LR=0.00000 Accuracy=96.17: 100%|██████████| 98/98 [00:41<00:00,  2.34it/s]
+	Loss=0.09630003571510315 Batch_id=97 LR=0.00114 Accuracy=95.65: 100%|██████████| 98/98 [00:41<00:00,  2.34it/s]
 	
 	Test set: Average loss: 0.0006, Accuracy: 9151/10000 (91.51%)
+	
+	Epoch 19:
+	Loss=0.10515687614679337 Batch_id=97 LR=0.00028 Accuracy=96.02: 100%|██████████| 98/98 [00:41<00:00,  2.34it/s]
+	
+	Test set: Average loss: 0.0006, Accuracy: 9186/10000 (91.86%)
+	
+	Epoch 20:
+	Loss=0.09443861991167068 Batch_id=97 LR=0.00000 Accuracy=96.28: 100%|██████████| 98/98 [00:41<00:00,  2.34it/s]
+	
+	Test set: Average loss: 0.0006, Accuracy: 9197/10000 (91.97%)
 ~~~
 
