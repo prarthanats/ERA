@@ -66,6 +66,58 @@ Support wrapper repo that includes augmentations, data loader, Custom_Resnet Mod
 The notebook for this assignment can be accessed here: [Assignment_11_CIFAR_10](https://github.com/prarthanats/ERA/blob/main/S11_Assignment/CIFAR_10_Assignment_11.ipynb)
 
 
+## Model Architecture 
+
+ResNet18 is a convolutional neural network (CNN) architecture that was introduced in the paper "Deep Residual Learning for Image Recognition" by He et al. (2015). It is a relatively shallow network, with only 18 layers, but it is still able to achieve state-of-the-art results on image classification tasks.
+
+The key innovation of ResNet is the use of residual blocks, which allow for the training of very deep networks by addressing the vanishing gradient problem. The residual blocks introduce skip connections that enable the network to learn residual mappings, making it easier to optimize.
+
+It consists of several layers of BasicBlocks, and each BasicBlock contains two 3x3 convolutional layers with batch normalization and a residual connection.
+
+~~~
+	1. BasicBlock Class:
+		The BasicBlock class represents the building block of the ResNet-18 model.
+		It inherits from nn.Module, making it a PyTorch module.
+		The expansion attribute is set to 1, indicating that the number of output channels is the same as the number of input channels.
+	
+		The __init__ method initializes the block and defines its layers:
+			self.conv1: The first 3x3 convolutional layer with in_planes input channels and planes output channels.
+			self.bn1: Batch normalization after the first convolutional layer.
+			self.conv2: The second 3x3 convolutional layer with planes input channels and planes output channels.
+			self.bn2: Batch normalization after the second convolutional layer.
+			self.shortcut: The shortcut connection for the residual block.
+		If the stride is not 1 or the number of input channels (in_planes) is not equal to self.expansion*planes, a 1x1 convolution is used to match the dimensions, followed by batch normalization.
+		The forward method defines the forward pass of the BasicBlock:
+			The input x is passed through the first convolutional layer, batch normalization, and ReLU activation.
+			The result is then passed through the second convolutional layer and batch normalization.
+			The output from the second convolutional layer is added to the shortcut connection, creating the residual connection.
+			The result is passed through the ReLU activation function, and the final output is returned.
+	2. ResNet Class:
+	
+		The ResNet class represents the overall ResNet-18 model.
+		It also inherits from nn.Module.
+		The __init__ method initializes the ResNet-18 model and defines its layers:
+			self.conv1: The initial 3x3 convolutional layer that takes input images with 3 channels (RGB) and produces 64 output channels.
+			self.bn1: Batch normalization after the first convolutional layer.
+			self.layer1, self.layer2, self.layer3, and self.layer4: Four stages of the ResNet-18 model, each consisting of multiple BasicBlocks.
+			self.linear: The fully connected layer at the end that maps the final feature vectors to the number of output classes (num_classes).
+		The _make_layer method is a helper function that creates a stage of BasicBlocks with the specified number of blocks, planes (output channels), and stride.
+		The forward method defines the forward pass of the ResNet-18 model:
+			The input x is passed through the first convolutional layer, batch normalization, and ReLU activation.
+			It is then passed through each stage (self.layer1, self.layer2, etc.) one by one.
+			After the last stage (self.layer4), the output is passed through an average pooling layer to reduce the spatial dimensions to 1x1.
+			The output is then flattened and passed through the fully connected layer to get the final classification logits.
+	ResNet18 Function:
+	
+	The ResNet18 function creates an instance of the ResNet class with BasicBlocks and the specific number of blocks in each stage [2, 2, 2, 2].
+	It returns the ResNet-18 model, which is ready for training and evaluation.
+
+~~~
+
+The final model can be visualized as:
+
+![Graph](https://github.com/prarthanats/ERA/assets/32382676/fa20cae6-713c-4b12-8469-820858531e44)
+
 ### Model Summary
 
 ~~~
