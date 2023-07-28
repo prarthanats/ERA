@@ -266,5 +266,3 @@ The notebook for this assignment can be accessed here: [Assignment_11_CIFAR_10](
 
 <img width="626" alt="tensor Output" src="https://github.com/prarthanats/ERA/assets/32382676/7ebdf3c1-5a7b-4417-bece-681ca114fdc5">
 
-
-### Training Log
