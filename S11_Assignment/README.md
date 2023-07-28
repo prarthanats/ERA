@@ -1,51 +1,19 @@
 # Application of Normalization on CIFAR 10 Dataset 
 
-In this assignment we will be implementing the different normalization techniques such as Batch, Layer and Group on the CIFAR 10 dataset using PyTorch.
+In this assignment we will be implementing a ResNet18 architecture on the CIFAR 10 dataset using PyTorch. 
 
 ##Requirements
 
-1. Write a customLinks to an external site. ResNet architecture for CIFAR10 that has the following architecture:
-	''' 
+1. Write a customLinks to an external site. ResNet18 architecture for CIFAR10 that has the following architecture from [Resnet18](https://github.com/kuangliu/pytorch-cifar)
+2. Transforms while training: RandomCrop(32, padding=4),CutOut(16x16)
+3. Train for 20 epochs
 	
-		PrepLayer - Conv 3x3 s1, p1) >> BN >> RELU [64k]
-		Layer1 -
-		X = Conv 3x3 (s1, p1) >> MaxPool2D >> BN >> RELU [128k]
-		R1 = ResBlock( (Conv-BN-ReLU-Conv-BN-ReLU))(X) [128k] 
-		Add(X, R1)
-		Layer 2 -
-		Conv 3x3 [256k]
-		MaxPooling2D
-		BN
-		ReLU
-		Layer 3 -
-		X = Conv 3x3 (s1, p1) >> MaxPool2D >> BN >> RELU [512k]
-		R2 = ResBlock( (Conv-BN-ReLU-Conv-BN-ReLU))(X) [512k]
-		Add(X, R2)
-		MaxPooling with Kernel Size 4
-		FC Layer 
-		SoftMax
-	
-	'''
-2. Uses One Cycle Policy such that:
-	'''
-	
-		Total Epochs = 24
-		Max at Epoch = 5
-		LRMIN = FIND
-		LRMAX = FIND
-		NO Annihilation
-		
-	'''
-
-3. Uses this transform -RandomCrop 32, 32 (after padding of 4) >> FlipLR >> Followed by CutOut(8, 8)
-4. Batch size = 512
-5. Use ADAM, and CrossEntropyLoss
-6. Target Accuracy: 90%
-
 ## General Requirements
 
 1. Using modular code
 2. Collab must be importing your GitHub package, and then just running the model
+3. Get 10 misclassified images
+4. Get 10 GradCam outputs on any misclassified images (remember that you MUST use the library we discussed in the class)
 
 ## CIFAR Data
 The CIFAR-10 dataset consists of 60000 32x32 RGB colour images  each of size 32x32 pixels, in 10 classes. There are 50000 training images and 10000 test images. Analysis on the dataset can be found here. 
@@ -74,12 +42,33 @@ The CIFAR-10 dataset consists of 60000 32x32 RGB colour images  each of size 32x
 we can see that some of the classes in automobile have gray scale
 Also the last image of aeroplane and bird look similar
 
-## [Resnet Utils]('https://github.com/prarthanats/Assignment_10_Resnet_Utils')
+## [Torch Wrapper]('https://github.com/prarthanats/torch_wrapper.git')
 
-Support wrapper repo that includes augmentations, data loader, Custom_Resnet Model, learning rate finder and training and testing code. [Resnet Utils]('https://github.com/prarthanats/Assignment_10_Resnet_Utils') 
+Support wrapper repo that includes augmentations, data loader, Custom_Resnet Model, learning rate finder and training and testing code. It has the following folder structure
+~~~
+    Torch Wrapper
+    |──config
+    |── ── assignment_10.yaml
+    |── ── assignment_11.yaml
+    |── model
+    |── ── custom_resnet.py
+    |── ── resnet.py
+    |── utils
+    |── ── data_augmentation.py
+    |── ── data_handeling.py
+    |── ── data_loader.py
+    |── ── gradcam.py
+    |── ── helper.py
+    |── ── train_test.py
+    |── ── visulaization.py
+    |── main.py
+    |── README.md
+
+~~~
+
 
 ## Notebook
-The notebook for this assignment can be accessed here: 
+The notebook for this assignment can be accessed here: [Assignment_11_CIFAR_10](https://github.com/prarthanats/ERA/blob/main/S11_Assignment/CIFAR_10_Assignment_11.ipynb)
 
 ### Model Summary
 
