@@ -1,4 +1,4 @@
-![Loss and Accuracy](https://github.com/prarthanats/ERA/assets/32382676/52275c67-6f5d-4561-9632-3ab93d5d0f4a)# Application of CAMs, LRs and Optimizers on CIFAR 10 Dataset 
+# Application of CAMs, LRs and Optimizers on CIFAR 10 Dataset 
 
 In this assignment we will be implementing a ResNet18 architecture on the CIFAR 10 dataset using PyTorch. 
 
