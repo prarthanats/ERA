@@ -174,11 +174,17 @@ These classes provide fundamental building blocks for creating a convolutional n
 
 ### Accuracy and Loss Plots
 
+Accuracy and Loss Plots are plotted using TensorBoard and  it is primarily used for monitoring and visualizing the training process and the performance of machine learning models. 
+<img width="438" alt="output" src="https://github.com/prarthanats/ERA/assets/32382676/06eb8d3f-88fb-45eb-92ec-4f1a68671120">
 
-### Misclassified Images and GradCAM Images
+### Misclassified Images 
+![Misclassified](https://github.com/prarthanats/ERA/assets/32382676/23f34ebd-2eb0-4e20-b836-f86579c39967)
 
+## Conclusion
 
-### Class Level Accuracy
+PyTorch Lightning has proven to be an invaluable tool for training and evaluating a CIFAR-10 image classification model. 
 
-
-### Training Log
+1. Its clean and modular design allowed us to focus on building and refining the model architecture With PyTorch Lightning, seamlessly organize our data loaders, model definition, and training loops, resulting in a more maintainable and scalable codebase.
+2. Integrating Grad-CAM visualization further enhanced our understanding of the model's inner workings. Grad-CAM provided us with insightful heatmaps, highlighting the regions of the input images that contributed most significantly to the model's predictions. This visualization technique not only improved interpretability but also instilled confidence in the model's performance and decision-making process.
+3. TensorBoard logging was instrumental in monitoring the training process effectively. I could easily track crucial training metrics such as loss, accuracy, and learning rate across epochs.
+4. By combining PyTorch Lightning, Grad-CAM visualization, and TensorBoard logging, i was able to build, analyze, and fine-tune a robust CIFAR-10 image classification model efficiently. 
