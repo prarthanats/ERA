@@ -107,7 +107,6 @@ Gradio is a user interface (UI) library that makes it easy to create web-based i
 	import gradio as gr
 	gr_interface = gr.Interface(fn=predict, inputs="text", outputs="text") #Assuming you have a PyTorch Lightning model 'model' and a prediction function 'predict'
 	gr_interface.launch()
-
 ~~~
 
 The Gradio app will be accessible at the provided URL, and users can now interact with your PyTorch Lightning model via the web interface.
@@ -117,9 +116,42 @@ The notebook for this assignment can be accessed here:
 
 ### Model Architecture
 
+The Custom Resnet Model Consists of 3 three classes
+~~~
+	PrepBlock:
+	
+	The PrepBlock is the first block in the convolutional neural network. It is responsible for the initial processing of the input images.
+	1. A 2D convolutional layer (nn.Conv2d) with 3 input channels (assuming RGB images) and 64 output channels. The kernel size is set to (3, 3), and padding is added to maintain the spatial dimensions of the input.
+	2. A ReLU activation function (nn.ReLU) to introduce non-linearity in the model.
+	3. A batch normalization layer (nn.BatchNorm2d) to stabilize training and accelerate convergence.
+	4. A dropout layer (nn.Dropout) with a specified dropout probability, which helps prevent overfitting during training.
+
+	ConvolutionBlock:
+	
+	The ConvolutionBlock is a building block for the main part of the convolutional neural network. It performs a series of convolutional operations and pooling.
+	The conv module consists of four layers:
+	1. A 2D convolutional layer (nn.Conv2d) with a specified number of input channels (in_channels) and output channels (out_channels). The kernel size is set to (3, 3), and padding is added for the same spatial dimensions.
+	2. A 2D max-pooling layer (nn.MaxPool2d) with a kernel size of (2, 2) to downsample the spatial dimensions by half.
+	3. A batch normalization layer (nn.BatchNorm2d) to normalize the output of the convolutional layer.
+	4. A ReLU activation function (nn.ReLU) to introduce non-linearity in the model.
+
+	ResidualBlock:
+	
+	The ResidualBlock is a variation of the residual block used in ResNet architectures. It introduces shortcut connections to improve gradient flow and mitigate the vanishing gradient problem.
+	The residual module consists of six layers:
+	1. A 2D convolutional layer (nn.Conv2d) with a specified number of input channels (channels) and output channels (channels). The kernel size is set to (3, 3), and padding is added for the same spatial dimensions.
+	2. A batch normalization layer (nn.BatchNorm2d) to normalize the output of the convolutional layer.
+	3. A ReLU activation function (nn.ReLU) to introduce non-linearity in the model.
+	4. Another 2D convolutional layer (nn.Conv2d) with the same number of input and output channels and the same kernel size and padding.
+	5. Another batch normalization layer (nn.BatchNorm2d).
+	6. Another ReLU activation function (nn.ReLU).
+	
+These classes provide fundamental building blocks for creating a convolutional neural network for image classification. You can use them to design more complex network architectures by stacking these blocks together in various configurations.
+~~~
 
 ### Model Summary
 
+<img width="259" alt="Model_Summary_Lightening" src="https://github.com/prarthanats/ERA/assets/32382676/271deb0f-edba-4187-8330-1c516f473757">
 
 ## Implementation and Inference Details
 
