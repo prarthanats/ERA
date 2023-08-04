@@ -5,35 +5,7 @@ This repository contains an application for CIFAR-10 classification using PyTorc
 ## Requirements
 
 1. Use the Custom ResNet architecture for CIFAR10 from Assignment 10:
-~~~
-	PrepLayer - Conv 3x3 s1, p1) >> BN >> RELU [64k]
-	Layer1 -
-	X = Conv 3x3 (s1, p1) >> MaxPool2D >> BN >> RELU [128k]
-	R1 = ResBlock( (Conv-BN-ReLU-Conv-BN-ReLU))(X) [128k] 
-	Add(X, R1)
-	Layer 2 -
-	Conv 3x3 [256k]
-	MaxPooling2D
-	BN
-	ReLU
-	Layer 3 -
-	X = Conv 3x3 (s1, p1) >> MaxPool2D >> BN >> RELU [512k]
-	R2 = ResBlock( (Conv-BN-ReLU-Conv-BN-ReLU))(X) [512k]
-	Add(X, R2)
-	MaxPooling with Kernel Size 4
-	FC Layer 
-	SoftMax
-~~~
-
-2. Uses One Cycle Policy such that:
-~~~
-	Total Epochs = 24
-	Max at Epoch = 5
-	LRMIN = FIND
-	LRMAX = FIND
-	NO Annihilation
-~~~
-
+2. Uses One Cycle Policy 
 3. Uses this transform -RandomCrop 32, 32 (after padding of 4) >> FlipLR >> Followed by CutOut(8, 8)
 4. Batch size = 512 and Use ADAM, and CrossEntropyLoss
 5. Target Accuracy: 90%
@@ -111,10 +83,7 @@ Gradio is a user interface (UI) library that makes it easy to create web-based i
 
 The Gradio app will be accessible at the provided URL, and users can now interact with your PyTorch Lightning model via the web interface.
 
-## Notebook
-The notebook for this assignment can be accessed here:  
-
-### Model Architecture
+## Model Architecture
 
 The Custom Resnet Model Consists of 3 three classes
 ~~~
@@ -154,32 +123,54 @@ These classes provide fundamental building blocks for creating a convolutional n
 <img width="259" alt="Model_Summary_Lightening" src="https://github.com/prarthanats/ERA/assets/32382676/271deb0f-edba-4187-8330-1c516f473757">
 
 ## Implementation and Inference Details
-
 ~~~
 	Epochs - 24
 	Batch Size - 512
 	Number of parameters: 6,573,130 parameters
 	Best Training Accuracy - 98.84% (24th Epoch)
-	Best Testing Accuracy - 92.33% (24th Epoch)
+	Best Testing Accuracy - 92.43% (24th Epoch)
 	LR Scheduler: OneCycleLR with pct_start = 0.2 (~5/24) since max_lr is required at Epoch 5, out of 24 total epochs
 	Optimizer - Adam Scheduler 
-	
 ~~~
 
-Accuracy Metric
-The model uses the Accuracy metric from the torchmetrics library to track accuracy during training and validation. It is a multiclass accuracy metric with 10 classes corresponding to the CIFAR-10 categories.
+## Notebook
+1. The notebook for this assignment can be accessed here:  [Assignment 12](https://github.com/prarthanats/ERA/blob/main/S12_Assignment/Assignment_12_CustomResnet.ipynb)
+2. The CustomResNet Lightening Module includes all the classes including:
+~~~
+	1. forward - The forward function defines the forward pass of the model. It takes an input tensor x and passes it through the layers of the model to produce the output predictions.
+	2. training_step - The training_step function defines the operations performed during a single training step. It takes a batch of training data and computes the loss and any other relevant metrics for that batch.
+	3. validation_step - The validation_step function defines the operations performed during a single validation step. It takes a batch of validation data and computes the loss and metrics for that batch.
+	4. test_step - The test_step function defines the operations performed during a single test step. It takes a batch of test data and computes the loss and metrics for that batch.
+	5. configure_optimizers - The configure_optimizers function defines the optimizer(s) used during training. It allows you to specify the optimization algorithm and its hyperparameters.
+	6. prepare_data - The prepare_data function is used for data preparation tasks that need to be performed only once, such as downloading and preprocessing the dataset.
+	7. setup - The setup function is used for any setup or initialization tasks that need to be performed on each GPU or distributed process before training begins
+	8. train_dataloader - The train_dataloader function defines the data loader for the training dataset. It specifies how training batches are sampled and prepared for training. The same is done for Validation and Test data
+	9. show_misclassified_images - The show_misclassified_images function is a custom function that can be used to visualize misclassified images during evaluation.
+~~~
 
-Training, Validation, and Testing Steps
-The class defines the training_step, validation_step, and test_step methods to perform the forward pass, calculate the loss, and update the accuracy metric during training, validation, and testing, respectively.
+3. The Configurations for the notebook is provided, it provides classes, learning rate, batch size, epochs
+~~~
+	config = {
+    'batch_size': 512,
+    'data_dir': './data',
+    'classes': ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck'],
+    'num_classes': 10,
+    'lr': 0.01,
+    'max_lr': 0.1,
+    'max_lr_epoch': 5,
+    'dropout' : 0.01,
+}
+~~~
+4. Tensor Board is used with Lightening for visualization and Montioring the training
 
-Optimizer and Learning Rate Scheduler
-The model uses the Adam optimizer with weight decay for parameter optimization. It also utilizes the OneCycleLR learning rate scheduler to automatically adjust the learning rate during training.
+   ![image](https://github.com/prarthanats/ERA/assets/32382676/6106d433-9f67-4785-a98a-ed57a067e20c)
 
-Data Loading
-The class provides methods for preparing and setting up the CIFAR-10 dataset for training, validation, and testing. It also includes a method, collect_misclassified_images, for collecting misclassified images during testing for further analysis.
+5. The Model is saved using
+~~~
+	torch.save(model.state_dict(), "resnet_model_v2.pth")
+~~~
+6. Gradio is then used for visulaization of the app. The App related information can be found [Custom Resner App](https://huggingface.co/spaces/PrarthanaTS/Cifar10)
 
-Visualization
-The class includes methods, show_misclassified_images and get_gradcam_images, for visualizing misclassified images and GradCAM visualizations of misclassified images, respectively.
 
 ### Accuracy and Loss Plots
 
