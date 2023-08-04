@@ -2,73 +2,63 @@
 
 This repository contains an application for CIFAR-10 classification using PyTorch Lightning. Image Classification is implemented using custom Resnet. The Application includes functionalities for missclassification and GradCam
 
-##Requirements
+## Requirements
 
 1. Use the Custom ResNet architecture for CIFAR10 from Assignment 10:
-	''' 
-	
-		PrepLayer - Conv 3x3 s1, p1) >> BN >> RELU [64k]
-		Layer1 -
-		X = Conv 3x3 (s1, p1) >> MaxPool2D >> BN >> RELU [128k]
-		R1 = ResBlock( (Conv-BN-ReLU-Conv-BN-ReLU))(X) [128k] 
-		Add(X, R1)
-		Layer 2 -
-		Conv 3x3 [256k]
-		MaxPooling2D
-		BN
-		ReLU
-		Layer 3 -
-		X = Conv 3x3 (s1, p1) >> MaxPool2D >> BN >> RELU [512k]
-		R2 = ResBlock( (Conv-BN-ReLU-Conv-BN-ReLU))(X) [512k]
-		Add(X, R2)
-		MaxPooling with Kernel Size 4
-		FC Layer 
-		SoftMax
-	
-	'''
+~~~
+	PrepLayer - Conv 3x3 s1, p1) >> BN >> RELU [64k]
+	Layer1 -
+	X = Conv 3x3 (s1, p1) >> MaxPool2D >> BN >> RELU [128k]
+	R1 = ResBlock( (Conv-BN-ReLU-Conv-BN-ReLU))(X) [128k] 
+	Add(X, R1)
+	Layer 2 -
+	Conv 3x3 [256k]
+	MaxPooling2D
+	BN
+	ReLU
+	Layer 3 -
+	X = Conv 3x3 (s1, p1) >> MaxPool2D >> BN >> RELU [512k]
+	R2 = ResBlock( (Conv-BN-ReLU-Conv-BN-ReLU))(X) [512k]
+	Add(X, R2)
+	MaxPooling with Kernel Size 4
+	FC Layer 
+	SoftMax
+~~~
+
 2. Uses One Cycle Policy such that:
-	'''
-	
-		Total Epochs = 24
-		Max at Epoch = 5
-		LRMIN = FIND
-		LRMAX = FIND
-		NO Annihilation
-		
-	'''
+~~~
+	Total Epochs = 24
+	Max at Epoch = 5
+	LRMIN = FIND
+	LRMAX = FIND
+	NO Annihilation
+~~~
 
 3. Uses this transform -RandomCrop 32, 32 (after padding of 4) >> FlipLR >> Followed by CutOut(8, 8)
-4. Batch size = 512
-5. Use ADAM, and CrossEntropyLoss
-6. Target Accuracy: 90%
+4. Batch size = 512 and Use ADAM, and CrossEntropyLoss
+5. Target Accuracy: 90%
 
 ## General Requirements
 
-Spaces app has these features:
+Spaces app needs to include these features:
 1. ask the user whether he/she wants to see GradCAM images and how many, and from which layer, allow opacity change as well
 2. ask whether he/she wants to view misclassified images, and how many
 3. allow users to upload new images, as well as provide 10 example images
 4. ask how many top classes are to be shown (make sure the user cannot enter more than 10)
 
 ## Introduction 
+
 ### CIFAR Data
 The CIFAR-10 dataset consists of 60000 32x32 RGB colour images  each of size 32x32 pixels, in 10 classes. There are 50000 training images and 10000 test images. Analysis on the dataset can be found here. 
-
 1. Images are equally distributed across classes, no class imbalance
 2. The 10 classes in CIFAR-10 are:
 
+![image](https://github.com/prarthanats/ERA/assets/32382676/30df5d06-4055-4f37-88be-bf45816c6f25)
 
-3. Mean and Standard Deviation for the CIFAR Data is 
+The dataset contains 10 classes, below are 10 sample images from each class, we can see that some of the classes in automobile have gray scale and also the last image of aeroplane and bird look simila
+3. Mean and Standard Deviation for the CIFAR Data is 'mean [0.49139968 0.48215841 0.44653091]' and 'standard deviation [0.24703223 0.24348513 0.26158784]'
 
-'mean [0.49139968 0.48215841 0.44653091]'
-'standard deviation [0.24703223 0.24348513 0.26158784]'
-
-4. The dataset contains 10 classes, below are 10 sample images from each class, 
-
-we can see that some of the classes in automobile have gray scale
-Also the last image of aeroplane and bird look similar
-
-###PyTorch Lightning
+### PyTorch Lightning
 
 PyTorch Lightning is a lightweight PyTorch wrapper that simplifies the training and organizing of deep learning models. It provides a high-level interface for PyTorch that abstracts away the boilerplate code typically required for training, validation, and testing loops. With PyTorch Lightning, you can focus more on designing your models and less on the repetitive tasks surrounding the training process.
 
