@@ -19,7 +19,6 @@ Spaces app needs to include these features:
 4. ask how many top classes are to be shown (make sure the user cannot enter more than 10)
 
 ## Introduction 
-
 ### CIFAR Data
 The CIFAR-10 dataset consists of 60000 32x32 RGB colour images  each of size 32x32 pixels, in 10 classes. There are 50000 training images and 10000 test images. Analysis on the dataset can be found here. 
 1. Images are equally distributed across classes, no class imbalance
