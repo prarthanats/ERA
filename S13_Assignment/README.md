@@ -110,6 +110,37 @@ This means that for 75% of the data samples, the mosaic transformation will be a
 ~~~
 
 ## Accuracy Metric
+
+Callbacks in PyTorch Lightning are special functions that can be inserted into the training loop to perform additional actions at specific points during training. Here's an explanation of the two callback classes you provided:
+
+#### AccuracyPlotCallback:
+
+This callback is used to periodically visualize the accuracy of the object detection model during training.
+~~~
+1. The every_n_epochs parameter specifies how often the callback should execute. In this case, the callback is designed to run every every_n_epochs epochs.
+2. During the on_train_epoch_end method, it checks if the current epoch is a multiple of every_n_epochs.
+3. If it is, it calls the plot_couple_examples function to visualize a few example predictions of the model on the training data. It's likely that this function generates plots showing how well the model is detecting objects.
+4. It calculates and prints the class accuracy metrics for the training data, logs them using PyTorch Lightning's log_dict function, and prints other relevant training metrics.
+~~~
+
+#### MAPCallback:
+
+This callback is used to calculate and log the Mean Average Precision (MAP) of the object detection model on the test data.
+~~~
+1. The every_n_epochs parameter specifies how often the callback should execute. In this case, the callback calculates MAP every every_n_epochs epochs.
+2. During the on_train_epoch_end method, it checks if the current epoch is a multiple of every_n_epochs.
+3. If it is, it calculates the predicted bounding boxes and true bounding boxes using the get_evaluation_bboxes function. Then, it calculates the MAP value using the mean_average_precision function and logs it using PyTorch Lightning's log function.
+4. It's common to calculate and log MAP on the test data periodically to monitor the model's performance.
+~~~
+
+#### Train on float16
+
+In PyTorch Lightning, the precision argument in the Trainer class is used to enable Automatic Mixed Precision (AMP) during training. AMP is a technique that leverages the capabilities of modern GPUs to accelerate training by performing certain operations in half-precision (float16) arithmetic while keeping critical operations like gradient updates in full precision (float32). This can lead to faster training times and reduced GPU memory usage.
+
+When you set precision to 16 in the Trainer, it tells PyTorch Lightning to enable mixed-precision training using float16.
+
+![image](https://github.com/prarthanats/ERA/assets/32382676/db3b2dd6-7cff-4f5b-ad1b-a46fa654ceec)
+
 Training and Testing Accuracy for 39th Epoch
 
 <img width="360" alt="1" src="https://github.com/prarthanats/ERA/assets/32382676/9b1f11db-4006-4194-a7f6-536820aaf732">
@@ -117,7 +148,6 @@ Training and Testing Accuracy for 39th Epoch
 Test Losses
 
 <img width="312" alt="Untitled" src="https://github.com/prarthanats/ERA/assets/32382676/66feef4d-4360-4019-b3d2-7aa8d9f8cb45">
-
 
 ### Object Detection Outputs [NotebookLink](https://github.com/prarthanats/ERA/blob/main/S13_Assignment/Final_Code_without_mosaic.ipynb)
 
@@ -132,7 +162,6 @@ For Application Output [AppNotebookLink](https://github.com/prarthanats/ERA/blob
 <img width="328" alt="Untitled1" src="https://github.com/prarthanats/ERA/assets/32382676/6b7309eb-5564-47fc-be53-4fa0db96a3ae">
 
 
-###
 ### Training Log
 
 ~~~
