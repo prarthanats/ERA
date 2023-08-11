@@ -112,26 +112,37 @@ Gradio is a user interface (UI) library that makes it easy to create web-based i
 The Gradio app will be accessible at the provided URL, and users can now interact with your PyTorch Lightning model via the web interface.
 
 ## Notebook
-The notebook for this assignment can be accessed here:  []
+The notebook for this assignment can be accessed here:  [Notebook](https://github.com/prarthanats/ERA/blob/main/S13_Assignment/Final_Code_without_mosaic.ipynb)
 
 ### Model Architecture
-
+~~~
+	 CNNBlock: A building block comprising a convolutional layer, batch normalization, and LeakyReLU activation, used to process image features in convolutional neural networks.
+	  ResidualBlock: A module containing multiple repetitions of two stacked CNNBlocks, capable of performing residual connections to help in feature extraction and information flow.
+	  ScalePrediction: Generates scale-specific predictions by employing convolutional layers with varying kernel sizes, aiding in object detection tasks, particularly for the YOLO architecture.
+	  YOLOv3: A YOLO variant for object detection, integrating various CNN layers, ResidualBlocks, and ScalePredictions to provide multi-scale predictions of object classes and bounding boxes in an image.
+~~~
 
 ### Model Summary
 
+<img width="196" alt="parameters" src="https://github.com/prarthanats/ERA/assets/32382676/30597175-a47d-41e7-b2a0-63d9de062ce5">
 
-## Implementation and Inference Details
+## LR Metrics
 
-
+<img width="438" alt="lr" src="https://github.com/prarthanats/ERA/assets/32382676/42519781-2976-46ee-a179-886f67c3c7f3">
 
 ## Accuracy Metric
+Training and Testing Accuracy for 39th Epoch
 
+<img width="360" alt="1" src="https://github.com/prarthanats/ERA/assets/32382676/9b1f11db-4006-4194-a7f6-536820aaf732">
 
+Test Losses
+<img width="312" alt="Untitled" src="https://github.com/prarthanats/ERA/assets/32382676/66feef4d-4360-4019-b3d2-7aa8d9f8cb45">
 
 
 ### Object Detection Outputs
 
 For the 10th Epoch
+
 ![10th epoch](https://github.com/prarthanats/ERA/assets/32382676/2644c784-d922-48ec-93f7-e8b4f6b222a7)
 
 For the 40th Epoch
