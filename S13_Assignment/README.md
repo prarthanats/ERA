@@ -71,14 +71,43 @@ The notebook for this assignment can be accessed here:  [Notebook](https://githu
 
 <img width="196" alt="parameters" src="https://github.com/prarthanats/ERA/assets/32382676/30597175-a47d-41e7-b2a0-63d9de062ce5">
 
-## LR Metrics
+## LR Metrics [lr_metrics](https://github.com/prarthanats/ERA/blob/main/S13_Assignment/utils.py)
 
 ~~~
 The max LR was found using the inbuilt functionality of lightning module.
 
+class LearningRateFinder:
+    def __init__(self, trainer, model):
+        self.trainer = trainer
+        self.model = model
+
+    def find_and_set_learning_rate(self):
+        tuner = Tuner(self.trainer)
+        lr_finder = tuner.lr_find(self.model)
+
+        # Plot the learning rate curve and get a suggestion
+        fig = lr_finder.plot(suggest=True)
+        fig.show()
+
+        # Get the suggested new learning rate
+        new_lr = lr_finder.suggestion()
+
+        # Update the learning rate in the model's hyperparameters
+        self.model.hparams.learning_rate = new_lr
+
 ~~~
 
 <img width="438" alt="lr" src="https://github.com/prarthanats/ERA/assets/32382676/42519781-2976-46ee-a179-886f67c3c7f3">
+
+## Mosaic Transformation
+
+Mosaic augmentation is a data augmentation technique commonly used in computer vision tasks, especially for object detection. To make the mosaic transformation apply to 75% of the data
+
+~~~
+self.counter = (self.counter + 1) % 4 ,
+
+This means that for 75% of the data samples, the mosaic transformation will be applied, as the counter values 1, 2, and 3 correspond to 75% of the total possibilities (since 1/4 is 25%).
+~~~
 
 ## Accuracy Metric
 Training and Testing Accuracy for 39th Epoch
@@ -92,11 +121,18 @@ Test Losses
 
 ### Object Detection Outputs
 
-For the 40th Epoch
+For Training Data Output
 
-![40th epoch](https://github.com/prarthanats/ERA/assets/32382676/1f5259c5-23e1-4073-811d-3dae42f5c40c)
+![40th epoch](https://github.com/prarthanats/ERA/assets/32382676/d93a94aa-85a8-4aaa-b0a8-59788b48067a)
+
+For Application Output
+
+<img width="438" alt="Untitled" src="https://github.com/prarthanats/ERA/assets/32382676/dc9f5d46-a714-4a8e-9e4a-cbc34927184f">
+
+<img width="328" alt="Untitled1" src="https://github.com/prarthanats/ERA/assets/32382676/6b7309eb-5564-47fc-be53-4fa0db96a3ae">
 
 
+###
 ### Training Log
 
 ~~~
