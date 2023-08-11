@@ -2,7 +2,7 @@
 
 This repository contains an application for Pascal VOC Object detection using PyTorch Lightning. Object detection is implemented using custom YOLOv3. The Application includes functionalities for GradCam
 
-##Requirements
+## Requirements
 
 1. Use the Custom Yolov3 architecture for Pascal VOC provided 
 2. Move the code to PytorchLightning
@@ -39,9 +39,6 @@ Annotations: Each image is annotated with bounding boxes around objects of inter
 	Vehicle: aeroplane, bicycle, boat, bus, car, motorbike, train
 	Indoor: bottle, chair, dining table, potted plant, sofa, tv/monitor
 ~~~
-
-
-
 ### YOLO: Real-Time Object Detection
 
 YOLO (You Only Look Once) is an advanced object detection algorithm known for its speed and accuracy. Unlike traditional object detection methods that involve sliding windows or region proposals, YOLO processes the entire image at once to predict object classes and bounding box coordinates directly.
@@ -61,7 +58,7 @@ To use YOLO for real-time object detection, you can follow these steps:
 4. Post-processing: Apply non-maximum suppression (NMS) to remove duplicate or overlapping detections. Filter out low-confidence predictions based on a confidence threshold.
 5. Visualization: Visualize the detected objects by overlaying bounding boxes and class labels on the original images.
 
-###PyTorch Lightning
+### PyTorch Lightning
 
 PyTorch Lightning is a lightweight PyTorch wrapper that simplifies the training and organizing of deep learning models. It provides a high-level interface for PyTorch that abstracts away the boilerplate code typically required for training, validation, and testing loops. With PyTorch Lightning, you can focus more on designing your models and less on the repetitive tasks surrounding the training process.
 
@@ -110,7 +107,6 @@ Gradio is a user interface (UI) library that makes it easy to create web-based i
 	import gradio as gr
 	gr_interface = gr.Interface(fn=predict, inputs="text", outputs="text") #Assuming you have a PyTorch Lightning model 'model' and a prediction function 'predict'
 	gr_interface.launch()
-
 ~~~
 
 The Gradio app will be accessible at the provided URL, and users can now interact with your PyTorch Lightning model via the web interface.
