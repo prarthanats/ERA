@@ -116,7 +116,7 @@ The notebook for this assignment can be accessed here:  [Notebook](https://githu
 
 ### Model Architecture
 ~~~
- CNNBlock: A building block comprising a convolutional layer, batch normalization, and LeakyReLU activation, used to process image features in convolutional neural networks.
+  CNNBlock: A building block comprising a convolutional layer, batch normalization, and LeakyReLU activation, used to process image features in convolutional neural networks.
   ResidualBlock: A module containing multiple repetitions of two stacked CNNBlocks, capable of performing residual connections to help in feature extraction and information flow.
   ScalePrediction: Generates scale-specific predictions by employing convolutional layers with varying kernel sizes, aiding in object detection tasks, particularly for the YOLO architecture.
   YOLOv3: A YOLO variant for object detection, integrating various CNN layers, ResidualBlocks, and ScalePredictions to provide multi-scale predictions of object classes and bounding boxes in an image.
@@ -136,6 +136,7 @@ Training and Testing Accuracy for 39th Epoch
 <img width="360" alt="1" src="https://github.com/prarthanats/ERA/assets/32382676/9b1f11db-4006-4194-a7f6-536820aaf732">
 
 Test Losses
+
 <img width="312" alt="Untitled" src="https://github.com/prarthanats/ERA/assets/32382676/66feef4d-4360-4019-b3d2-7aa8d9f8cb45">
 
 
@@ -153,7 +154,7 @@ For the 40th Epoch
 ### Training Log
 
 ~~~
-		Train Metrics
+	Train Metrics
 	Epoch: 0
 	Loss: 19.502483367919922
 	Class Accuracy: 34.179066%
