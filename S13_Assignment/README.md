@@ -116,10 +116,10 @@ The notebook for this assignment can be accessed here:  [Notebook](https://githu
 
 ### Model Architecture
 ~~~
-	 CNNBlock: A building block comprising a convolutional layer, batch normalization, and LeakyReLU activation, used to process image features in convolutional neural networks.
-	  ResidualBlock: A module containing multiple repetitions of two stacked CNNBlocks, capable of performing residual connections to help in feature extraction and information flow.
-	  ScalePrediction: Generates scale-specific predictions by employing convolutional layers with varying kernel sizes, aiding in object detection tasks, particularly for the YOLO architecture.
-	  YOLOv3: A YOLO variant for object detection, integrating various CNN layers, ResidualBlocks, and ScalePredictions to provide multi-scale predictions of object classes and bounding boxes in an image.
+ CNNBlock: A building block comprising a convolutional layer, batch normalization, and LeakyReLU activation, used to process image features in convolutional neural networks.
+  ResidualBlock: A module containing multiple repetitions of two stacked CNNBlocks, capable of performing residual connections to help in feature extraction and information flow.
+  ScalePrediction: Generates scale-specific predictions by employing convolutional layers with varying kernel sizes, aiding in object detection tasks, particularly for the YOLO architecture.
+  YOLOv3: A YOLO variant for object detection, integrating various CNN layers, ResidualBlocks, and ScalePredictions to provide multi-scale predictions of object classes and bounding boxes in an image.
 ~~~
 
 ### Model Summary
