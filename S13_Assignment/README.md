@@ -119,13 +119,13 @@ Test Losses
 <img width="312" alt="Untitled" src="https://github.com/prarthanats/ERA/assets/32382676/66feef4d-4360-4019-b3d2-7aa8d9f8cb45">
 
 
-### Object Detection Outputs
+### Object Detection Outputs [NotebookLink](https://github.com/prarthanats/ERA/blob/main/S13_Assignment/Final_Code_without_mosaic.ipynb)
 
-For Training Data Output
+For Training Data Output 
 
 ![40th epoch](https://github.com/prarthanats/ERA/assets/32382676/d93a94aa-85a8-4aaa-b0a8-59788b48067a)
 
-For Application Output
+For Application Output [AppNotebookLink](https://github.com/prarthanats/ERA/blob/main/S13_Assignment/Gradio_App_YoloV3.ipynb)
 
 <img width="438" alt="Untitled" src="https://github.com/prarthanats/ERA/assets/32382676/dc9f5d46-a714-4a8e-9e4a-cbc34927184f">
 
