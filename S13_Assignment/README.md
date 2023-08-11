@@ -155,6 +155,9 @@ For Training Data Output
 
 ![40th epoch](https://github.com/prarthanats/ERA/assets/32382676/d93a94aa-85a8-4aaa-b0a8-59788b48067a)
 
+![download (4)](https://github.com/prarthanats/ERA/assets/32382676/b1043775-486b-4c67-a490-1a4de487df8c)
+
+
 For Application Output [AppNotebookLink](https://github.com/prarthanats/ERA/blob/main/S13_Assignment/Gradio_App_YoloV3.ipynb)
 
 <img width="438" alt="Untitled" src="https://github.com/prarthanats/ERA/assets/32382676/dc9f5d46-a714-4a8e-9e4a-cbc34927184f">
