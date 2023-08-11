@@ -129,7 +129,14 @@ The notebook for this assignment can be accessed here:  []
 
 
 
-### Object Detection 
+### Object Detection Outputs
+
+For the 10th Epoch
+![10th epoch](https://github.com/prarthanats/ERA/assets/32382676/2644c784-d922-48ec-93f7-e8b4f6b222a7)
+
+For the 40th Epoch
+
+![40th epoch](https://github.com/prarthanats/ERA/assets/32382676/1f5259c5-23e1-4073-811d-3dae42f5c40c)
 
 
 ### Training Log
