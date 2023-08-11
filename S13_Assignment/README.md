@@ -111,6 +111,8 @@ Gradio is a user interface (UI) library that makes it easy to create web-based i
 
 The Gradio app will be accessible at the provided URL, and users can now interact with your PyTorch Lightning model via the web interface.
 
+<img width="871" alt="bla" src="https://github.com/prarthanats/ERA/assets/32382676/825577ee-396d-4565-a538-012f962b677b">
+
 ## Notebook
 The notebook for this assignment can be accessed here:  [Notebook](https://github.com/prarthanats/ERA/blob/main/S13_Assignment/Final_Code_without_mosaic.ipynb)
 
@@ -141,10 +143,6 @@ Test Losses
 
 
 ### Object Detection Outputs
-
-For the 10th Epoch
-
-![10th epoch](https://github.com/prarthanats/ERA/assets/32382676/2644c784-d922-48ec-93f7-e8b4f6b222a7)
 
 For the 40th Epoch
 
