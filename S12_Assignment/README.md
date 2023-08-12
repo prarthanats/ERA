@@ -80,7 +80,10 @@ Gradio is a user interface (UI) library that makes it easy to create web-based i
 	gr_interface.launch()
 ~~~
 
-The Gradio app will be accessible at the provided URL, and users can now interact with your PyTorch Lightning model via the web interface.
+The Gradio app will be accessible at the provided URL - [Gradio App CIFAR10](https://huggingface.co/spaces/PrarthanaTS/Cifar10)
+
+![image](https://github.com/prarthanats/ERA/assets/32382676/33440708-09fe-40bc-86ee-fe22b1753866)
+
 
 ## Model Architecture
 
@@ -121,16 +124,81 @@ These classes provide fundamental building blocks for creating a convolutional n
 
 <img width="259" alt="Model_Summary_Lightening" src="https://github.com/prarthanats/ERA/assets/32382676/271deb0f-edba-4187-8330-1c516f473757">
 
+~~~
+	----------------------------------------------------------------
+	        Layer (type)               Output Shape         Param #
+	================================================================
+	            Conv2d-1           [-1, 64, 32, 32]           1,728
+	              ReLU-2           [-1, 64, 32, 32]               0
+	       BatchNorm2d-3           [-1, 64, 32, 32]             128
+	           Dropout-4           [-1, 64, 32, 32]               0
+	         PrepBlock-5           [-1, 64, 32, 32]               0
+	            Conv2d-6          [-1, 128, 32, 32]          73,728
+	         MaxPool2d-7          [-1, 128, 16, 16]               0
+	       BatchNorm2d-8          [-1, 128, 16, 16]             256
+	              ReLU-9          [-1, 128, 16, 16]               0
+	 ConvolutionBlock-10          [-1, 128, 16, 16]               0
+	           Conv2d-11          [-1, 128, 16, 16]         147,456
+	      BatchNorm2d-12          [-1, 128, 16, 16]             256
+	             ReLU-13          [-1, 128, 16, 16]               0
+	           Conv2d-14          [-1, 128, 16, 16]         147,456
+	      BatchNorm2d-15          [-1, 128, 16, 16]             256
+	             ReLU-16          [-1, 128, 16, 16]               0
+	    ResidualBlock-17          [-1, 128, 16, 16]               0
+	           Conv2d-18          [-1, 256, 16, 16]         294,912
+	        MaxPool2d-19            [-1, 256, 8, 8]               0
+	      BatchNorm2d-20            [-1, 256, 8, 8]             512
+	             ReLU-21            [-1, 256, 8, 8]               0
+	 ConvolutionBlock-22            [-1, 256, 8, 8]               0
+	           Conv2d-23            [-1, 512, 8, 8]       1,179,648
+	        MaxPool2d-24            [-1, 512, 4, 4]               0
+	      BatchNorm2d-25            [-1, 512, 4, 4]           1,024
+	             ReLU-26            [-1, 512, 4, 4]               0
+	 ConvolutionBlock-27            [-1, 512, 4, 4]               0
+	           Conv2d-28            [-1, 512, 4, 4]       2,359,296
+	      BatchNorm2d-29            [-1, 512, 4, 4]           1,024
+	             ReLU-30            [-1, 512, 4, 4]               0
+	           Conv2d-31            [-1, 512, 4, 4]       2,359,296
+	      BatchNorm2d-32            [-1, 512, 4, 4]           1,024
+	             ReLU-33            [-1, 512, 4, 4]               0
+	    ResidualBlock-34            [-1, 512, 4, 4]               0
+	        MaxPool2d-35            [-1, 512, 1, 1]               0
+	           Linear-36                   [-1, 10]           5,130
+	================================================================
+	Total params: 6,573,130
+	Trainable params: 6,573,130
+	Non-trainable params: 0
+	----------------------------------------------------------------
+	Input size (MB): 0.01
+	Forward/backward pass size (MB): 8.19
+	Params size (MB): 25.07
+	Estimated Total Size (MB): 33.28
+	----------------------------------------------------------------
+~~~
+
 ## Implementation and Inference Details
+
+### COnfusion Matrix
+
+![CM](https://github.com/prarthanats/ERA/assets/32382676/c22828cc-ca36-4cdb-814a-5c00ebf3023d)
+
+### Accuracy Metrics
 ~~~
 	Epochs - 24
 	Batch Size - 512
 	Number of parameters: 6,573,130 parameters
 	Best Training Accuracy - 98.84% (24th Epoch)
-	Best Testing Accuracy - 92.43% (24th Epoch)
+	Best Testing Accuracy - 92.5% (24th Epoch)
 	LR Scheduler: OneCycleLR with pct_start = 0.2 (~5/24) since max_lr is required at Epoch 5, out of 24 total epochs
-	Optimizer - Adam Scheduler 
+	Optimizer - Adam Scheduler
 ~~~
+
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃        Test metric        ┃       DataLoader 0        ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│       test_accuracy       │    0.9259999990463257     │
+│        test_losses        │    0.2941371500492096     │
+└───────────────────────────┴───────────────────────────┘
 
 ## Notebook
 1. The notebook for this assignment can be accessed here:  [Assignment 12](https://github.com/prarthanats/ERA/blob/main/S12_Assignment/Assignment_12_CustomResnet.ipynb)
@@ -166,10 +234,8 @@ These classes provide fundamental building blocks for creating a convolutional n
 
 5. The Model is saved using
 ~~~
-	torch.save(model.state_dict(), "resnet_model_v2.pth")
+	torch.save(model.state_dict(), "resnet_model_v7.pth")
 ~~~
-6. Gradio is then used for visulaization of the app. The App related information can be found [Custom Resner App](https://huggingface.co/spaces/PrarthanaTS/Cifar10)
-
 
 ### Accuracy and Loss Plots
 
@@ -177,7 +243,8 @@ Accuracy and Loss Plots are plotted using TensorBoard and  it is primarily used 
 <img width="438" alt="output" src="https://github.com/prarthanats/ERA/assets/32382676/06eb8d3f-88fb-45eb-92ec-4f1a68671120">
 
 ### Misclassified Images 
-![Misclassified](https://github.com/prarthanats/ERA/assets/32382676/23f34ebd-2eb0-4e20-b836-f86579c39967)
+
+![image](https://github.com/prarthanats/ERA/assets/32382676/9988421d-1c3b-40e4-80a0-49931da44f93)
 
 ## Conclusion
 
