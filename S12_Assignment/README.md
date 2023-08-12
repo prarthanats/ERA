@@ -191,14 +191,9 @@ These classes provide fundamental building blocks for creating a convolutional n
 	Best Testing Accuracy - 92.5% (24th Epoch)
 	LR Scheduler: OneCycleLR with pct_start = 0.2 (~5/24) since max_lr is required at Epoch 5, out of 24 total epochs
 	Optimizer - Adam Scheduler
+	test_accuracy -  0.9259999990463257
+	test_losses -0.2941371500492096 
 ~~~
-
-┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃        Test metric        ┃       DataLoader 0        ┃
-┡━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
-│       test_accuracy       │    0.9259999990463257     │
-│        test_losses        │    0.2941371500492096     │
-└───────────────────────────┴───────────────────────────┘
 
 ## Notebook
 1. The notebook for this assignment can be accessed here:  [Assignment 12](https://github.com/prarthanats/ERA/blob/main/S12_Assignment/Assignment_12_CustomResnet.ipynb)
