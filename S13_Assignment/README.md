@@ -139,7 +139,7 @@ In PyTorch Lightning, the precision argument in the Trainer class is used to ena
 
 When you set precision to 16 in the Trainer, it tells PyTorch Lightning to enable mixed-precision training using float16.
 
-![image](https://github.com/prarthanats/ERA/assets/32382676/9ccdd24b-5668-4bdd-9ec1-3960a69ff460)
+![image](https://github.com/prarthanats/ERA/assets/32382676/405a19a2-173c-46b3-b2da-cae9fde89049)
 
 Training and Testing Accuracy for 39th Epoch
 
