@@ -53,19 +53,19 @@ You can explore and download the dataset from the Hugging Face website, where ad
 ## [Custom Transformer Model Architecture / Code Structure]('https://github.com/prarthanats/ERA/blob/main/S15_Assignment/lightening_code/model.py')
 
 Summary of the key components:
-    - LayerNormalization: Implements layer normalization with learnable scale and bias parameters.
-    - FeedForwardBlock: A feedforward neural network block used within the Transformer layers.
-    - InputEmbeddings: Embeds input tokens into a continuous vector space.
-    - PositionalEncoding: Adds positional information to the input embeddings to account for token order.
-    - ResidualConnection: Adds residual connections and layer normalization to sub-layers within the Transformer blocks.
-    - MultiHeadAttentionBlock: Implements multi-head self-attention mechanism within the Transformer.
-    - EncoderBlock: A building block for the encoder part of the Transformer.
-    - Encoder: Stacks multiple encoder blocks to form the encoder of the Transformer.
-    - DecoderBlock: A building block for the decoder part of the Transformer.
-    - Decoder: Stacks multiple decoder blocks to form the decoder of the Transformer.
-    - ProjectionLayer: The final layer that projects decoder outputs into a target vocabulary space.
-    - Transformer: Combines the encoder, decoder, embeddings, positional encodings, and projection layers to create the overall Transformer model.
-    - build_transformer: A function for constructing the Transformer model with specified parameters.
+- LayerNormalization: Implements layer normalization with learnable scale and bias parameters.
+- FeedForwardBlock: A feedforward neural network block used within the Transformer layers.
+- InputEmbeddings: Embeds input tokens into a continuous vector space.
+- PositionalEncoding: Adds positional information to the input embeddings to account for token order.
+- ResidualConnection: Adds residual connections and layer normalization to sub-layers within the Transformer blocks.
+- MultiHeadAttentionBlock: Implements multi-head self-attention mechanism within the Transformer.
+- EncoderBlock: A building block for the encoder part of the Transformer.
+- Encoder: Stacks multiple encoder blocks to form the encoder of the Transformer.
+- DecoderBlock: A building block for the decoder part of the Transformer.
+- Decoder: Stacks multiple decoder blocks to form the decoder of the Transformer.
+- ProjectionLayer: The final layer that projects decoder outputs into a target vocabulary space.
+- Transformer: Combines the encoder, decoder, embeddings, positional encodings, and projection layers to create the overall Transformer model.
+- build_transformer: A function for constructing the Transformer model with specified parameters.
     
 ~~~
 |--- InputEmbeddings
