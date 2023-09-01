@@ -83,7 +83,7 @@ Start
 	Epochs - 10
 	Batch Size - 8
 	Number of parameters: 75.1 M  
-	loss - 4.64
+	loss - 3.4823
 ~~~
 
 ## Lightening Code Structure
