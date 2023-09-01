@@ -89,7 +89,7 @@ Start
 	Epochs - 10
 	Batch Size - 8
 	Number of parameters: 75.1 M  
-  loss - 4.64
+	loss - 4.64
 ~~~
 
 ## Lightening Code Structure
@@ -117,3 +117,10 @@ Start
 |       |--- Save Model (if Preloading)
 
 ~~~
+
+## Training Loss Plot
+
+<img width="597" alt="training loss" src="https://github.com/prarthanats/ERA/assets/32382676/515a0b86-5e0e-42fa-a8e0-3af71e0355d4">
+
+
+
