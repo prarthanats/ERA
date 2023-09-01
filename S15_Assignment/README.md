@@ -9,7 +9,7 @@ This repository contains code and utilities for training and evaluating deep lea
 2. Train the model for 10 epochs
 3. Achieve a loss of less than 4. Loss should start from 9-10, and reduce to 4, showing that your code is working
 
-## Introduction to Data - [Opus Books]('https://huggingface.co/datasets/opus_books')
+## Introduction to Data - ['Opus Books'](https://huggingface.co/datasets/opus_books)
 
 The opus_books dataset provided by Hugging Face is a part of the OPUS (Open Parallel Corpus) project, which aims to collect and provide high-quality parallel corpora. This dataset specifically focuses on parallel texts from books, making it a valuable resource for training and evaluating machine translation models, among other natural language processing tasks.
 
