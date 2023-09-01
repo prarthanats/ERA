@@ -6,6 +6,7 @@ from config import get_weights_file_path
 import torch 
 import torch.nn as nn 
 from torch.utils.data import DataLoader, random_split
+from tqdm import tqdm
 
 from pathlib import Path
  
@@ -17,6 +18,8 @@ from tokenizers.pre_tokenizers import Whitespace
 
 import torchmetrics 
 from torch.utils.tensorboard import SummaryWriter 
+import os
+from torchsummary import summary
 
 import pytorch_lightning as pl
 
@@ -38,6 +41,9 @@ class PytorchLighteningTransformer(pl.LightningModule):
         self.expected = [] 
         self.predicted = [] 
         self.num_examples = 1
+
+        save_dir = "weights"
+        os.makedirs(save_dir, exist_ok=True)
 
     def forward(self, encoder_input, decoder_input, encoder_mask, decoder_mask):
         encoder_output = self.model.encode(encoder_input, encoder_mask)
@@ -121,12 +127,11 @@ class PytorchLighteningTransformer(pl.LightningModule):
 
         loss = self.loss_fn(proj_output.view(-1, self.tokenizer_tgt.get_vocab_size()), label.view(-1))
 
-        self.log('training_loss', loss, on_epoch=True, on_step=True)
+        self.log('training_loss', loss, on_epoch=True, prog_bar=True)
 
         self.training_loss.append(loss.item())         
         self.writer.add_scalar('training_loss', loss.item(), self.trainer.global_step) 
         self.writer.flush() 
-            
         # Backpropagate the loss 
         loss.backward(retain_graph=True) 
             
@@ -192,6 +197,8 @@ class PytorchLighteningTransformer(pl.LightningModule):
             self.expected.append(target_text) 
             self.predicted.append(model_out_text) 
 
+            source_text = self.tokenizer_src.decode(batch["encoder_input"][0].detach().cpu().numpy())
+            print(f"{f'SOURCE: ':>12}{source_text}")
             print(f"{f'TARGET: ':>12}{target_text}")
             print(f"{f'PREDICTED: ':>12}{model_out_text}")  
             
