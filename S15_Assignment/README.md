@@ -21,9 +21,9 @@ Content: The dataset is primarily focused on books, which can include various ge
 
 ### Usage:
 
-Machine Translation: You can use this dataset to train and evaluate machine translation models. Given its diversity of languages and topics, it can be valuable for building translation systems that work across different domains.
-Language Understanding: Beyond translation, you can leverage this dataset for various natural language understanding tasks, such as text classification, sentiment analysis, and more.
-Research: The dataset can be utilized for research purposes, including multilingual and cross-lingual studies, as well as for developing and testing novel NLP algorithms.
+- Machine Translation: You can use this dataset to train and evaluate machine translation models. Given its diversity of languages and topics, it can be valuable for building translation systems that work across different domains.
+- Language Understanding: Beyond translation, you can leverage this dataset for various natural language understanding tasks, such as text classification, sentiment analysis, and more.
+- Research: The dataset can be utilized for research purposes, including multilingual and cross-lingual studies, as well as for developing and testing novel NLP algorithms.
 
 ### Accessing the Dataset:
 
@@ -42,12 +42,12 @@ You can explore and download the dataset from the Hugging Face website, where ad
 	- Decoder Input: Includes [SOS] and padding tokens. The target text is embedded after [SOS], and padding tokens are added to match the seq_len. It does not include [EOS] because the decoder has to predict it.
 	- Labels: Include the target text followed by [EOS] and padding tokens to reach the seq_len.
 	- Returns a dictionary containing the following:
-	"encoder_input": Encoder input sequence.
-	"decoder_input": Decoder input sequence.
-	"encoder_mask": A mask indicating the positions of non-padding tokens in the encoder input.
-	"decoder_mask": A mask used in the decoder for causal masking, preventing it from attending to future tokens.
-	"label": The label sequence.
-	"tgt_text": The target text in its original form
+		"encoder_input": Encoder input sequence.
+		"decoder_input": Decoder input sequence.
+		"encoder_mask": A mask indicating the positions of non-padding tokens in the encoder input.
+		"decoder_mask": A mask used in the decoder for causal masking, preventing it from attending to future tokens.
+		"label": The label sequence.
+		"tgt_text": The target text in its original form
 ~~~
 
 ## [Custom Transformer Model Architecture / Code Structure]('https://github.com/prarthanats/ERA/blob/main/S15_Assignment/lightening_code/model.py')
