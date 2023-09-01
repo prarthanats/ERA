@@ -144,23 +144,23 @@ The model can be run using Lightning framework as shown below:
 2. Import Dependency
 ~~~
 	
-	from callback import TrainEndCallback
-	from lightening_train import PytorchLighteningTransformer
-	from config import get_config, get_weights_file_path
+from callback import TrainEndCallback
+from lightening_train import PytorchLighteningTransformer
+from config import get_config, get_weights_file_path
 
-	import warnings
-	from tqdm import tqdm
-	import os
-	from pathlib import Path
-	
-	import torchmetrics
-	from torch.utils.tensorboard import SummaryWriter
-	
-	from pytorch_lightning import LightningModule
-	from pytorch_lightning.callbacks.progress import TQDMProgressBar
-	
-	import pytorch_lightning as pl
-	from pytorch_lightning.loggers import TensorBoardLogger
+import warnings
+from tqdm import tqdm
+import os
+from pathlib import Path
+
+import torchmetrics
+from torch.utils.tensorboard import SummaryWriter
+
+from pytorch_lightning import LightningModule
+from pytorch_lightning.callbacks.progress import TQDMProgressBar
+
+import pytorch_lightning as pl
+from pytorch_lightning.loggers import TensorBoardLogger
 
 ~~~
 3. Model Training and Testing
@@ -174,23 +174,23 @@ trainer: This is an instance of the PyTorch Lightning Trainer class, which coord
 3.3 Model Training and Testing
 The trainer orchestrates the entire training loop, handling data loading, batching, forward and backward passes, optimization, and other training-related tasks.
 ~~~
-	model = PytorchLighteningTransformer(config)
-	callback = TrainEndCallback(config=config)
-	
-	# Create the Trainer instance with the callback
-	trainer = pl.Trainer(callbacks=[callback],max_epochs=10)
-	
-	# Train the Lightning module
-	trainer.fit(model)
+model = PytorchLighteningTransformer(config)
+callback = TrainEndCallback(config=config)
+
+# Create the Trainer instance with the callback
+trainer = pl.Trainer(callbacks=[callback],max_epochs=10)
+
+# Train the Lightning module
+trainer.fit(model)
 ~~~
 
 
 ## Implementation and Inference Details
 ~~~
-	Epochs - 10
-	Batch Size - 8
-	Number of parameters: 75.1 M  
-	loss - 3.4823
+Epochs - 10
+Batch Size - 8
+Number of parameters: 75.1 M  
+loss - 3.4823
 ~~~
 
 ## Training Loss Plot
