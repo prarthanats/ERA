@@ -1,5 +1,5 @@
 
-# "English-to-Italian Sentence Translation using Transformers"
+# English-to-Italian Sentence Translation using Transformers
 
 This repository contains code and utilities for training and evaluating deep learning models, for sentence translation using the PyTorch Lightening framework.
 
@@ -79,3 +79,9 @@ Start
 |       |--- Projection
 |--- End
 ~~~
+
+## Model Summary
+
+![image](https://github.com/prarthanats/ERA/assets/32382676/712aa688-b1d5-4d8f-a696-676855bb7c83)
+
+## Implementation and Inference Details
