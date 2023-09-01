@@ -39,19 +39,14 @@ Start
 |--- InputEmbeddings
 |       |--- nn.Embedding
 |--- PositionalEncoding
-|       |--- Initialization
 |       |--- Positional Encoding Calculation
 |--- LayerNormalization
-|       |--- Initialization
 |       |--- Forward Calculation
 |--- MultiHeadAttentionBlock
-|       |--- Initialization
 |       |--- Attention Calculation
 |--- FeedForwardBlock
-|       |--- Initialization
 |       |--- Forward Calculation
 |--- ResidualConnection
-|       |--- Initialization
 |       |--- Forward Calculation
 |--- EncoderBlock
 |       |--- Self-Attention Block
@@ -69,7 +64,6 @@ Start
 |       |--- Multiple Decoder Blocks
 |       |--- LayerNormalization
 |--- ProjectionLayer
-|       |--- Initialization
 |       |--- Forward Calculation
 |--- Transformer
 |       |--- Encoder
