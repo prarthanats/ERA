@@ -30,9 +30,43 @@ Research: The dataset can be utilized for research purposes, including multiling
 You can access the opus_books dataset through the Hugging Face Datasets library. It provides easy-to-use APIs for downloading and working with the data in your machine learning projects.
 You can explore and download the dataset from the Hugging Face website, where additional information and usage examples may be available.
 
+### Sample Data Sample
+
 ![image](https://github.com/prarthanats/ERA/assets/32382676/bb74083d-c064-4676-8367-84744075a308)
 
-## Model Architecture
+### [Code Structure DataSet]('https://github.com/prarthanats/ERA/blob/main/S15_Assignment/lightening_code/dataset.py')
+~~~
+	- Retrieves an example from the dataset at the specified index and tokenizes the source and target text using the respective tokenizers.
+	- Prepares encoder input, decoder input, and labels as follows:
+	- Encoder Input: Includes special tokens [SOS] (start of sentence), [EOS] (end of sentence), and padding tokens. The source text is embedded between [SOS] and [EOS], and padding tokens are added as necessary to reach the seq_len.
+	- Decoder Input: Includes [SOS] and padding tokens. The target text is embedded after [SOS], and padding tokens are added to match the seq_len. It does not include [EOS] because the decoder has to predict it.
+	- Labels: Include the target text followed by [EOS] and padding tokens to reach the seq_len.
+	- Returns a dictionary containing the following:
+	"encoder_input": Encoder input sequence.
+	"decoder_input": Decoder input sequence.
+	"encoder_mask": A mask indicating the positions of non-padding tokens in the encoder input.
+	"decoder_mask": A mask used in the decoder for causal masking, preventing it from attending to future tokens.
+	"label": The label sequence.
+	"tgt_text": The target text in its original form
+~~~
+
+## [Custom Transformer Model Architecture / Code Structure]('https://github.com/prarthanats/ERA/blob/main/S15_Assignment/lightening_code/model.py')
+
+Summary of the key components:
+    - LayerNormalization: Implements layer normalization with learnable scale and bias parameters.
+    - FeedForwardBlock: A feedforward neural network block used within the Transformer layers.
+    - InputEmbeddings: Embeds input tokens into a continuous vector space.
+    - PositionalEncoding: Adds positional information to the input embeddings to account for token order.
+    - ResidualConnection: Adds residual connections and layer normalization to sub-layers within the Transformer blocks.
+    - MultiHeadAttentionBlock: Implements multi-head self-attention mechanism within the Transformer.
+    - EncoderBlock: A building block for the encoder part of the Transformer.
+    - Encoder: Stacks multiple encoder blocks to form the encoder of the Transformer.
+    - DecoderBlock: A building block for the decoder part of the Transformer.
+    - Decoder: Stacks multiple decoder blocks to form the decoder of the Transformer.
+    - ProjectionLayer: The final layer that projects decoder outputs into a target vocabulary space.
+    - Transformer: Combines the encoder, decoder, embeddings, positional encodings, and projection layers to create the overall Transformer model.
+    - build_transformer: A function for constructing the Transformer model with specified parameters.
+    
 ~~~
 |--- InputEmbeddings
 |       |--- nn.Embedding
@@ -64,6 +98,32 @@ You can explore and download the dataset from the Hugging Face website, where ad
 ## Model Summary
 
 ![image](https://github.com/prarthanats/ERA/assets/32382676/712aa688-b1d5-4d8f-a696-676855bb7c83)
+
+
+
+## [Pytorch Lightening Code Structure]('https://github.com/prarthanats/ERA/blob/main/S15_Assignment/lightening_code/lightening_train.py')
+~~~
+|--- Initialization
+|--- Prepare Data
+|--- Configure Optimizers
+|--- Define Train DataLoader
+|--- Define Validation DataLoader
+|--- Split Dataset into Training and Validation Sets
+|--- Training Loop
+|--- Training Step
+|       |--- Forward Pass
+|       |--- Loss Calculation
+|       |--- Backpropagation
+|       |--- Logging Training Loss
+|--- Validation Step
+|       |--- Set Model to Evaluation Mode
+|       |--- Greedy Decoding for Validation
+|       |--- Compute Evaluation Metrics (CER, WER, BLEU)
+|       |--- Log Validation Metrics
+|--- End of Epoch
+|       |--- Log Epoch Number
+|       |--- Save Model (if Preloading)
+~~~
 
 ## Setup and Usage
 
@@ -124,31 +184,6 @@ The trainer orchestrates the entire training loop, handling data loading, batchi
 	Batch Size - 8
 	Number of parameters: 75.1 M  
 	loss - 3.4823
-~~~
-
-## Lightening Code Structure
-
-~~~
-|--- Initialization
-|--- Prepare Data
-|--- Configure Optimizers
-|--- Define Train DataLoader
-|--- Define Validation DataLoader
-|--- Split Dataset into Training and Validation Sets
-|--- Training Loop
-|--- Training Step
-|       |--- Forward Pass
-|       |--- Loss Calculation
-|       |--- Backpropagation
-|       |--- Logging Training Loss
-|--- Validation Step
-|       |--- Set Model to Evaluation Mode
-|       |--- Greedy Decoding for Validation
-|       |--- Compute Evaluation Metrics (CER, WER, BLEU)
-|       |--- Log Validation Metrics
-|--- End of Epoch
-|       |--- Log Epoch Number
-|       |--- Save Model (if Preloading)
 ~~~
 
 ## Training Loss Plot
