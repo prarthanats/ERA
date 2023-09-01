@@ -85,3 +85,35 @@ Start
 ![image](https://github.com/prarthanats/ERA/assets/32382676/712aa688-b1d5-4d8f-a696-676855bb7c83)
 
 ## Implementation and Inference Details
+~~~
+	Epochs - 10
+	Batch Size - 8
+	Number of parameters: 75.1 M  
+  loss - 4.64
+~~~
+
+## Lightening Code Structure
+
+~~~
+|--- Initialization
+|--- Prepare Data
+|--- Configure Optimizers
+|--- Define Train DataLoader
+|--- Define Validation DataLoader
+|--- Split Dataset into Training and Validation Sets
+|--- Training Loop
+|--- Training Step
+|       |--- Forward Pass
+|       |--- Loss Calculation
+|       |--- Backpropagation
+|       |--- Logging Training Loss
+|--- Validation Step
+|       |--- Set Model to Evaluation Mode
+|       |--- Greedy Decoding for Validation
+|       |--- Compute Evaluation Metrics (CER, WER, BLEU)
+|       |--- Log Validation Metrics
+|--- End of Epoch
+|       |--- Log Epoch Number
+|       |--- Save Model (if Preloading)
+
+~~~
