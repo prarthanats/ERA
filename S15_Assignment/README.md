@@ -34,44 +34,31 @@ You can explore and download the dataset from the Hugging Face website, where ad
 
 ## Model Architecture
 ~~~
-Start
-|
 |--- InputEmbeddings
 |       |--- nn.Embedding
 |--- PositionalEncoding
 |       |--- Positional Encoding Calculation
-|--- LayerNormalization
-|       |--- Forward Calculation
-|--- MultiHeadAttentionBlock
-|       |--- Attention Calculation
-|--- FeedForwardBlock
-|       |--- Forward Calculation
-|--- ResidualConnection
-|       |--- Forward Calculation
 |--- EncoderBlock
 |       |--- Self-Attention Block
 |       |--- FeedForward Block
 |       |--- Residual Connections
-|--- Encoder
-|       |--- Multiple Encoder Blocks
-|       |--- LayerNormalization
 |--- DecoderBlock
 |       |--- Self-Attention Block
 |       |--- Cross-Attention Block
 |       |--- FeedForward Block
 |       |--- Residual Connections
-|--- Decoder
-|       |--- Multiple Decoder Blocks
+|--- Encoder
+|       |--- Encoder Blocks
 |       |--- LayerNormalization
-|--- ProjectionLayer
-|       |--- Forward Calculation
+|--- Decoder
+|       |--- Decoder Blocks
+|       |--- LayerNormalization
 |--- Transformer
 |       |--- Encoder
 |       |       |--- Encode Source
 |       |--- Decoder
 |       |       |--- Decode Target
 |       |--- Projection
-|--- End
 ~~~
 
 ## Model Summary
@@ -109,12 +96,87 @@ Start
 |--- End of Epoch
 |       |--- Log Epoch Number
 |       |--- Save Model (if Preloading)
-
 ~~~
 
 ## Training Loss Plot
 
-<img width="597" alt="training loss" src="https://github.com/prarthanats/ERA/assets/32382676/515a0b86-5e0e-42fa-a8e0-3af71e0355d4">
+<img width="555" alt="training_loss_new" src="https://github.com/prarthanats/ERA/assets/32382676/4455178c-4efe-4050-8392-f75c22dbad23">
 
+## Validation Character Error Rate
+
+The Character Error Rate (CER) is a metric used to evaluate the accuracy of character-level text recognition. It measures the number of character-level errors made by a system when compared to a reference or ground truth.
+
+<img width="527" alt="cer" src="https://github.com/prarthanats/ERA/assets/32382676/9b4d0df0-c9b4-4e9b-8018-9d78447bbc94">
+
+## Validation Word Error Rate
+
+ The Word Error Rate (WER) is a metric used to measures the number of word-level errors made by a system when compared to a reference or ground truth.
+
+ <img width="545" alt="wer" src="https://github.com/prarthanats/ERA/assets/32382676/105cb47c-65eb-4a39-81a2-37177efdc7df">
+
+## Training Logs
+~~~
+	Training: 0it [00:00, ?it/s]
+	Validation: 0it [00:00, ?it/s]
+	    SOURCE: A form was near -- what form , the pitch - dark night and my enfeebled vision prevented me from .
+	    TARGET: Una forma mi era vicina, ma come fosse non potevo distinguerla nel buio.
+	 PREDICTED: la mia cosa , e la mia cosa , e la mia cosa .
+	Epoch Number 0
+	Final Training Loss: 5.8139
+	Validation: 0it [00:00, ?it/s]
+	    SOURCE: A form was near -- what form , the pitch - dark night and my enfeebled vision prevented me from .
+	    TARGET: Una forma mi era vicina, ma come fosse non potevo distinguerla nel buio.
+	 PREDICTED: La mia vita era un ' altra , e mi parve che mi .
+	Epoch Number 1
+	Final Training Loss: 5.8436
+	Validation: 0it [00:00, ?it/s]
+	    SOURCE: A form was near -- what form , the pitch - dark night and my enfeebled vision prevented me from .
+	    TARGET: Una forma mi era vicina, ma come fosse non potevo distinguerla nel buio.
+	 PREDICTED: La mia vita era stata in una volta , e mi di , e mi di .
+	Epoch Number 2
+	Final Training Loss: 3.7605
+	Validation: 0it [00:00, ?it/s]
+	    SOURCE: A form was near -- what form , the pitch - dark night and my enfeebled vision prevented me from .
+	    TARGET: Una forma mi era vicina, ma come fosse non potevo distinguerla nel buio.
+	 PREDICTED: la mia testa , che era la notte , e la mia casa mi aveva una volta una volta a me .
+	Epoch Number 3
+	Final Training Loss: 5.1322
+	Validation: 0it [00:00, ?it/s]
+	    SOURCE: A form was near -- what form , the pitch - dark night and my enfeebled vision prevented me from .
+	    TARGET: Una forma mi era vicina, ma come fosse non potevo distinguerla nel buio.
+	 PREDICTED: La mia meraviglia era stata , e la notte mi di nuovo il mio spirito .
+	Epoch Number 4
+	Final Training Loss: 5.4552
+	Validation: 0it [00:00, ?it/s]
+	    SOURCE: A form was near -- what form , the pitch - dark night and my enfeebled vision prevented me from .
+	    TARGET: Una forma mi era vicina, ma come fosse non potevo distinguerla nel buio.
+	 PREDICTED: Un ' altra volta , che cosa mi aveva fatto il mio spirito , e la mia solitudine mi pareva che la mia vita mi .
+	Epoch Number 5
+	Final Training Loss: 4.9846
+	Validation: 0it [00:00, ?it/s]
+	    SOURCE: A form was near -- what form , the pitch - dark night and my enfeebled vision prevented me from .
+	    TARGET: Una forma mi era vicina, ma come fosse non potevo distinguerla nel buio.
+	 PREDICTED: " Quando la notte era svanita , la notte , la notte e la notte mi di coraggio .
+	Epoch Number 6
+	Final Training Loss: 4.5593
+	Validation: 0it [00:00, ?it/s]
+	    SOURCE: A form was near -- what form , the pitch - dark night and my enfeebled vision prevented me from .
+	    TARGET: Una forma mi era vicina, ma come fosse non potevo distinguerla nel buio.
+	 PREDICTED: Una notte seduta al mio letto , la notte e la notte , la mia solitudine .
+	Epoch Number 7
+	Final Training Loss: 3.2663
+	Validation: 0it [00:00, ?it/s]
+	    SOURCE: A form was near -- what form , the pitch - dark night and my enfeebled vision prevented me from .
+	    TARGET: Una forma mi era vicina, ma come fosse non potevo distinguerla nel buio.
+	 PREDICTED: Un ' ora , che cosa era in quella notte , la mia solitudine e la mia solitudine .
+	Epoch Number 8
+	Final Training Loss: 4.2449
+	Validation: 0it [00:00, ?it/s]
+	    SOURCE: A form was near -- what form , the pitch - dark night and my enfeebled vision prevented me from .
+	    TARGET: Una forma mi era vicina, ma come fosse non potevo distinguerla nel buio.
+	 PREDICTED: Una sera era in mezzo alla mia notte , che mi sentii la notte e la potenza di veder la potenza e la potenza di .
+	Epoch Number 9
+	Final Training Loss: 3.4823
+~~~
 
 
