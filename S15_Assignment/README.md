@@ -9,7 +9,7 @@ This repository contains code and utilities for training and evaluating deep lea
 2. Train the model for 10 epochs
 3. Achieve a loss of less than 4. Loss should start from 9-10, and reduce to 4, showing that your code is working
 
-## Introduction to Data - ['Opus Books'](https://huggingface.co/datasets/opus_books)
+## Introduction to Data - [Opus Books](https://huggingface.co/datasets/opus_books)
 
 The opus_books dataset provided by Hugging Face is a part of the OPUS (Open Parallel Corpus) project, which aims to collect and provide high-quality parallel corpora. This dataset specifically focuses on parallel texts from books, making it a valuable resource for training and evaluating machine translation models, among other natural language processing tasks.
 
@@ -34,7 +34,7 @@ You can explore and download the dataset from the Hugging Face website, where ad
 
 ![image](https://github.com/prarthanats/ERA/assets/32382676/bb74083d-c064-4676-8367-84744075a308)
 
-### [Code Structure DataSet]('https://github.com/prarthanats/ERA/blob/main/S15_Assignment/lightening_code/dataset.py')
+### [Code Structure DataSet](https://github.com/prarthanats/ERA/blob/main/S15_Assignment/lightening_code/dataset.py)
 ~~~
 	- Retrieves an example from the dataset at the specified index and tokenizes the source and target text using the respective tokenizers.
 	- Prepares encoder input, decoder input, and labels as follows:
@@ -50,7 +50,7 @@ You can explore and download the dataset from the Hugging Face website, where ad
 		"tgt_text": The target text in its original form
 ~~~
 
-## [Custom Transformer Model Architecture / Code Structure]('https://github.com/prarthanats/ERA/blob/main/S15_Assignment/lightening_code/model.py')
+## [Custom Transformer Model Architecture / Code Structure](https://github.com/prarthanats/ERA/blob/main/S15_Assignment/lightening_code/model.py)
 
 Summary of the key components:
 - LayerNormalization: Implements layer normalization with learnable scale and bias parameters.
@@ -99,9 +99,7 @@ Summary of the key components:
 
 ![image](https://github.com/prarthanats/ERA/assets/32382676/712aa688-b1d5-4d8f-a696-676855bb7c83)
 
-
-
-## [Pytorch Lightening Code Structure]('https://github.com/prarthanats/ERA/blob/main/S15_Assignment/lightening_code/lightening_train.py')
+## [Pytorch Lightening Code Structure](https://github.com/prarthanats/ERA/blob/main/S15_Assignment/lightening_code/lightening_train.py)
 ~~~
 |--- Initialization
 |--- Prepare Data
