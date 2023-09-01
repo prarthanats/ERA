@@ -34,23 +34,29 @@ You can explore and download the dataset from the Hugging Face website, where ad
 
 ![image](https://github.com/prarthanats/ERA/assets/32382676/bb74083d-c064-4676-8367-84744075a308)
 
-### [Code Structure DataSet](https://github.com/prarthanats/ERA/blob/main/S15_Assignment/lightening_code/dataset.py)
+## File Descriptions
+
+### [Dataset](https://github.com/prarthanats/ERA/blob/main/S15_Assignment/lightening_code/dataset.py)
+
+Handles dataset processing, specifically for bilingual datasets, which could be used in machine translation tasks.
 ~~~
-	- Retrieves an example from the dataset at the specified index and tokenizes the source and target text using the respective tokenizers.
-	- Prepares encoder input, decoder input, and labels as follows:
-	- Encoder Input: Includes special tokens [SOS] (start of sentence), [EOS] (end of sentence), and padding tokens. The source text is embedded between [SOS] and [EOS], and padding tokens are added as necessary to reach the seq_len.
-	- Decoder Input: Includes [SOS] and padding tokens. The target text is embedded after [SOS], and padding tokens are added to match the seq_len. It does not include [EOS] because the decoder has to predict it.
-	- Labels: Include the target text followed by [EOS] and padding tokens to reach the seq_len.
-	- Returns a dictionary containing the following:
-		"encoder_input": Encoder input sequence.
-		"decoder_input": Decoder input sequence.
-		"encoder_mask": A mask indicating the positions of non-padding tokens in the encoder input.
-		"decoder_mask": A mask used in the decoder for causal masking, preventing it from attending to future tokens.
-		"label": The label sequence.
-		"tgt_text": The target text in its original form
+- Retrieves an example from the dataset at the specified index and tokenizes the source and target text using the respective tokenizers.
+- Prepares encoder input, decoder input, and labels as follows:
+- Encoder Input: Includes special tokens [SOS] (start of sentence), [EOS] (end of sentence), and padding tokens. The source text is embedded between [SOS] and [EOS], and padding tokens are added as necessary to reach the seq_len.
+- Decoder Input: Includes [SOS] and padding tokens. The target text is embedded after [SOS], and padding tokens are added to match the seq_len. It does not include [EOS] because the decoder has to predict it.
+- Labels: Include the target text followed by [EOS] and padding tokens to reach the seq_len.
+- Returns a dictionary containing the following:
+	"encoder_input": Encoder input sequence.
+	"decoder_input": Decoder input sequence.
+	"encoder_mask": A mask indicating the positions of non-padding tokens in the encoder input.
+	"decoder_mask": A mask used in the decoder for causal masking, preventing it from attending to future tokens.
+	"label": The label sequence.
+	"tgt_text": The target text in its original form
 ~~~
 
-## [Custom Transformer Model Architecture / Code Structure](https://github.com/prarthanats/ERA/blob/main/S15_Assignment/lightening_code/model.py)
+## [Model](https://github.com/prarthanats/ERA/blob/main/S15_Assignment/lightening_code/model.py)
+
+Defines the neural network architectures, including custom layers and blocks.
 
 Summary of the key components:
 - LayerNormalization: Implements layer normalization with learnable scale and bias parameters.
@@ -99,7 +105,10 @@ Summary of the key components:
 
 ![image](https://github.com/prarthanats/ERA/assets/32382676/712aa688-b1d5-4d8f-a696-676855bb7c83)
 
-## [Pytorch Lightening Code Structure](https://github.com/prarthanats/ERA/blob/main/S15_Assignment/lightening_code/lightening_train.py)
+## [Lightening](https://github.com/prarthanats/ERA/blob/main/S15_Assignment/lightening_code/lightening_train.py)
+
+Contains code related to the PyTorch Lightning framework, including callback definitions
+
 ~~~
 |--- Initialization
 |--- Prepare Data
