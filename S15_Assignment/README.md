@@ -197,18 +197,6 @@ loss - 3.4823
 
 <img width="555" alt="training_loss_new" src="https://github.com/prarthanats/ERA/assets/32382676/4455178c-4efe-4050-8392-f75c22dbad23">
 
-## Validation Character Error Rate
-
-The Character Error Rate (CER) is a metric used to evaluate the accuracy of character-level text recognition. It measures the number of character-level errors made by a system when compared to a reference or ground truth.
-
-<img width="527" alt="cer" src="https://github.com/prarthanats/ERA/assets/32382676/9b4d0df0-c9b4-4e9b-8018-9d78447bbc94">
-
-## Validation Word Error Rate
-
- The Word Error Rate (WER) is a metric used to measures the number of word-level errors made by a system when compared to a reference or ground truth.
-
- <img width="545" alt="wer" src="https://github.com/prarthanats/ERA/assets/32382676/105cb47c-65eb-4a39-81a2-37177efdc7df">
-
 ## Training Logs
 
 We can see that in the 10th epoch the loss is below 4.
