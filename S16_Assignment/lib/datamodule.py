@@ -15,7 +15,7 @@ from pytorch_lightning import LightningDataModule
 from torch.utils.data import DataLoader, Dataset, random_split
 
 from dataset import BilingualDataset
-from train import get_or_build_tokenizer,causal_mask, 
+from train import get_or_build_tokenizer,causal_mask, collate_batch
 from config import get_config
 from functools import partial
 
