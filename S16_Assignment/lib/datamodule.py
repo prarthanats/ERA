@@ -15,7 +15,7 @@ from pytorch_lightning import LightningDataModule
 from torch.utils.data import DataLoader, Dataset, random_split
 
 from dataset import BilingualDataset
-from train import get_or_build_tokenizer,causal_mask
+from train import get_or_build_tokenizer,causal_mask, 
 from config import get_config
 from functools import partial
 
@@ -111,32 +111,3 @@ class DataModuleOpusLight(LightningDataModule):
             collate_fn=partial(collate_batch,self.pad_token)
         )
 
-
-def collate_batch(pad_token,bat):
-    encode_batch_length = list(map(lambda x : x['encoder_input'].size(0),bat))
-    decode_batch_length = list(map(lambda x : x['decoder_input'].size(0),bat))
-    max_seq_len = max( encode_batch_length +  decode_batch_length)
-    max_seq_len = max_seq_len + 2
-    src_text = []
-    tgt_text = []
-    for item in bat:
-        item['encoder_input'] = torch.cat([item['encoder_input'],
-                                           torch.tensor([pad_token] * (max_seq_len-item['encoder_input'].size(0)), dtype = torch.int64),],dim=0)
-        item['decoder_input'] = torch.cat([item['decoder_input'],
-                                        torch.tensor([pad_token] * (max_seq_len-item['decoder_input'].size(0)), dtype = torch.int64),],dim=0)
-        
-        item['label'] = torch.cat([item['label'],
-                                        torch.tensor([pad_token] * (max_seq_len-item['label'].size(0)), dtype = torch.int64),],dim=0)
-    
-        src_text.append(item['src_text'] )
-        tgt_text.append(item['tgt_text'] )
-    
-    return  {'encoder_input':torch.stack([o['encoder_input'] for o in bat]), #(bs,max_seq_len)
-             'decoder_input':torch.stack([o['decoder_input'] for o in bat]), #bs,max_seq_len)
-             'label':torch.stack([o['label'] for o in bat]), #(bs,max_seq_len)
-             "encoder_mask" : torch.stack([(o['encoder_input'] != pad_token).unsqueeze(0).unsqueeze(1).int() for o in bat]),#(bs,1,1,max_seq_len)
-             "decoder_mask" : torch.stack([(o['decoder_input'] != pad_token).int() & causal_mask(o['decoder_input'].size(dim=-1)) for o
-                         in bat]),
-             "src_text": src_text,
-             "tgt_text": tgt_text
-     }
