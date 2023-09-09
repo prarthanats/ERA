@@ -59,11 +59,13 @@ class DataModuleOpusLight(LightningDataModule):
         min_src_length = 5
         min_tgt_length = 5
         
-        data_filtered = list(filter(lambda x: len(x['translation'][self.config['lang_src']]) <= max_src_length, dataset))
-        data_filtered = [k for k in data_filtered if len(k['translation'][self.config['lang_src']]) > min_src_length]
-        data_filtered = [k for k in data_filtered if len(k['translation'][self.config['lang_tgt']]) > min_tgt_length]
-        data_filtered = list(filter(lambda x: len(x['translation'][self.config['lang_tgt']]) <= max_tgt_length, data_filtered))
-        
+        data_filtered = [
+            k for k in dataset
+            if len(k['translation'][self.config['lang_src']]) <= max_src_length
+            and len(k['translation'][self.config['lang_src']]) > 5
+            and len(k['translation'][self.config['lang_tgt']]) > 5
+            and len(k['translation'][self.config['lang_tgt']]) < max_tgt_length
+        ]
 
         train_size = int(0.9 * len(data_filtered))
         val_size = len(data_filtered) - train_size
