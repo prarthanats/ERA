@@ -56,11 +56,13 @@ class DataModuleOpusLight(LightningDataModule):
     def create_train_val_datasets(self, dataset):
         max_src_length = 150
         max_tgt_length = max_src_length + 10
-
+        min_src_length = 5
+        min_tgt_length = 5
+        
         data_filtered = list(filter(lambda x: len(x['translation'][self.config['lang_src']]) <= max_src_length, dataset))
-        data_filtered = [k for k in data_filtered if len(k['translation'][self.config['lang_src']]) > 5]
-        data_filtered = [k for k in data_filtered if len(k['translation'][self.config['lang_tgt']]) > 5]
-        data_filtered = list(filter(lambda x: len(x['translation'][self.config['lang_tgt']]) < max_tgt_length, data_filtered))
+        data_filtered = [k for k in data_filtered if len(k['translation'][self.config['lang_src']]) > min_src_length]
+        data_filtered = [k for k in data_filtered if len(k['translation'][self.config['lang_tgt']]) > min_tgt_length]
+        data_filtered = list(filter(lambda x: len(x['translation'][self.config['lang_tgt']]) <= max_tgt_length, data_filtered))
         
 
         train_size = int(0.9 * len(data_filtered))
