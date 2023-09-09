@@ -89,13 +89,14 @@ Sharing Pattern :
 The model can be run using Lightning framework as shown below:
 
 Clone the GitHub Repo
-
+~~~
+https://github.com/prarthanats/ERA/tree/af9cd46c1fc13d453a4875ce87ecd7f2148ffac2/S16_Assignment
+~~~
+Run the 
 
 
 #### Implementation and Inference Details  
 
-
-#### Training Loss Plot
 
 
 #### Training Logs
