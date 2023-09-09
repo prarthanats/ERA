@@ -57,15 +57,16 @@ class DataModuleOpusLight(LightningDataModule):
         max_src_length = 150
         max_tgt_length = max_src_length + 10
 
-        filtered_ds = list(filter(lambda x: len(x['translation'][self.config['lang_src']]) <= max_src_length, dataset))
-        filtered_ds = list(filter(lambda x: len(x['translation'][self.config['lang_tgt']]) < max_tgt_length, filtered_ds))
-        filtered_ds = [k for k in filtered_ds if len(k['translation'][self.config['lang_src']]) > 5]
-        filtered_ds = [k for k in filtered_ds if len(k['translation'][self.config['lang_tgt']]) > 5]
+        data_filtered = list(filter(lambda x: len(x['translation'][self.config['lang_src']]) <= max_src_length, dataset))
+        data_filtered = [k for k in data_filtered if len(k['translation'][self.config['lang_src']]) > 5]
+        data_filtered = [k for k in data_filtered if len(k['translation'][self.config['lang_tgt']]) > 5]
+        data_filtered = list(filter(lambda x: len(x['translation'][self.config['lang_tgt']]) < max_tgt_length, data_filtered))
+        
 
-        train_size = int(0.9 * len(filtered_ds))
-        val_size = len(filtered_ds) - train_size
+        train_size = int(0.9 * len(data_filtered))
+        val_size = len(data_filtered) - train_size
 
-        train_ds, val_ds = random_split(filtered_ds, [train_size, val_size])
+        train_ds, val_ds = random_split(data_filtered, [train_size, val_size])
 
         print(f"Training  DataSet Size : {len(train_ds)}")
         print(f"Validation DataSet Size : {len(val_ds)}")
