@@ -94,3 +94,32 @@ def get_or_build_tokenizer(config, ds, lang):
         tokenizer = Tokenizer.from_file(str(tokenizer_path))
     return tokenizer
 
+
+def collate_batch(pad_token,bat):
+    encode_batch_length = list(map(lambda x : x['encoder_input'].size(0),bat))
+    decode_batch_length = list(map(lambda x : x['decoder_input'].size(0),bat))
+    max_seq_len = max(max(encode_batch_length), max(decode_batch_length)) + 2
+    
+    src_text = []
+    tgt_text = []
+    for item in bat:
+        item['encoder_input'] = torch.cat([item['encoder_input'],
+                                           torch.tensor([pad_token] * (max_seq_len-item['encoder_input'].size(0)), dtype = torch.int64),],dim=0)
+        item['decoder_input'] = torch.cat([item['decoder_input'],
+                                        torch.tensor([pad_token] * (max_seq_len-item['decoder_input'].size(0)), dtype = torch.int64),],dim=0)
+        
+        item['label'] = torch.cat([item['label'],
+                                        torch.tensor([pad_token] * (max_seq_len-item['label'].size(0)), dtype = torch.int64),],dim=0)
+    
+        src_text.append(item['src_text'] )
+        tgt_text.append(item['tgt_text'] )
+    
+    return  {'encoder_input':torch.stack([o['encoder_input'] for o in bat]), #(bs,max_seq_len)
+             'decoder_input':torch.stack([o['decoder_input'] for o in bat]), #bs,max_seq_len)
+             'label':torch.stack([o['label'] for o in bat]), #(bs,max_seq_len)
+             "encoder_mask" : torch.stack([(o['encoder_input'] != pad_token).unsqueeze(0).unsqueeze(1).int() for o in bat]),#(bs,1,1,max_seq_len)
+             "decoder_mask" : torch.stack([(o['decoder_input'] != pad_token).int() & causal_mask(o['decoder_input'].size(dim=-1)) for o
+                         in bat]),
+             "src_text": src_text,
+             "tgt_text": tgt_text
+     }
