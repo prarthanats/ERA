@@ -14,7 +14,7 @@ import time
 from model import build_transformer
 from train import causal_mask
 
-class BilangLightning(LightningModule):
+class TrainingModuleOpusLightning(LightningModule):
     def __init__(self, tokenizer_src,tokenizer_tgt,config):
         super().__init__()
         self.learning_rate = 1e-3
