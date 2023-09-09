@@ -8,13 +8,12 @@ import torch
 import torch.nn as nn
 from pytorch_lightning import LightningModule
 from torch.optim.lr_scheduler import LambdaLR
-from torchmetrics.text import BLEUScore, CharErrorRate, WordErrorRate
 import time
 
 from model import build_transformer
 from train import causal_mask
 
-class BilangLightning(LightningModule):
+class TrainingModuleOpusLightning(LightningModule):
     def __init__(self, tokenizer_src,tokenizer_tgt,config):
         super().__init__()
         self.learning_rate = 1e-3
@@ -36,18 +35,13 @@ class BilangLightning(LightningModule):
 
         self.loss_fn = nn.CrossEntropyLoss(ignore_index=self.tokenizer_src.token_to_id("[PAD]"), label_smoothing=0.1)
         
-        self.train_loss = []
+        self.training_loss = []
         self.val_loss = []
         self.source_texts = []
         self.expected = []
         self.predicted = []
         self.last_val_batch = None 
         self.epoch_loader = 0
-
-        self.char_error_rate = CharErrorRate()
-        self.word_error_rate = WordErrorRate()
-        self.bleu_score = BLEUScore()
-
 
     def forward(self, encoder_input, decoder_input, encoder_mask, decoder_mask):
         encoder_output = self.model.encode(encoder_input, encoder_mask)  # (B, seq_len, seq_len)
@@ -69,15 +63,13 @@ class BilangLightning(LightningModule):
         loss = self.loss_fn(proj_output.view(-1, self.tokenizer_tgt.get_vocab_size()), label.view(-1))
         
         # update and log metrics
-        self.train_loss.append(loss)
-        mean_loss = sum(self.train_loss) / len(self.train_loss)
-        self.log("train/loss", mean_loss, prog_bar=True)
+        self.training_loss.append(loss)
         self.epoch_loader = 1
 
         return loss
 
     def on_train_epoch_end(self):
-        mean_train_loss = sum(self.train_loss) / len(self.train_loss)
+        mean_train_loss = sum(self.training_loss) / len(self.training_loss)
         print("TRAINING LOSS : ", round(mean_train_loss.item(), 5))
         epoch_end_time = time.time()
         epoch_duration = epoch_end_time - self.epoch_start_time
@@ -88,7 +80,6 @@ class BilangLightning(LightningModule):
         print("----------------------------------------------------------------------")
         self.train_loss = []
         
-
 
     def validation_step(self, batch, batch_idx):
         self.last_val_batch = batch
@@ -110,17 +101,10 @@ class BilangLightning(LightningModule):
 
             expected = target_text
             predicted = model_out_text
-
             
             print(f"SOURCE : {source_text[0]}")
             print(f"EXPECTED  : {expected[0]}")
             print(f"PREDICTED : {predicted}")
-
-            cer = self.char_error_rate(predicted, expected)
-            wer = self.word_error_rate(predicted, expected)
-          
-            self.log("Validation/CER", cer, prog_bar=True)
-            self.log("Validation/WER", wer, prog_bar=True)
 
             self.model.train()
             self.epoch_loader = 0
