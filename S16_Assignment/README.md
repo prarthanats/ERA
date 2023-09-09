@@ -1,4 +1,4 @@
-# English-to-Italian Sentence Translation using Transformers
+# English-to-French Sentence Translation using Transformers
 
 The goal of this assignment was to train an English to French translation model using the OPUS book translation dataset using the PyTorch Lightening framework.
 
@@ -48,6 +48,12 @@ Dataset Used is [English-French](https://huggingface.co/datasets/opus_books/view
 
 4. Implemented dynamic padding to handle variable-length sequences for each batch efficiently.
 
+This function takes a batch of data samples, calculate the lengths of the encoder inputs and decoder inputs for each sample in the batch and store them in encode_batch_length and decode_batch_length lists, respectively.Then finds the maximum sequence length among all encoder and decoder inputs in the batch (max_seq_len), and add 2 to it. This is done to ensure that there is room for additional tokens if needed. Iterate over each item (data sample) in the batch (bat):
+
+   a. Pad the encoder_input, decoder_input, and label tensors with the pad_token to match the maximum sequence length (max_seq_len). This is done using torch.cat to concatenate the original tensor with a tensor filled with pad_token values for the required number of elements.
+   
+   b. Append the source and target texts of the data sample to the src_text and tgt_text lists, respectively.
+
 ~~~
 encode_batch_length = list(map(lambda x : x['encoder_input'].size(0),bat))
 decode_batch_length = list(map(lambda x : x['decoder_input'].size(0),bat))
@@ -66,3 +72,31 @@ for item in bat:
     src_text.append(item['src_text'] )
     tgt_text.append(item['tgt_text'] )
 ~~~
+
+#### Model Architecture
+
+1. Encoder-Decoder: This model utilizes the encoder-decoder architecture for sequence-to-sequence translation tasks.
+2. Parameter Sharing: Implemented parameter sharing between encoder and decoder block to reduce the number of parameters
+~~~
+Sharing Pattern :
+[e1, e2, e3, e1, e2, e3] - for encoder
+[d1, d2, d3, d1, d2, d3] - for decoder
+~~~
+3. Dense feedforward layer size (dff) reduced to 128
+
+#### Setup and Usage
+
+The model can be run using Lightning framework as shown below:
+
+Clone the GitHub Repo
+
+
+
+#### Implementation and Inference Details  
+
+
+#### Training Loss Plot
+
+
+#### Training Logs
+   
