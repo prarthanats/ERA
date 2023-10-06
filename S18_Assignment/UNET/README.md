@@ -55,4 +55,25 @@ By combining Max Pooling for semantic understanding, Transpose Convolutions for 
 
 ![image](https://github.com/prarthanats/ERA/assets/32382676/9547cf06-5ab1-4b98-8d0a-d5005443d51c)
 
+## Modification 3 -  Strided Convolutions(Contracting) + Transpose Convolutions(Expanding) + Cross Entropy Loss
 
+Strided Convolutions (Contracting): Strided Convolutions, with a larger stride value, reduce the spatial dimensions of feature maps similarly to Max Pooling but with learnable parameters. They capture high-level semantic information while allowing the model to learn spatial hierarchies in a more adaptive manner. Strided Convolutions can be advantageous when there's a concern about information loss caused by Max Pooling layers.
+
+By using Strided Convolutions in the contracting path instead of Max Pooling, while still employing Transpose Convolutions in the expanding path and Cross Entropy Loss during training, the U-Net architecture maintains its ability to capture high-level semantics and precise localization. This modification offers more flexibility in learning spatial hierarchies and can be beneficial in scenarios where Max Pooling may not be the most suitable choice. It helps U-Net strike a balance between understanding "what" is in the image and "where" it is located while optimizing segmentation performance.
+
+![image](https://github.com/prarthanats/ERA/assets/32382676/2b95fc9f-37b9-49c1-afc1-8e1327c74197)
+
+![image](https://github.com/prarthanats/ERA/assets/32382676/e7d6ab5a-ef52-4f01-917c-7cf90b72b367)
+
+## Modification 4 -  Strided Convolutions(Contracting) + Bilinear UpSampling(Expanding) + Dice Loss
+
+By using Strided Convolutions for contracting, Bilinear Upsampling for expanding, and Dice Loss for training, U-Net maintains its ability to capture high-level semantic information and recover fine-grained details for precise localization. This combination offers a balance between understanding "what" is in the image and "where" it is located while optimizing segmentation performance. It can be particularly useful in medical image segmentation and other tasks requiring both semantic recognition and accurate localization.
+
+![image](https://github.com/prarthanats/ERA/assets/32382676/93f618f6-90c3-447b-ad23-1e6ae397089e)
+
+![image](https://github.com/prarthanats/ERA/assets/32382676/6868416f-121d-417e-8b76-457d9307b8fc)
+
+
+## Conclusion
+
+From the above plots we can see that the first three strategies worked really well. The Max Pooling +Transpose Conv + Binary Cross-Entropy strategy seems to have the highest accuracy and comparing the sample prediction it seems to have a slight edge over the Max Pooling + Transpose Conv + Dice Loss and Strided Convolution + Transpose Conv + Binary Cross Entropy strategies.
