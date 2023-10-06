@@ -33,7 +33,7 @@ Final Layer: The decoder's output layer typically consists of a single convoluti
 
 Loss Function: The training of a UNet model involves minimizing a suitable loss function, such as binary cross-entropy or dice coefficient loss, which quantifies the dissimilarity between the predicted segmentation mask and the ground truth mask.
 
-# Modification 1 - Max Pooling(Contracting) + Transpose Convolutions(Expanding) + Cross Entropy Loss
+## Modification 1 - Max Pooling(Contracting) + Transpose Convolutions(Expanding) + Cross Entropy Loss
 
 Max Pooling (Contracting): Max Pooling is a downsampling operation that reduces the spatial dimensions of the feature maps. It achieves this by selecting the maximum value in a small window, effectively compressing the information. In the U-Net's contracting path, Max Pooling helps capture and abstract high-level features while reducing the computational burden by shrinking the feature map size. This allows the model to understand the "what" (semantic information) in the input image.
 
@@ -44,8 +44,6 @@ Cross Entropy Loss:Cross Entropy Loss is a common choice for segmentation tasks,
 ![image](https://github.com/prarthanats/ERA/assets/32382676/f6989583-5f80-4742-9a76-79cc32c670a7)
 
 ![image](https://github.com/prarthanats/ERA/assets/32382676/c16e0e44-1f76-4609-a53a-19e7ae33dbbc)
-
-
 
 ## Modification 2 - Max Pooling(Contracting) + Transpose Convolutions(Expanding) + Dice Loss
 
