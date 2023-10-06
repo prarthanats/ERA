@@ -36,4 +36,33 @@ They are often used for generating novel data samples, interpolating between exi
 
 ## VAE on MNIST
 
+#### Model Summary
 
+![image](https://github.com/prarthanats/ERA/assets/32382676/ea5b0fd3-ea4f-4411-bb5f-6dd79be76ba3)
+
+#### Correct Label Data
+
+![image](https://github.com/prarthanats/ERA/assets/32382676/0529bfb0-5811-4a52-b6fb-4e520f80d9f7)
+
+![image](https://github.com/prarthanats/ERA/assets/32382676/d3446814-a59b-40da-83e0-a45f20d88f3b)
+
+#### Incorrect Label Data
+
+![image](https://github.com/prarthanats/ERA/assets/32382676/e35a12a5-c54a-4bf7-b262-29ac71a21d71)
+
+![image](https://github.com/prarthanats/ERA/assets/32382676/22454547-f465-4d1b-a26c-7251d565bb83)
+
+
+## VAE on CIFAR
+
+#### Model Summary
+
+![image](https://github.com/prarthanats/ERA/assets/32382676/59d2ea97-3b88-4fa1-92d1-42b7567de7c1)
+
+#### Correct Label Data
+
+![image](https://github.com/prarthanats/ERA/assets/32382676/27146ee3-5a0b-403a-8ee8-fa8300542b0a)
+
+#### Incorrect Label Data
+
+![image](https://github.com/prarthanats/ERA/assets/32382676/b69b6ee5-6d4d-4874-928e-3b06c8a2aa3e)
