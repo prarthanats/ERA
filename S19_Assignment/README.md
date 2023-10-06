@@ -29,6 +29,7 @@ Motion artifacts can degrade the quality of MRI images and make it challenging f
 
 ## Gradio App
 
+![image](https://github.com/prarthanats/ERA/assets/32382676/a3bc7def-0cc0-42f1-b908-aaae66a654b5)
 
 
 
