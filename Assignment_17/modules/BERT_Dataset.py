@@ -8,7 +8,7 @@ import random
 import torch
 
 
-class SentencesDataset(Dataset):
+class BERTDataset(Dataset):
     #Init dataset
     def __init__(self, sentences, vocab, seq_len):
         dataset = self

@@ -36,3 +36,19 @@ def get_gpt_config():
         "NUM_LAYER" : 6,
         "DROPOUT" : 0.2
         }
+
+def get_vit_config():
+    
+    return{
+        "img_size":224, # Training resolution from Table 3 in ViT paper
+        "in_channels":3, # Number of channels in input image
+        "patch_size":16, # Patch size
+        "num_transformer_layers":12, # Layers from Table 1 for ViT-Base
+        "embedding_dim":768, # Hidden size D from Table 1 for ViT-Base
+        "mlp_size":3072, # MLP size from Table 1 for ViT-Base
+        "num_heads":12, # Heads from Table 1 for ViT-Base
+        "attn_dropout":0, # Dropout for attention projection
+        "mlp_dropout":0.1, # Dropout for dense/MLP layers 
+        "embedding_dropout":0.1, # Dropout for patch and position embeddings
+        "num_classes":1000
+        }
