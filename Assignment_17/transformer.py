@@ -1,22 +1,10 @@
-
 import torch.nn.functional as F
 import torch.nn as nn
 import torch
 import math
-from config import get_gpt_config
-config = get_gpt_config()
-
-def attention(q, k, v, mask=None, dropout=None):
-    scores = q.matmul(k.transpose(-2, -1))
-    scores /= math.sqrt(q.shape[-1])
-
-    # Mask
-    scores = scores if mask is None else scores.masked_fill(mask == 0, -1e3)
-
-    scores = F.softmax(scores, dim=-1)
-    scores = dropout(scores) if dropout is not None else scores
-    output = scores.matmul(v)
-    return output
+from config import get_gpt_config,get_bert_config,get_vit_config
+config_gpt = get_gpt_config()
+config_vit = get_vit_config()
 
 class MultiHeadAttention(nn.Module):
     def __init__(self, n_heads, out_dim, dropout=0.1):
@@ -44,10 +32,22 @@ class MultiHeadAttention(nn.Module):
         q, k, v = [self.split_heads(t) for t in (q, k, v)]
         q, k, v = [t.transpose(1, 2) for t in (q, k, v)]
 
-        scores = attention(q, k, v, mask, self.dropout)
+        scores = self.attention(q, k, v, mask)
         scores = scores.transpose(1, 2).contiguous().view(scores.shape[0], -1, self.out_dim)
         out = self.out(scores)
         return out
+
+    def attention(self, q, k, v, mask=None):
+        scores = q.matmul(k.transpose(-2, -1))
+        scores /= math.sqrt(q.shape[-1])
+
+        # Mask
+        scores = scores if mask is None else scores.masked_fill(mask == 0, -1e3)
+
+        scores = F.softmax(scores, dim=-1)
+        scores = self.dropout(scores)
+        output = scores.matmul(v)
+        return output
 
 class FeedForward(nn.Module):
     def __init__(self, inp_dim, inner_dim, dropout=0.1):
@@ -76,183 +76,6 @@ class EncoderLayer(nn.Module):
         x = x + self.dropout2(self.ff(x2))
         return x
 
-
-class AttentionHead1(nn.Module):
-    """
-    One head of the self-attention layer
-    """
-
-    def __init__(self, head_size, num_embed, block_size, dropout):
-        super().__init__()
-        self.key = nn.Linear(num_embed, head_size, bias=False)
-        self.query = nn.Linear(num_embed, head_size, bias=False)
-        self.value = nn.Linear(num_embed, head_size, bias=False)
-        # tril is a lower triangular matrix. it is not a parameter
-        # of the model, so we assign it to the module using register_buffer
-        self.register_buffer("tril", torch.tril(torch.ones(block_size, block_size)))
-
-        # let's also add dropout
-        self.dropout = nn.Dropout(dropout)
-
-    def forward(self, x):
-        B, T, C = x.shape
-        k = self.key(x)
-        q = self.query(x)
-        # compute attention scores
-        # (B, T, C) @ (B, C, T) -> (B, T, T)
-        wei = q @ k.transpose(-2, -1) * C**-0.5
-        # Tril matrix (lower triagular matrix) is used to mask 
-        # future positions (setting them to -inf) so that the
-        # decoder "learns" to predict next words
-        wei = wei.masked_fill(self.tril[:T, :T] == 0, float("-inf"))  # (B,T,T)
-        wei = F.softmax(wei, dim=-1)  # (B,T,T)
-        wei = self.dropout(wei)
-        # weighted aggregation of the values
-        v = self.value(x)
-        out = wei @ v  # (B,T,T) @ (B,T,C) ---> (B,T,C)
-        return out
-
-class FeedForward1(nn.Module):
-    """
-    A simple linear layer followed by ReLu
-    """
-
-    def __init__(self, num_embed, dropout):
-        super().__init__()
-        self.net = nn.Sequential(
-            # in the Attention is All You Need paper
-            # authors are using the size of the ffwd layer 2048
-            # and the output of the model is 512
-            # so we apply the same factor of 4
-            nn.Linear(num_embed, 4 * num_embed),
-            nn.ReLU(),
-            # apply the linear projection layer
-            nn.Linear(4 * num_embed, num_embed),
-            nn.Dropout(dropout),
-        )
-
-    def forward(self, x):
-        return self.net(x)
-
-class MultiHeadAttention1(nn.Module):
-    """
-    Multiple Heads of self-attention in parallel
-    """
-
-    def __init__(self, num_heads, head_size, num_embed, block_size, dropout):
-        super().__init__()
-        self.heads = nn.ModuleList(
-            [
-                AttentionHead1(
-                    head_size=head_size,
-                    num_embed=num_embed,
-                    block_size=block_size,
-                    dropout=dropout,
-                )
-                for _ in range(num_heads)
-            ]
-        )
-        self.proj = nn.Linear(num_embed, num_embed)
-        self.dropout = nn.Dropout(dropout)
-
-    def forward(self, x):
-        # output of the self-attention
-        out = torch.cat([h(x) for h in self.heads], dim=-1)
-        # apply the linear projection layer
-        out = self.dropout(self.proj(out))
-        return out
-
-class TransformerBlock(nn.Module):
-    """
-    This calss will group together MultiHead Attention and
-    FeedForward NN, so that we can copy it in Transformer
-    """
-
-    def __init__(self, num_heads, block_size, num_embed, dropout):
-        super().__init__()
-        head_size = num_embed // num_heads
-        self.sa = MultiHeadAttention1(
-            num_heads=num_heads,
-            head_size=head_size,
-            num_embed=num_embed,
-            block_size=block_size,
-            dropout=dropout,
-        )
-        self.ffwd = FeedForward1(num_embed=num_embed, dropout=dropout)
-        # add the layer normalization
-        self.ln1 = nn.LayerNorm(num_embed)
-        self.ln2 = nn.LayerNorm(num_embed)
-
-    def forward(self, x):
-        # "x +" is the skip (or residual) connection
-        # it helps with optimization
-        # also we apply layer normalization before self-attention
-        # and feed-forward (a reshufle from original paper)
-        x = x + self.sa(self.ln1(x))
-        x = x + self.ffwd(self.ln2(x))
-        return x
-            
-# Positional Embedding
-class PositionalEmbedding(nn
-                          .Module):
-    def __init__(self, d_model, max_seq_len = 80):
-        super().__init__()
-        self.d_model = d_model
-        pe = torch.zeros(max_seq_len, d_model)
-        pe.requires_grad = False
-        for pos in range(max_seq_len):
-            for i in range(0, d_model, 2):
-                pe[pos, i] = math.sin(pos / (10000 ** ((2 * i)/d_model)))
-                pe[pos, i + 1] = math.cos(pos / (10000 ** ((2 * (i + 1))/d_model)))
-        pe = pe.unsqueeze(0)
-        self.register_buffer('pe', pe)
-    
-    def forward(self, x):
-        return self.pe[:,:x.size(1)] #x.size(1) = seq_len
-
-
-patch_size=16
-
-# 1. Create a class which subclasses nn.Module
-class PatchEmbedding(nn.Module):
-    """Turns a 2D input image into a 1D sequence learnable embedding vector.
-    
-    Args:
-        in_channels (int): Number of color channels for the input images. Defaults to 3.
-        patch_size (int): Size of patches to convert input image into. Defaults to 16.
-        embedding_dim (int): Size of embedding to turn image into. Defaults to 768.
-    """ 
-    # 2. Initialize the class with appropriate variables
-    def __init__(self, 
-                 in_channels:int=3,
-                 patch_size:int=16,
-                 embedding_dim:int=768):
-        super().__init__()
-        
-        # 3. Create a layer to turn an image into patches
-        self.patcher = nn.Conv2d(in_channels=in_channels,
-                                 out_channels=embedding_dim,
-                                 kernel_size=patch_size,
-                                 stride=patch_size,
-                                 padding=0)
-
-        # 4. Create a layer to flatten the patch feature maps into a single dimension
-        self.flatten = nn.Flatten(start_dim=2, # only flatten the feature map dimensions into a single vector
-                                  end_dim=3)
-
-    # 5. Define the forward method 
-    def forward(self, x):
-        # Create assertion to check that inputs are the correct shape
-        image_resolution = x.shape[-1]
-        assert image_resolution % patch_size == 0, f"Input image size must be divisble by patch size, image shape: {image_resolution}, patch size: {patch_size}"
-        
-        # Perform the forward pass
-        x_patched = self.patcher(x)
-        x_flattened = self.flatten(x_patched) 
-        # 6. Make sure the output shape has the right order 
-        return x_flattened.permute(0, 2, 1) # adjust so the embedding is on the final dimension [batch_size, P^2•C, N] -> [batch_size, N, P^2•C]
-
-# 1. Create a class that inherits from nn.Module
 class MultiheadSelfAttentionBlock(nn.Module):
     """Creates a multi-head self-attention block ("MSA block" for short).
     """
@@ -342,6 +165,181 @@ class TransformerEncoderBlock(nn.Module):
         x = self.mlp_block(x) + x 
         
         return x
+    
+
+class MultiHeadAttentionGPT(nn.Module):
+    def __init__(self, num_heads, head_size, num_embed, block_size, dropout):
+        super().__init__()
+        self.heads = nn.ModuleList(
+            [
+                self.AttentionHeadGPT(
+                    head_size=head_size,
+                    num_embed=num_embed,
+                    block_size=block_size,
+                    dropout=dropout,
+                )
+                for _ in range(num_heads)
+            ]
+        )
+        self.proj = nn.Linear(num_embed, num_embed)
+        self.dropout = nn.Dropout(dropout)
+
+    def forward(self, x):
+        # Output of the self-attention
+        out = torch.cat([self.head(x) for self.head in self.heads], dim=-1)
+        # Apply the linear projection layer
+        out = self.dropout(self.proj(out))
+        return out
+
+    class AttentionHeadGPT(nn.Module):
+        """
+        One head of the self-attention layer
+        """
+
+        def __init__(self, head_size, num_embed, block_size, dropout):
+            super().__init__()
+            self.key = nn.Linear(num_embed, head_size, bias=False)
+            self.query = nn.Linear(num_embed, head_size, bias=False)
+            self.value = nn.Linear(num_embed, head_size, bias=False)
+            # tril is a lower triangular matrix. It is not a parameter
+            # of the model, so we assign it to the module using register_buffer
+            self.register_buffer("tril", torch.tril(torch.ones(block_size, block_size)))
+
+            # Let's also add dropout
+            self.dropout = nn.Dropout(dropout)
+
+        def forward(self, x):
+            B, T, C = x.shape
+            k = self.key(x)
+            q = self.query(x)
+            # Compute attention scores
+            # (B, T, C) @ (B, C, T) -> (B, T, T)
+            wei = q @ k.transpose(-2, -1) * C ** -0.5
+            # Tril matrix (lower triangular matrix) is used to mask 
+            # future positions (setting them to -inf) so that the
+            # decoder "learns" to predict next words
+            wei = wei.masked_fill(self.tril[:T, :T] == 0, float("-inf"))  # (B, T, T)
+            wei = F.softmax(wei, dim=-1)  # (B, T, T)
+            wei = self.dropout(wei)
+            # Weighted aggregation of the values
+            v = self.value(x)
+            out = wei @ v  # (B, T, T) @ (B, T, C) ---> (B, T, C)
+            return out
+
+class FeedForward1(nn.Module):
+    """
+    A simple linear layer followed by ReLu
+    """
+
+    def __init__(self, num_embed, dropout):
+        super().__init__()
+        self.net = nn.Sequential(
+            # in the Attention is All You Need paper
+            # authors are using the size of the ffwd layer 2048
+            # and the output of the model is 512
+            # so we apply the same factor of 4
+            nn.Linear(num_embed, 4 * num_embed),
+            nn.ReLU(),
+            # apply the linear projection layer
+            nn.Linear(4 * num_embed, num_embed),
+            nn.Dropout(dropout),
+        )
+
+    def forward(self, x):
+        return self.net(x)
+
+
+class TransformerBlock(nn.Module):
+    """
+    This calss will group together MultiHead Attention and
+    FeedForward NN, so that we can copy it in Transformer
+    """
+
+    def __init__(self, num_heads, block_size, num_embed, dropout):
+        super().__init__()
+        head_size = num_embed // num_heads
+        self.sa = MultiHeadAttentionGPT(
+            num_heads=num_heads,
+            head_size=head_size,
+            num_embed=num_embed,
+            block_size=block_size,
+            dropout=dropout,
+        )
+        self.ffwd = FeedForward1(num_embed=num_embed, dropout=dropout)
+        # add the layer normalization
+        self.ln1 = nn.LayerNorm(num_embed)
+        self.ln2 = nn.LayerNorm(num_embed)
+
+    def forward(self, x):
+        # "x +" is the skip (or residual) connection
+        # it helps with optimization
+        # also we apply layer normalization before self-attention
+        # and feed-forward (a reshufle from original paper)
+        x = x + self.sa(self.ln1(x))
+        x = x + self.ffwd(self.ln2(x))
+        return x
+            
+# Positional Embedding
+class PositionalEmbedding(nn
+                          .Module):
+    def __init__(self, d_model, max_seq_len = 80):
+        super().__init__()
+        self.d_model = d_model
+        pe = torch.zeros(max_seq_len, d_model)
+        pe.requires_grad = False
+        for pos in range(max_seq_len):
+            for i in range(0, d_model, 2):
+                pe[pos, i] = math.sin(pos / (10000 ** ((2 * i)/d_model)))
+                pe[pos, i + 1] = math.cos(pos / (10000 ** ((2 * (i + 1))/d_model)))
+        pe = pe.unsqueeze(0)
+        self.register_buffer('pe', pe)
+    
+    def forward(self, x):
+        return self.pe[:,:x.size(1)] #x.size(1) = seq_len
+
+
+patch_size=16
+
+# 1. Create a class which subclasses nn.Module
+class PatchEmbedding(nn.Module):
+    """Turns a 2D input image into a 1D sequence learnable embedding vector.
+    
+    Args:
+        in_channels (int): Number of color channels for the input images. Defaults to 3.
+        patch_size (int): Size of patches to convert input image into. Defaults to 16.
+        embedding_dim (int): Size of embedding to turn image into. Defaults to 768.
+    """ 
+    # 2. Initialize the class with appropriate variables
+    def __init__(self, 
+                 in_channels:int=3,
+                 patch_size:int=16,
+                 embedding_dim:int=768):
+        super().__init__()
+        
+        # 3. Create a layer to turn an image into patches
+        self.patcher = nn.Conv2d(in_channels=in_channels,
+                                 out_channels=embedding_dim,
+                                 kernel_size=patch_size,
+                                 stride=patch_size,
+                                 padding=0)
+
+        # 4. Create a layer to flatten the patch feature maps into a single dimension
+        self.flatten = nn.Flatten(start_dim=2, # only flatten the feature map dimensions into a single vector
+                                  end_dim=3)
+
+    # 5. Define the forward method 
+    def forward(self, x):
+        # Create assertion to check that inputs are the correct shape
+        image_resolution = x.shape[-1]
+        assert image_resolution % patch_size == 0, f"Input image size must be divisble by patch size, image shape: {image_resolution}, patch size: {patch_size}"
+        
+        # Perform the forward pass
+        x_patched = self.patcher(x)
+        x_flattened = self.flatten(x_patched) 
+        # 6. Make sure the output shape has the right order 
+        return x_flattened.permute(0, 2, 1) # adjust so the embedding is on the final dimension [batch_size, P^2•C, N] -> [batch_size, N, P^2•C]
+
+
 
 # 1. Create a ViT class that inherits from nn.Module
 class ViT(nn.Module):
@@ -360,37 +358,22 @@ class ViT(nn.Module):
                  embedding_dropout:float=0.1, # Dropout for patch and position embeddings
                  num_classes:int=1000): # Default for ImageNet but can customize this
         super().__init__() # don't forget the super().__init__()!
-        
-        # 3. Make the image size is divisble by the patch size 
+
         assert img_size % patch_size == 0, f"Image size must be divisible by patch size, image size: {img_size}, patch size: {patch_size}."
-        
-        # 4. Calculate number of patches (height * width/patch^2)
         self.num_patches = (img_size * img_size) // patch_size**2
-                 
-        # 5. Create learnable class embedding (needs to go at front of sequence of patch embeddings)
         self.class_embedding = nn.Parameter(data=torch.randn(1, 1, embedding_dim),
                                             requires_grad=True)
-        
-        # 6. Create learnable position embedding
         self.position_embedding = nn.Parameter(data=torch.randn(1, self.num_patches+1, embedding_dim),
                                                requires_grad=True)
-                
-        # 7. Create embedding dropout value
         self.embedding_dropout = nn.Dropout(p=embedding_dropout)
-        
-        # 8. Create patch embedding layer
         self.patch_embedding = PatchEmbedding(in_channels=in_channels,
                                               patch_size=patch_size,
                                               embedding_dim=embedding_dim)
-        
-        # 9. Create Transformer Encoder blocks (we can stack Transformer Encoder blocks using nn.Sequential()) 
-        # Note: The "*" means "all"
         self.transformer_encoder = nn.Sequential(*[TransformerEncoderBlock(embedding_dim=embedding_dim,
                                                                             num_heads=num_heads,
                                                                             mlp_size=mlp_size,
                                                                             mlp_dropout=mlp_dropout) for _ in range(num_transformer_layers)])
-       
-        # 10. Create classifier head
+
         self.classifier = nn.Sequential(
             nn.LayerNorm(normalized_shape=embedding_dim),
             nn.Linear(in_features=embedding_dim, 
@@ -399,31 +382,14 @@ class ViT(nn.Module):
     
     # 11. Create a forward() method
     def forward(self, x):
-        
-        # 12. Get batch size
         batch_size = x.shape[0]
-        
-        # 13. Create class token embedding and expand it to match the batch size (equation 1)
         class_token = self.class_embedding.expand(batch_size, -1, -1) # "-1" means to infer the dimension (try this line on its own)
-
-        # 14. Create patch embedding (equation 1)
         x = self.patch_embedding(x)
-
-        # 15. Concat class embedding and patch embedding (equation 1)
         x = torch.cat((class_token, x), dim=1)
-
-        # 16. Add position embedding to patch embedding (equation 1) 
         x = self.position_embedding + x
-
-        # 17. Run embedding dropout (Appendix B.1)
         x = self.embedding_dropout(x)
-
-        # 18. Pass patch, position and class embedding through transformer encoder layers (equations 2 & 3)
         x = self.transformer_encoder(x)
-
-        # 19. Put 0 index logit through classifier (equation 4)
         x = self.classifier(x[:, 0]) # run on each sample in a batch at 0 index
-
         return x    
         
         
@@ -487,7 +453,7 @@ class Transformer(nn.Module):
             # the token_emb is (B, T, C), C = NUM_EMBED
             token_emb = self.token_embedding_table(idx)
             # (T, C)
-            posit_emb = self.position_embedding_table(torch.arange(T, device=config['DEVICE']))
+            posit_emb = self.position_embedding_table(torch.arange(T, device=config_gpt['DEVICE']))
 
             x = token_emb + posit_emb
             # apply one head of self-attention
@@ -512,35 +478,11 @@ class Transformer(nn.Module):
             return x
         
     def generate(self, idx: torch.Tensor, max_new_tokens: int, block_size: int):
-        # idx is (B, T) array of indices in the current context
         for _ in range(max_new_tokens):
-            # crop the context too the  last block_size tokens
-            # because tokens don't communicate between blocks
             idx_crop = idx[:, -block_size:]
-            # get the predictions
             logits, loss = self.forward(idx_crop)
-            # focus only on the last time step
             logits = logits[:, -1, :]  # becomes (B, C)
-            # apply softmax to get probabilities
             probs = F.softmax(logits, dim=-1)  # (B, C)
-            # sample from the distribution with probabilities probs
             idx_next = torch.multinomial(probs, num_samples=1)  # (B, 1)
-            # append sampled index to the running sequence
             idx = torch.cat((idx, idx_next), dim=1)  # (B, T+1)
         return idx
-
-      
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
