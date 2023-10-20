@@ -1,0 +1,13 @@
+torch
+numpy
+pillow
+torchsummary
+transformers==4.25.1
+diffusers
+ftfy
+accelerate
+torchvision
+scipy
+tqdm
+gradio
+opencv-python
